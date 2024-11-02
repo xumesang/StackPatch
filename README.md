@@ -1,6 +1,5 @@
 # StackPatch
 
-
 ## Introduction
 This repository contains the demo projects used in our paper and you can compile and run these projects to validate the functionable of StackPatch.  
  
