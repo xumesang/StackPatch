@@ -6,42 +6,39 @@
 uint8_t max30102_Bus_Write(uint8_t Register_Address, uint8_t Word_Data)
 {
 
-	/* 采用串行EEPROM随即读取指令序列，连续读取若干字节 */
-
-	/* 第1步：发起I2C总线启动信号 */
+	
   iic_start();
 
-	/* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	iic_send_byte(max30102_WR_address | I2C_WR);	/* 此处是写指令 */
+	
+	iic_send_byte(max30102_WR_address | I2C_WR);	
 
-	/* 第3步：发送ACK */
+	
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 
-	/* 第4步：发送字节地址 */
+
 	iic_send_byte(Register_Address);
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 	
-	/* 第5步：开始写入数据 */
+	
 	iic_send_byte(Word_Data);
 
-	/* 第6步：发送ACK */
+	
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 
-	/* 发送I2C总线停止信号 */
+	
 	iic_stop();
-	return 1;	/* 执行成功 */
+	return 1;	
 
-cmd_fail: /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
-	/* 发送I2C总线停止信号 */
+cmd_fail: 
 	iic_stop();
 	return 0;
 }
@@ -53,50 +50,49 @@ uint8_t max30102_Bus_Read(uint8_t Register_Address)
 	uint8_t  data;
 
 
-	/* 第1步：发起I2C总线启动信号 */
+	
 	iic_start();
 
-	/* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	iic_send_byte(max30102_WR_address | I2C_WR);	/* 此处是写指令 */
+	
+	iic_send_byte(max30102_WR_address | I2C_WR);	
 
-	/* 第3步：发送ACK */
+	
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 
-	/* 第4步：发送字节地址， */
+	
 	iic_send_byte((uint8_t)Register_Address);
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 	
 
-	/* 第6步：重新启动I2C总线。下面开始读取数据 */
+	
 	iic_start();
 
-	/* 第7步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	iic_send_byte(max30102_WR_address | I2C_RD);	/* 此处是读指令 */
+	
+	iic_send_byte(max30102_WR_address | I2C_RD);	
 
-	/* 第8步：发送ACK */
+	
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 
-	/* 第9步：读取数据 */
+	
 	{
-		data = iic_read_byte(0);	/* 读1个字节 */
+		data = iic_read_byte(0);	
 
-		iic_nack();	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
+		iic_nack();	
 	}
-	/* 发送I2C总线停止信号 */
-	iic_stop();
-	return data;	/* 执行成功 返回data值 */
 
-cmd_fail: /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
-	/* 发送I2C总线停止信号 */
+	iic_stop();
+	return data;	
+
+cmd_fail: 
 	iic_stop();
 	return 0;
 }
@@ -107,39 +103,39 @@ void max30102_FIFO_ReadWords(uint8_t Register_Address,uint8_t Word_Data[][2],uin
 	uint8_t i=0;
 	uint8_t no = count;
 	uint8_t data1, data2;
-	/* 第1步：发起I2C总线启动信号 */
+	
 	iic_start();
 
-	/* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	iic_send_byte(max30102_WR_address | I2C_WR);	/* 此处是写指令 */
+	
+	iic_send_byte(max30102_WR_address | I2C_WR);	
 
-	/* 第3步：发送ACK */
+	
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 
-	/* 第4步：发送字节地址， */
+
 	iic_send_byte((uint8_t)Register_Address);
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 	
 
-	/* 第6步：重新启动I2C总线。下面开始读取数据 */
+	
 	iic_start();
 
-	/* 第7步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	iic_send_byte(max30102_WR_address | I2C_RD);	/* 此处是读指令 */
+	
+	iic_send_byte(max30102_WR_address | I2C_RD);	
 
-	/* 第8步：发送ACK */
+
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 
-	/* 第9步：读取数据 */
+
 	while (no)
 	{
 		data1 = iic_read_byte(0);	
@@ -153,7 +149,7 @@ void max30102_FIFO_ReadWords(uint8_t Register_Address,uint8_t Word_Data[][2],uin
 		iic_ack();
 		data2 = iic_read_byte(0);
 		if(1==no)
-			iic_nack();	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
+			iic_nack();	
 		else
 			iic_ack();
 		Word_Data[i][1] = (((uint16_t)data1 << 8) | data2); 
@@ -161,11 +157,10 @@ void max30102_FIFO_ReadWords(uint8_t Register_Address,uint8_t Word_Data[][2],uin
 		no--;	
 		i++;
 	}
-	/* 发送I2C总线停止信号 */
+
 	iic_stop();
 
-cmd_fail: /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
-	/* 发送I2C总线停止信号 */
+cmd_fail: 
 	iic_stop();
 }
 
@@ -174,51 +169,50 @@ void max30102_FIFO_ReadBytes(uint8_t Register_Address,uint8_t* Data)
 	max30102_Bus_Read(REG_INTR_STATUS_1);
 	max30102_Bus_Read(REG_INTR_STATUS_2);
 	
-	/* 第1步：发起I2C总线启动信号 */
+	
 	iic_start();
 
-	/* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	iic_send_byte(max30102_WR_address | I2C_WR);	/* 此处是写指令 */
+	
+	iic_send_byte(max30102_WR_address | I2C_WR);	
 
-	/* 第3步：发送ACK */
+
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 
-	/* 第4步：发送字节地址， */
+	
 	iic_send_byte((uint8_t)Register_Address);
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 	
 
-	/* 第6步：重新启动I2C总线。下面开始读取数据 */
+	
 	iic_start();
 
-	/* 第7步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
-	iic_send_byte(max30102_WR_address | I2C_RD);	/* 此处是读指令 */
+	
+	iic_send_byte(max30102_WR_address | I2C_RD);	
 
-	/* 第8步：发送ACK */
+	
 	if (iic_wait_ack() != 0)
 	{
-		goto cmd_fail;	/* EEPROM器件无应答 */
+		goto cmd_fail;	
 	}
 
-	/* 第9步：读取数据 */
+	
 	Data[0] = iic_read_byte(1);	
 	Data[1] = iic_read_byte(1);	
 	Data[2] = iic_read_byte(1);	
 	Data[3] = iic_read_byte(1);
 	Data[4] = iic_read_byte(1);	
 	Data[5] = iic_read_byte(0);
-	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
-	/* 发送I2C总线停止信号 */
+	
+
 	iic_stop();
 
-cmd_fail: /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
-	/* 发送I2C总线停止信号 */
+cmd_fail: 
 	iic_stop();
 
 //	u8 i;
@@ -297,7 +291,7 @@ void max30102_init(void)
 //	max30102_Bus_Write(0xa,
 //			(3<<5)  // SPO2_ADC_RGE 2 = full scale 8192 nA (LSB size 31.25pA); 3 = 16384nA
 //			| (1<<2) // sample rate: 0 = 50sps; 1 = 100sps; 2 = 200sps
-//			| (3<<0) // LED_PW 3 = 411μs, ADC resolution 18 bits
+//			| (3<<0) // LED_PW 3 = 411锟斤拷s, ADC resolution 18 bits
 //	);
 
 //	// LED1 (red) power (0 = 0mA; 255 = 50mA)

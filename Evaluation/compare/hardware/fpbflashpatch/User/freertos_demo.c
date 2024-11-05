@@ -11,16 +11,14 @@
 TaskHandle_t    start_task_handler;
 void start_task( void * pvParameters );
 
-/* TASK1 任务 配置
- * 包括: 任务句柄 任务优先级 堆栈大小 创建任务
+/* TASK1 cve func
  */
 #define TASK1_PRIO         3
 #define TASK1_STACK_SIZE   64
 TaskHandle_t    task1_handler;
 void task1( void * pvParameters );
 
-/* TASK2 任务 配置
- * 包括: 任务句柄 任务优先级 堆栈大小 创建任务
+/* TASK2 update server
  */
 #define TASK2_PRIO         2
 #define TASK2_STACK_SIZE   64
@@ -145,7 +143,7 @@ void freertos_demo(void)
 
 void start_task( void * pvParameters )
 {
-    taskENTER_CRITICAL();               /* 进入临界区 */
+    taskENTER_CRITICAL();               /* 锟斤拷锟斤拷锟劫斤拷锟斤拷 */
     xTaskCreate((TaskFunction_t         )   task1,
                 (char *                 )   "task1",
                 (configSTACK_DEPTH_TYPE )   TASK1_STACK_SIZE,
@@ -160,12 +158,12 @@ void start_task( void * pvParameters )
                 (UBaseType_t            )   TASK2_PRIO,
                 (TaskHandle_t *         )   &task2_handler );
     vTaskDelete(NULL);
-    taskEXIT_CRITICAL();                /* 退出临界区 */
+    taskEXIT_CRITICAL();                
 }
 
 volatile uint32_t  patch_address = 0x08000000;
 volatile uint32_t  patch_dispatch_address = 0x08000000;
-/* 任务一，实现LED每500ms翻转一次 */
+
 void task1( void * pvParameters )
 {   uint32_t  i = 1;
 	  const TickType_t xDelay = pdMS_TO_TICKS(1000);
@@ -201,7 +199,7 @@ void task1( void * pvParameters )
 
 }
 
-/* 任务二，tansmit hello */
+
 volatile uint32_t break_point_instruction_addr;
 volatile uint32_t back_instruction_address;
 

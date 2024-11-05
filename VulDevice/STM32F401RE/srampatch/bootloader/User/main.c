@@ -14,8 +14,8 @@ void Error_Handler(void);
 int main(void)
 { 
 
-  uint32_t lastcount = 0;     /* 上一次串口接收数据值 */
-  uint32_t applenth = 0;      /* 接收到的app代码长度 */
+  uint32_t lastcount = 0;     
+  uint32_t applenth = 0;      
 	HAL_Init(); 
   SystemClock_Config();
   Led_Init();
@@ -41,28 +41,28 @@ int main(void)
 	  
         if (g_usart_rx_cnt)
         {
-            if (lastcount == g_usart_rx_cnt)   /* 新周期内,没有收到任何数据,认为本次数据接收完成 */
+            if (lastcount == g_usart_rx_cnt)   
             {
                 applenth = g_usart_rx_cnt;
                 lastcount = 0;
                 g_usart_rx_cnt = 0;
-                printf("用户程序接收完成!\r\n");
-                printf("代码长度:%dBytes\r\n", applenth);
+                printf("App acceptance completed!\r\n");
+                printf("code size:%dBytes\r\n", applenth);
             }
             else lastcount = g_usart_rx_cnt;
         }
 			    	
 				 if (applenth)
             { 
-                if (((*(volatile uint32_t *)(0x20001000 + 4)) & 0xFF000000) == 0x20000000)   /* 判断是否为0X20XXXXXX */
+                if (((*(volatile uint32_t *)(0x20001000 + 4)) & 0xFF000000) == 0x20000000)  
             {   
-					  		printf("开始执行SRAM用户代码!!\r\n\r\n");
+					  		printf("Start executing SRAM program!!\r\n\r\n");
                 delay_ms(10);
-                iap_load_app(0x20001000);   /* SRAM地址 */
+                iap_load_app(0x20001000);   
             }
             else
             {
-                printf("非SRAM应用程序,无法执行!\r\n");
+                printf("Non SRAM program, unable to execute!\r\n");
                
             }
                 

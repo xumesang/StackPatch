@@ -11,17 +11,12 @@
 TaskHandle_t    start_task_handler;
 void start_task( void * pvParameters );
 
-/* TASK1 任务 配置
- * 包括: 任务句柄 任务优先级 堆栈大小 创建任务
- */
 #define TASK1_PRIO         2
 #define TASK1_STACK_SIZE   64
 TaskHandle_t    task1_handler;
 void task1( void * pvParameters );
 
-/* TASK2 任务 配置
- * 包括: 任务句柄 任务优先级 堆栈大小 创建任务
- */
+
 #define TASK2_PRIO         3
 #define TASK2_STACK_SIZE   64
 TaskHandle_t    task2_handler;
@@ -44,7 +39,7 @@ void freertos_demo(void)
 
 void start_task( void * pvParameters )
 {
-    taskENTER_CRITICAL();               /* 进入临界区 */
+    taskENTER_CRITICAL();             
     xTaskCreate((TaskFunction_t         )   task1,
                 (char *                 )   "task1",
                 (configSTACK_DEPTH_TYPE )   TASK1_STACK_SIZE,
@@ -60,11 +55,11 @@ void start_task( void * pvParameters )
                 (TaskHandle_t *         )   &task2_handler );
           
     vTaskDelete(NULL);
-    taskEXIT_CRITICAL();                /* 退出临界区 */
+    taskEXIT_CRITICAL();               
 }
 
 volatile uint32_t  patch_address = 0x08000000;
-/* 任务一，实现LED每500ms翻转一次 */
+
 void task1( void * pvParameters )
 {   //uint32_t a,b,c;
 
@@ -184,7 +179,7 @@ static void debug_monitor_init() {
 	*shp8 = 0xff;
 	*shp8 = -1;
 }
-/* 任务二，tansmit hello */
+/* 锟斤拷锟斤拷锟斤拷锟絫ansmit hello */
 volatile uint32_t break_point_instruction_addr;
 volatile uint32_t back_instruction_address;
 

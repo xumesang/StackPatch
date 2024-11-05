@@ -47,11 +47,11 @@ void btim_timx_int_init(uint16_t arr, uint16_t psc)
     g_timx_handler.Instance = BTIM_TIMX_INT;                     
     g_timx_handler.Init.Prescaler = psc;                         
     g_timx_handler.Init.CounterMode = TIM_COUNTERMODE_UP;         
-    g_timx_handler.Init.Period = arr;                             /* µ */
+    g_timx_handler.Init.Period = arr;                          
 	                               
     HAL_TIM_Base_Init(&g_timx_handler);
     
-    HAL_TIM_Base_Start_IT(&g_timx_handler);                       /* */
+    HAL_TIM_Base_Start_IT(&g_timx_handler);                   
 }
 
 /**
@@ -62,9 +62,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
 {
     if (htim->Instance == BTIM_TIMX_INT)
     {
-        BTIM_TIMX_INT_CLK_ENABLE();                     /* Ó */
-        HAL_NVIC_SetPriority(BTIM_TIMX_INT_IRQn, 1, 3); /*  */
-        HAL_NVIC_EnableIRQ(BTIM_TIMX_INT_IRQn);         /*  */
+        BTIM_TIMX_INT_CLK_ENABLE();                 
+        HAL_NVIC_SetPriority(BTIM_TIMX_INT_IRQn, 1, 3); 
+        HAL_NVIC_EnableIRQ(BTIM_TIMX_INT_IRQn);        
     }
 }
 
@@ -74,7 +74,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
  */
 void BTIM_TIMX_INT_IRQHandler(void)
 {
-    HAL_TIM_IRQHandler(&g_timx_handler);  /* */
+    HAL_TIM_IRQHandler(&g_timx_handler);  
 }
 
 
