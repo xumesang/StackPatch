@@ -1,14 +1,14 @@
 # StackPatch
 
 ## Introduction
-This repository contains the demo projects used in our paper and you can compile and run these projects to validate the functionable of StackPatch.  
+This repository contains the demo projects used in our paper, which yyou can compile and run to validate the functions of StackPatch. 
  
 
 ```
 -------------\
-| - Evaluation, The evluation of StackPatch by using STM32F401RE, GD32VF103, ESP32S3.
-| - VulDevice, The implementation of StackPatch by using STM32F401RE, GD32VF103, ESP32S3.
+| - Evaluation: The evluation of StackPatch was conducted using STM32F401RE, GD32VF103, and ESP32S3 development boards.
+| - VulDevice: This folder contains the implementation of StackPatch on using STM32F401RE, GD32VF103, and ESP32S3 development boards. 
 ```
  
 ## Usage
-we suggest you use STM32F401RE to compile the StackPatch Runtime by keil IDE.
+we recommend using the STM32F401RE board to compile the StackPatch runtime with keil IDE.
