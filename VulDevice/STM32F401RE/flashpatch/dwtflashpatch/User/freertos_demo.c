@@ -84,7 +84,7 @@ void freertos_demo(void)
 
 void start_task( void * pvParameters )
 {
-    taskENTER_CRITICAL();               /* 进入临界区 */
+    taskENTER_CRITICAL();              
     xTaskCreate((TaskFunction_t         )   task1,
                 (char *                 )   "task1",
                 (configSTACK_DEPTH_TYPE )   TASK1_STACK_SIZE,
@@ -100,12 +100,12 @@ void start_task( void * pvParameters )
                 (TaskHandle_t *         )   &task2_handler );
           
     vTaskDelete(NULL);
-    taskEXIT_CRITICAL();                /* 退出临界区 */
+    taskEXIT_CRITICAL();                
 }
 
 volatile uint32_t  patch_address = 0x08000000;
 volatile uint32_t  patch_dispatch_address = 0x08000000;
-/* 任务一，实现LED每500ms翻转一次 */
+
 void task1( void * pvParameters )
 {   uint32_t  i = 1;
 	  const TickType_t xDelay = pdMS_TO_TICKS(50);
@@ -141,7 +141,7 @@ void task1( void * pvParameters )
 
 }
 
-/* 任务二，tansmit hello */
+
 volatile uint32_t break_point_instruction_addr;
 volatile uint32_t back_instruction_address;
 
