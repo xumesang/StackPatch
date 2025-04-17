@@ -1,7 +1,10 @@
-### StackPatch
+### StackPatch - Hot Patching Framework based on Stack Frame Reconstruction for Embedded Systems
 
-## Introduction
-This repository contains demo projects from our work, which you can compile and run to validate the functionalities of StackPatch. 
+## Description
+The StackPatch is an open-source hot patching framework dedicated to embedded systems. 
+
+It consists of various modules that aid hot patching operations:
+
 
 
 To evaluate *StackPatch* and obtain results similar to those presented in the paper, access to one of the following **four** boards is required: 
