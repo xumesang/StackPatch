@@ -1,4 +1,4 @@
-### StackPatch - Hot Patching Framework based on Stack Frame Reconstruction for Embedded Systems
+### StackPatch - Hot Patching Framework based on Stack Frame Reconstruction
 
 ## Description
 The StackPatch is an open-source hot patching framework dedicated to embedded systems. 
