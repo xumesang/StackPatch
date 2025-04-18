@@ -1,7 +1,7 @@
-### StackPatch
+### StackPatch - Hot Patching Framework for Embedded Systems
 
 ## Introduction
-This repository contains demo projects from our work, which you can compile and run to validate the functionalities of StackPatch. 
+This repository contains 11 demo projects, and you can use them to facilitate patch development based on stack frame reconstruction. 
 
 
 ### Description 
