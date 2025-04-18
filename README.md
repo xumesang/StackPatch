@@ -21,6 +21,25 @@ This repository contains demo projects from our work, which you can compile and 
 └─── STM32F401RE: Implementation of StackPatch on the STM32F401RE board.
 ```
 
+## There are 11 demos in this repository:
+ - StackPatch\VulDevice\ESP32S3 : Implementation of StackPatch on the STM32F401RE board.
+ - StackPatch\VulDevice\GD32VF103 : Implementation of StackPatch on the STM32F401RE board.
+ - StackPatch\VulDevice\STM32F401RE\flashpatch\dwtflashpatch : Implementation of stackpatch hardware breakpoint mode (DWT) on stm32f401re board.
+ - StackPatch\VulDevice\STM32F401RE\flashpatch\fpbflashpatch : Implementation of stackpatch hardware breakpoint mode (FPB) on stm32f401re board.
+ - StackPatch\VulDevice\STM32F401RE\srampatch\bootloader : Bootloader for executing programs in SRAM.
+ - StackPatch\VulDevice\STM32F401RE\srampatch\freertos_cve_test : Using software breakpoints to fix vulnerabilities in FreeRTOS.
+ - StackPatch\VulDevice\STM32F401RE\srampatch\sram_cve : Using software breakpoints to fix vulnerabilities in other RTOSes.
+ - StackPatch\Evaluation\Compare : Performance comparison between stackpatch and other work.
+ - StackPatch\Evaluation\dispatchdelayBinarySearch : Add the binary search function of stackpatch scheduling patch.
+ - StackPatch\Evaluation\HeartTateSensor\fpbflashpatch: Experiment of stackpatch in repairing vulnerabilities in heart rate sensor.
+ - StackPatch\Evaluation\NetworkSreverLatency : Experiment of repairing web server with stackpatch.
+
+A demo folder introduction example : 
+└─── Drivers : Drive configuration file (including Hal Library).
+└─── Middlewares : Including RTOS kernel source code.
+└─── Output : By compiling the demo, the output file.
+└─── Projects : Keil project of the demo.
+└─── User : User's program.
 
 
 ### Requirements
