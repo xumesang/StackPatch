@@ -1,23 +1,23 @@
-# StackPatch -STM32F401RE
+# StackPatch implementation on the STM32F401RE board
 
 
 ## Usage
 
-In this folder, we provide two trigger mechanisms of StackPatch on the stm32f401re development board.
+Users can use two trigger mechanisms to repair vulnerable programs running on the stm32f401re development board.
 
 #### The structure of this folder is as follows:
 ```
 
-flashpatch
+flashpatch     <--- When the vulnerable program running in Flash memory, users can use the DWT or the FPB hardware breakpoints to repair it. 
 |
-└─── dwtflashpatch       <--- DWT hardware breakpoints trigger mechanisms
-└─── fpbflashpatch       <--- FPB hardware breakpoints trigger mechanisms
+└─── dwtflashpatch       <--- The DWT hardware breakpoints trigger mechanism
+└─── fpbflashpatch       <--- The FPB hardware breakpoints trigger mechanism
 
-srampatch     <--- The trigger mechanism of software breakpoints requires the program to run in SRAM, so we build bootloader (stored in FLASH) and apps (stored in SRAM). 
+srampatch     <--- When the vulnerable program running in SRAM, users are recommended to use software berakpoints to repair it. We build bootloader (stored in FLASH) and apps (stored in SRAM). 
 |
-└─── bootloader          <--- For this trigger mechanism, you need to burn the bootloader into flash and send the compiled bin file of the app program through UART.
-└─── freertos_cve_test   <--- Example program of using stackpatch to patch FreeRTOS vulnerabilities.
-└─── sram_cve            <--- Example program of using stackpatch to patch other RTOSes or libraries vulnerabilities.
+└─── bootloader          <--- Users need to flash the bootloader into flash and send the compiled bin file of the app program through a serial interface (e.g., UART). 
+└─── freertos_cve_test   <--- These examples show how to repair FreeRTOS vulnerabilities. 
+└─── sram_cve            <--- These examples show how to repair vulnerabilities of other RTOSes and embedded libraries.
 
 ```
 

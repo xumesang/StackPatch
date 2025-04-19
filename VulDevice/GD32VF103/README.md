@@ -1,8 +1,7 @@
-# StackPatch -ESP32S3
+# StackPatch implementation on the GD32VF103 board
 
 
 ## Usage
 ## entry.S
-We have modified the entry.S in the component, specifically the trap_entry exception handling function. 
-You can use it to replace the corresponding file.
+Users can use our modified trap_entry exception handling functions in the entry.S file to repair vulnerable progtrams on the GD32VF103 board. 
 
