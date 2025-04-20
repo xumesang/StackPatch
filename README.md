@@ -16,17 +16,17 @@ StackPatch reconstructs stack frames to apply live security patches on embedded 
 
 ## Repository Structure
 
-StackPatch/
-├── Evaluation/
-│   ├── Compare/
-│   ├── DispatchDelayBinarySearch/
-│   ├── HeartRateSensor/
-│   └── NetworkServiceLatency/
-├── VulDevice/
-│   ├── ESP32S3/
-│   ├── GD32VF103/
-│   └── STM32F401RE/
-└── README.md
+StackPatch/  
+├── Evaluation/  
+│   ├── Compare/  
+│   ├── DispatchDelayBinarySearch/  
+│   ├── HeartRateSensor/  
+│   └── NetworkServiceLatency/  
+├── VulDevice/  
+│   ├── ESP32S3/  
+│   ├── GD32VF103/  
+│   └── STM32F401RE/  
+└── README.md  
 
 
 
