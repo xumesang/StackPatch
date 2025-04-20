@@ -3,6 +3,7 @@
 
 #include "freertoscve.h"
 
+// Repair the CVE-2018-16601 vulnerability
 //void patch_cve2018_16601(unsigned int* pStack) __attribute__((section(".ARM.__at_0x20008000")));
 void patch_cve2018_16601(unsigned int* pStack){ 
 	
@@ -17,6 +18,7 @@ void patch_cve2018_16601(unsigned int* pStack){
 	 }
 }	
 
+// Repair the CVE-2018-16603 vulnerability
 void patch_cve2018_16603(unsigned int* pStack){ 
 	 //printf("%d\r\n",*(pStack + 9u));
 
@@ -32,6 +34,7 @@ void patch_cve2018_16603(unsigned int* pStack){
 			 }
 }	
 
+// Repair the CVE-2018-16528 vulnerability
 void patch_cve2018_16528(unsigned int* pStack){  //breakpoint movs r6,r4;
 	// printf("%d\r\n",*(uint32_t *)(*(pStack + 1u) + 0x20));
 	if( *(pStack + 2u) == 0 ){
@@ -42,12 +45,13 @@ void patch_cve2018_16528(unsigned int* pStack){  //breakpoint movs r6,r4;
 	 *(pStack + 15u) += 2u; //back
 }
 
-
+// Repair the CVE-2018-16526 vulnerability
 void patch_cve2018_16526(unsigned int* pStack){  
   *(uint8_t *)(*(pStack + 2u)) =(*(uint8_t *)(*(pStack + 2u))&0xf0 ) |( ( 20u >> 2 ) & 0x0F );
 	 *(pStack + 15u) += 2u; //back
 }
 
+// Repair the CVE-2018-16599 vulnerability
 void patch_cve2018_16599(unsigned int* pStack){  
     if(*(pStack + 2u) < 0x32 ){
 	   *(pStack + 1u)  =  *(pStack + 17u) ;    //r4
@@ -64,6 +68,8 @@ void patch_cve2018_16599(unsigned int* pStack){
 	  *(pStack + 15u) += 2u; //back
 	 }
 }
+
+// Repair the CVE-2018-31532 vulnerability
 void patch_cve2018_31532(unsigned int* pStack){  
   if(*(pStack + 12u) >= *(pStack + 12u) + 0x19 ){
 	   *(pStack + 9u)  = NULL; 
@@ -74,6 +80,7 @@ void patch_cve2018_31532(unsigned int* pStack){
 	}
 }
 
+// Repair the CVE-2021-16571 vulnerability
 void patch_cve2021_31571(unsigned int* pStack){ 
   if((0x20 + *(pStack + 11u) ) <=  *(pStack + 11u)){
 	   while(1); //back
@@ -82,6 +89,8 @@ void patch_cve2021_31571(unsigned int* pStack){
 	  *(pStack + 15u) += 2u; //back
 	}
 }
+
+// Repair the CVE-2018-16600 vulnerability
 void patch_cve2018_16600(unsigned int* pStack){ 
   if(*(uint8_t *)(*(pStack + 1u) + 8) < 0x20){
 	   *(pStack + 9u) = 0;
@@ -92,6 +101,8 @@ void patch_cve2018_16600(unsigned int* pStack){
 	  *(pStack + 15u) += 2u; //back
 	}
 }
+
+// Repair the CVE-2018-16523 vulnerability
 void patch_cve2018_16523(unsigned int* pStack){ 
   if(*(pStack + 1u) + (((*(uint32_t *)(*(pStack + 3u)+0xc) >> 4) - 5) << 2) > ( *(uint32_t *)(*(pStack + 9u)+ 4) + *(uint32_t *)(*(pStack + 9u)+8 ))){
 		//	 printf("hhha");
@@ -113,6 +124,7 @@ void patch_cve2018_16523(unsigned int* pStack){
 	}
 }
 
+// Repair the CVE-2018-16524 vulnerability
 void patch_cve2018_16524(unsigned int* pStack){ 
   	if(*(pStack + 6u) < 2){
 		*(pStack + 15u) +=18u; 
