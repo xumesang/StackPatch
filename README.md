@@ -1,5 +1,5 @@
 # StackPatch
-**Hot-Patching Framework for Embedded Systems**
+**Hot-Patching Framework for Embedded Systems**  
 StackPatch reconstructs stack frames to apply live security patches on embedded devices without rebooting.
 
 ## Table of Contents
