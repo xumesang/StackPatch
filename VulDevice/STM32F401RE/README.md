@@ -1,23 +1,29 @@
-# StackPatch implementation on the STM32F401RE board
+# StackPatch Implementation on STM32F401RE
 
+StackPatch on the STM32F401RE (Cortex‑M4) platform supports both hardware‑ and software‑breakpoint triggers to apply hot patches at runtime without reboot.
+
+---
 
 ## Usage
 
-Users can use two trigger mechanisms to repair vulnerable programs running on the stm32f401re development board.
+Choose the trigger mechanism based on where your vulnerable code executes:
 
-#### The structure of this folder is as follows:
-```
+1. **Flash‑based Programs**  
+   Use hardware breakpoints (DWT or FPB) when the firmware runs from Flash.
 
-flashpatch     <--- When the vulnerable program running in Flash memory, users can use the DWT or the FPB hardware breakpoints to repair it. 
-|
-└─── dwtflashpatch       <--- The DWT hardware breakpoints trigger mechanism
-└─── fpbflashpatch       <--- The FPB hardware breakpoints trigger mechanism
+2. **SRAM‑based Programs**  
+   Use software breakpoints when the application runs from SRAM via a bootloader.
 
-srampatch     <--- When the vulnerable program running in SRAM, users are recommended to use software berakpoints to repair it. We build bootloader (stored in FLASH) and apps (stored in SRAM). 
-|
-└─── bootloader          <--- Users need to flash the bootloader into flash and send the compiled bin file of the app program through a serial interface (e.g., UART). 
-└─── freertos_cve_test   <--- These examples show how to repair FreeRTOS vulnerabilities. 
-└─── sram_cve            <--- These examples show how to repair vulnerabilities of other RTOSes and embedded libraries.
+---
 
-```
+## Folder Structure
 
+```plaintext
+flashpatch/           # Flash‑based triggers
+├── dwtflashpatch/    # DWT hardware‑breakpoint mode
+└── fpbflashpatch/    # FPB hardware‑breakpoint mode
+
+srampatch/            # SRAM‑based triggers
+├── bootloader/       # Bootloader in Flash; loads SRAM apps via serial
+├── freertos_cve_test/# Software‑breakpoint patches for FreeRTOS
+└── sram_cve/         # Software‑breakpoint patches for other RTOSes/libs

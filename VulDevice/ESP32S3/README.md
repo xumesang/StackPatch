@@ -1,9 +1,23 @@
-# StackPatch implementation on the ESP32S3 board
+# StackPatch Implementation on ESP32S3
 
+StackPatch on the ESP32S3 (Xtensa‑LX7) platform hooks into the FreeRTOS exception mechanism and instruments target functions to enable live hot‑patching without reboot.
 
-## Description
-## panc_handler_asm.S
-To direct the control from the vulnerable code to hot patches, we modify the panc_handler_asm.S in the ESP-IDF component (which integrates FreeRTOS), specifically the xt_panic exception handling function. Users can use it to replace their own exception handlers in the ESP-IDF component.
+---
 
-## instrument.py
-Users can use it to perform instrumentation operations for functions in ESP-IDF.
+## 1. Modified Exception Handler (`panic_handler_asm.S`)
+
+**Location:**  
+`<esp-idf-root>/components/freertos/port/xtensa/xtensa_vectors.S` (or your project’s equivalent)
+
+**Changes:**  
+- Replaces the default `xt_panic` handler with a custom entry point.  
+- Saves CPU registers and stack context, then transfers control to the StackPatch dispatcher.  
+- After patch application, restores context and returns execution to the fixed code path.
+
+**Integration Steps:**  
+1. Copy the provided `panic_handler_asm.S` into your ESP‑IDF component directory, overwriting the stock handler.  
+2. Rebuild your ESP‑IDF project as usual:  
+   ```bash
+   idf.py fullclean
+   idf.py build
+   idf.py flash

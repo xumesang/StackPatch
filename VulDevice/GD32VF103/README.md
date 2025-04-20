@@ -1,7 +1,32 @@
-# StackPatch implementation on the GD32VF103 board
+# StackPatch Implementation on GD32VF103  
 
+StackPatch on the GD32VF103 (RISC‑V32) platform installs a custom exception handler to intercept faults and apply hot‑patches at runtime without reboot.
+
+---
 
 ## Usage
-## entry.S
-Users can use our modified trap_entry exception handling functions in the entry.S file to repair vulnerable progtrams on the GD32VF103 board. 
+
+### 1. Modified Exception Handler (`entry.S`)
+
+**Location:**  
+`VulDevice/GD32VF103/entry.S`
+
+**Purpose:**  
+Replace the default `trap_entry` routine to capture CPU context on exceptions, invoke the StackPatch dispatcher, then return execution to the patched code path.
+
+**Changes:**  
+- Saved all general‑purpose registers and interrupt state on entry.  
+- Branched to the StackPatch dispatcher with the saved context pointer.  
+- After the patch is applied, restored registers and returned from exception.  
+
+**Integration Steps:**  
+1. Copy our provided `entry.S` into your GD32VF103 project’s startup directory, overwriting the stock handler.  
+2. Rebuild your firmware using your Eclipse-based RISC‑V toolchain.  
+3. Flash the updated binary to the board via GD‑LINK.  
+4. Monitor the serial console to verify StackPatch logs and confirm that the vulnerable routine has been patched.
+
+---
+
+With this handler in place, any exception triggered by a known vulnerability will automatically divert to StackPatch for live correction, then resume normal execution seamlessly.  
+
 
