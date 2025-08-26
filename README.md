@@ -89,7 +89,7 @@ To reproduce the results in our paper, you need one of these boards:
 
 ## Usage Guide
 
-### Recommended: STM32F401RE / nRF52840
+### Recommended: STM32F401RE
 1. Install and launch Keil µVision5.  
 2. Connect the board to your PC via debugger (e.g., ST‑LINK).  
 3. Open the Keil project in  
