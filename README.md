@@ -25,7 +25,8 @@ StackPatch/
 ├── VulDevice/  
 │   ├── ESP32S3/  
 │   ├── GD32VF103/  
-│   └── STM32F401RE/  
+│   ├── STM32F401RE/  
+|   └── SerialTerminalTool/
 └── README.md  
 
 
@@ -82,7 +83,7 @@ To reproduce the results in our paper, you need one of these boards:
 
 **Common Requirements**:
 - Windows 10  
-- Serial terminal tool (e.g., pyserial)  
+- Serial terminal tool (e.g., UartAssist V5.0.10 in \VulDevice\SerialTerminalTool)  
 - Debugger: J‑LINK, ST‑LINK, or GD‑LINK  
 
 ---
