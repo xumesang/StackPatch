@@ -95,7 +95,7 @@ To reproduce the results in our paper, you need one of these boards:
 2. Connect the board to your PC via debugger (e.g., ST‑LINK).  
 3. Open the Keil project. (e.g., double-click StackPatch\VulDevice\STM32F401RE\flashpatch\fpbflashpatch\Projects\MDK-ARM\f401re.uvprojx.)  
 4. Build and flash the firmware.  
-5. Use a serial terminal to view StackPatch log output.
+5. Use the serial terminal tool to view StackPatch log output.
 
 ### GD32VF103
 - IDE: Eclipse  
