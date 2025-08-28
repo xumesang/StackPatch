@@ -21,12 +21,41 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-H:\stm32f401re\evaluation\compare\hardware\fpbflashpatch\Projects\MDK-ARM\f401re.uvprojx
-Project File Date:  06/10/2024
+H:\stm32f401re\StackPatchAE\VulDevice\STM32F401RE\flashpatch\fpbflashpatch\Projects\MDK-ARM\f401re.uvprojx
+Project File Date:  08/27/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'template'
+Rebuild target 'template'
+assembling startup_stm32f401xe.s...
+compiling iap.c...
+compiling system_stm32f4xx.c...
+compiling main.c...
+compiling stm32f4xx_it.c...
+..\..\User\stm32f4xx_it.c(140): warning:  #68-D: integer conversion resulted in a change of sign
+   	{ exception_info->r0 = -1;
+..\..\User\stm32f4xx_it.c(244): warning:  #68-D: integer conversion resulted in a change of sign
+   	{ *(sp + 9u) = -1;
+..\..\User\stm32f4xx_it.c(175): warning: A1581W: Added 2 bytes of padding at address 0x32
+..\..\User\stm32f4xx_it.c: 2 warnings, 0 errors
+compiling patch.c...
+..\..\User\patch.c(12): warning:  #68-D: integer conversion resulted in a change of sign
+  		*(pStack + 9u) = -1; //r0 = -1
+..\..\User\patch.c: 1 warning, 0 errors
+compiling patch_delay_test.c...
+..\..\User\patch_delay_test.h(12): warning:  #1295-D: Deprecated declaration dwt_init - give arg types
+  void dwt_init();
+..\..\User\patch_delay_test.h(13): warning:  #1295-D: Deprecated declaration dwt_deinit - give arg types
+  void dwt_deinit();
+..\..\User\patch_delay_test.h(14): warning:  #1295-D: Deprecated declaration dwt_get_counter - give arg types
+  uint32_t dwt_get_counter();
+..\..\User\patch_delay_test.h(18): warning:  #1295-D: Deprecated declaration MeasureTimeStart - give arg types
+  void MeasureTimeStart();
+..\..\User\patch_delay_test.h(21): warning:  #1-D: last line of file ends without a newline
+  int MeasureTimeEnd();
+..\..\User\patch_delay_test.h(21): warning:  #1295-D: Deprecated declaration MeasureTimeEnd - give arg types
+  int MeasureTimeEnd();
+..\..\User\patch_delay_test.c: 6 warnings, 0 errors
 compiling freertos_demo.c...
 ..\..\User\patch_delay_test.h(12): warning:  #1295-D: Deprecated declaration dwt_init - give arg types
   void dwt_init();
@@ -40,45 +69,159 @@ compiling freertos_demo.c...
   int MeasureTimeEnd();
 ..\..\User\patch_delay_test.h(21): warning:  #1295-D: Deprecated declaration MeasureTimeEnd - give arg types
   int MeasureTimeEnd();
-..\..\User\freertos_demo.c(74): warning:  #188-D: enumerated type mixed with another type
+..\..\User\freertos_demo.c(73): warning:  #188-D: enumerated type mixed with another type
   	return (((*dhcsr) & 0x1) != 0);
-..\..\User\freertos_demo.c(80): warning:  #61-D: integer operation result is out of range
+..\..\User\freertos_demo.c(79): warning:  #61-D: integer operation result is out of range
   	*scb_hfsr = (1 << 31);
-..\..\User\freertos_demo.c(80): warning:  #68-D: integer conversion resulted in a change of sign
+..\..\User\freertos_demo.c(79): warning:  #68-D: integer conversion resulted in a change of sign
   	*scb_hfsr = (1 << 31);
-..\..\User\freertos_demo.c(104): warning:  #68-D: integer conversion resulted in a change of sign
+..\..\User\freertos_demo.c(103): warning:  #68-D: integer conversion resulted in a change of sign
   	*shp8 = -1;
-..\..\User\freertos_demo.c(62): warning:  #177-D: variable "REMAP_ADDR"  was declared but never referenced
+..\..\User\freertos_demo.c(61): warning:  #177-D: variable "REMAP_ADDR"  was declared but never referenced
   static FPB_REMAP REMAP_ADDR;
-..\..\User\freertos_demo.c(217): warning:  #177-D: variable "NoPatch"  was declared but never referenced
+..\..\User\freertos_demo.c(216): warning:  #177-D: variable "NoPatch"  was declared but never referenced
   static uint8_t NoPatch[] = ""
-..\..\User\freertos_demo.c(240): warning:  #177-D: variable "dwt_patch2018_16601"  was declared but never referenced
+..\..\User\freertos_demo.c(239): warning:  #177-D: variable "dwt_patch2018_16601"  was declared but never referenced
   static uint8_t dwt_patch2018_16601[] = ""
-..\..\User\freertos_demo.c(245): warning:  #177-D: variable "patch2018_16601"  was declared but never referenced
+..\..\User\freertos_demo.c(244): warning:  #177-D: variable "patch2018_16601"  was declared but never referenced
   static uint8_t patch2018_16601[] = ""
-..\..\User\freertos_demo.c(258): warning:  #177-D: variable "patch2018_16603"  was declared but never referenced
+..\..\User\freertos_demo.c(257): warning:  #177-D: variable "patch2018_16603"  was declared but never referenced
   static uint8_t patch2018_16603[] = ""
-..\..\User\freertos_demo.c(264): warning:  #177-D: variable "patch16528"  was declared but never referenced
+..\..\User\freertos_demo.c(263): warning:  #177-D: variable "patch16528"  was declared but never referenced
   static uint8_t patch16528[] = ""
-..\..\User\freertos_demo.c(268): warning:  #177-D: variable "patch16526"  was declared but never referenced
+..\..\User\freertos_demo.c(267): warning:  #177-D: variable "patch16526"  was declared but never referenced
   static uint8_t patch16526[] = ""
-..\..\User\freertos_demo.c(272): warning:  #177-D: variable "patch16599"  was declared but never referenced
+..\..\User\freertos_demo.c(271): warning:  #177-D: variable "patch16599"  was declared but never referenced
   static uint8_t patch16599[] = ""
-..\..\User\freertos_demo.c(280): warning:  #177-D: variable "patch31532"  was declared but never referenced
+..\..\User\freertos_demo.c(279): warning:  #177-D: variable "patch31532"  was declared but never referenced
   static uint8_t patch31532[] = ""
-..\..\User\freertos_demo.c(287): warning:  #177-D: variable "patchcve2021_31571"  was declared but never referenced
+..\..\User\freertos_demo.c(286): warning:  #177-D: variable "patchcve2021_31571"  was declared but never referenced
   static uint8_t patchcve2021_31571[] = ""
-..\..\User\freertos_demo.c(293): warning:  #177-D: variable "patchcve2018_16600"  was declared but never referenced
+..\..\User\freertos_demo.c(292): warning:  #177-D: variable "patchcve2018_16600"  was declared but never referenced
   static uint8_t patchcve2018_16600[] = ""
-..\..\User\freertos_demo.c(298): warning:  #177-D: variable "patchcve2018_16523"  was declared but never referenced
+..\..\User\freertos_demo.c(297): warning:  #177-D: variable "patchcve2018_16523"  was declared but never referenced
   static uint8_t patchcve2018_16523[] = ""
-..\..\User\freertos_demo.c(307): warning:  #177-D: variable "patchcve2018_16524"  was declared but never referenced
+..\..\User\freertos_demo.c(306): warning:  #177-D: variable "patchcve2018_16524"  was declared but never referenced
   static uint8_t patchcve2018_16524[] = ""
 ..\..\User\freertos_demo.c: 23 warnings, 0 errors
+compiling freertoscve.c...
+..\..\User\patch_delay_test.h(12): warning:  #1295-D: Deprecated declaration dwt_init - give arg types
+  void dwt_init();
+..\..\User\patch_delay_test.h(13): warning:  #1295-D: Deprecated declaration dwt_deinit - give arg types
+  void dwt_deinit();
+..\..\User\patch_delay_test.h(14): warning:  #1295-D: Deprecated declaration dwt_get_counter - give arg types
+  uint32_t dwt_get_counter();
+..\..\User\patch_delay_test.h(18): warning:  #1295-D: Deprecated declaration MeasureTimeStart - give arg types
+  void MeasureTimeStart();
+..\..\User\patch_delay_test.h(21): warning:  #1-D: last line of file ends without a newline
+  int MeasureTimeEnd();
+..\..\User\patch_delay_test.h(21): warning:  #1295-D: Deprecated declaration MeasureTimeEnd - give arg types
+  int MeasureTimeEnd();
+..\..\User\freertoscve.c(9): warning:  #177-D: variable "uxHeaderLength"  was declared but never referenced
+  	uint32_t uxHeaderLength = ( uint32_t ) ( ( pxIPHeader->ucVersionHeaderLength & 0x0Fu ) << 2 );
+..\..\User\freertoscve.c(10): warning:  #177-D: variable "ucProtocol"  was declared but never referenced
+  	uint8_t ucProtocol;
+..\..\User\freertoscve.c(74): warning:  #188-D: enumerated type mixed with another type
+  	return 1;
+..\..\User\freertoscve.c(58): warning:  #177-D: variable "eReturn"  was declared but never referenced
+  eFrameProcessingResult_t eReturn;
+..\..\User\freertoscve.c(60): warning:  #177-D: variable "uxHeaderLength"  was declared but never referenced
+  UBaseType_t uxHeaderLength = ( UBaseType_t ) ( ( pxIPHeader->ucVersionHeaderLength & 0x0Fu ) << 2 );
+..\..\User\freertoscve.c(61): warning:  #550-D: variable "ucProtocol"  was set but never used
+  uint8_t ucProtocol;
+..\..\User\freertoscve.c(134): warning:  #550-D: variable "i"  was set but never used
+  	int i;
+..\..\User\freertoscve.c(158): warning:  #550-D: variable "ucProtocol"  was set but never used
+  uint8_t ucProtocol;
+..\..\User\freertoscve.c(247): warning:  #177-D: variable "xRemainingOptionsBytes"  was declared but never referenced
+          UBaseType_t xRemainingOptionsBytes = pucLast - pucPtr;
+..\..\User\freertoscve.c(229): warning:  #177-D: variable "uxNewMSS"  was declared but never referenced
+  UBaseType_t uxNewMSS;
+..\..\User\freertoscve.c(278): warning:  #513-D: a value of type "TCPPacket_t *" cannot be assigned to an entity of type "uint8_t *"
+  	testdata.pucEthernetBuffer = &prv;
+..\..\User\freertoscve.c(294): warning:  #177-D: variable "uxNewMSS"  was declared but never referenced
+  UBaseType_t uxNewMSS;
+..\..\User\freertoscve.c(344): warning:  #513-D: a value of type "TCPPacket_t *" cannot be assigned to an entity of type "uint8_t *"
+  	testdata.pucEthernetBuffer = &prv;
+..\..\User\freertoscve.c(357): warning:  #177-D: variable "usFlags"  was declared but never referenced
+  		uint16_t usFlags, usType, usClass;
+..\..\User\freertoscve.c(357): warning:  #177-D: variable "usType"  was declared but never referenced
+  		uint16_t usFlags, usType, usClass;
+..\..\User\freertoscve.c(357): warning:  #177-D: variable "usClass"  was declared but never referenced
+  		uint16_t usFlags, usType, usClass;
+..\..\User\freertoscve.c(358): warning:  #177-D: variable "pucSource"  was declared but never referenced
+  		uint8_t *pucSource, *pucTarget;
+..\..\User\freertoscve.c(358): warning:  #177-D: variable "pucTarget"  was declared but never referenced
+  		uint8_t *pucSource, *pucTarget;
+..\..\User\freertoscve.c(359): warning:  #177-D: variable "ucByte"  was declared but never referenced
+  		uint8_t ucByte;
+..\..\User\freertoscve.c(360): warning:  #177-D: variable "ucNBNSName"  was declared but never referenced
+  		uint8_t ucNBNSName[ 17 ];
+..\..\User\freertoscve.c(421): warning:  #144-D: a value of type "EthernetHeader_t *" cannot be used to initialize an entity of type "uint8_t *"
+  		.pucEthernetBuffer = &data,
+..\..\User\freertoscve.c(471): warning:  #177-D: variable "pucQueueStorage"  was declared but never referenced
+          uint8_t * pucQueueStorage;
+..\..\User\freertoscve.c(526): warning:  #177-D: variable "xReturn"  was declared but never referenced
+  			BaseType_t xReturn = pdPASS;
+..\..\User\freertoscve.c(531): warning:  #940-D: missing return statement at end of non-void function "prvProcessDHCPReplies" 
+  }
+..\..\User\freertoscve.c(504): warning:  #177-D: variable "pucUDPPayload"  was declared but never referenced
+  uint8_t *pucUDPPayload, *pucLastByte;
+..\..\User\freertoscve.c(504): warning:  #177-D: variable "pucLastByte"  was declared but never referenced
+  uint8_t *pucUDPPayload, *pucLastByte;
+..\..\User\freertoscve.c(509): warning:  #177-D: variable "pucByte"  was declared but never referenced
+  uint8_t *pucByte, ucOptionCode, ucLength;
+..\..\User\freertoscve.c(509): warning:  #177-D: variable "ucOptionCode"  was declared but never referenced
+  uint8_t *pucByte, ucOptionCode, ucLength;
+..\..\User\freertoscve.c(509): warning:  #177-D: variable "ucLength"  was declared but never referenced
+  uint8_t *pucByte, ucOptionCode, ucLength;
+..\..\User\freertoscve.c(510): warning:  #177-D: variable "ulProcessed"  was declared but never referenced
+  uint32_t ulProcessed, ulParameter;
+..\..\User\freertoscve.c(510): warning:  #177-D: variable "ulParameter"  was declared but never referenced
+  uint32_t ulProcessed, ulParameter;
+..\..\User\freertoscve.c(512): warning:  #177-D: variable "ulMandatoryOptions"  was declared but never referenced
+  const uint32_t ulMandatoryOptions = 2ul; /* DHCP server address, and the correct DHCP message type must be present in the options. */
+..\..\User\freertoscve.c: 38 warnings, 0 errors
+compiling stm32f4xx_hal_dma_ex.c...
+compiling stm32f4xx_hal.c...
+compiling stm32f4xx_hal_rcc.c...
+compiling stm32f4xx_hal_cortex.c...
+compiling stm32f4xx_hal_dma.c...
+compiling stm32f4xx_hal_pwr.c...
+compiling stm32f4xx_hal_pwr_ex.c...
+compiling stm32f4xx_hal_gpio.c...
+compiling stm32f4xx_hal_flash_ex.c...
+compiling stm32f4xx_hal_usart.c...
+compiling stm32f4xx_hal_flash.c...
+compiling stm32f4xx_hal_uart.c...
+compiling stm32f4xx_hal_flash_ramfunc.c...
+compiling stm32f4xx_hal_rcc_ex.c...
+compiling stm32f4xx_hal_tim_ex.c...
+compiling stm32f4xx_hal_tim.c...
+compiling flash.c...
+compiling usart.c...
+compiling led.c...
+compiling sys.c...
+compiling fpb.c...
+..\..\Drivers\MY_Driver\fpb.c(211): warning:  #188-D: enumerated type mixed with another type
+  		hera_remap_instr(old_instruction_address,new_instruction_address,1,link);
+..\..\Drivers\MY_Driver\fpb.c(212): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\Drivers\MY_Driver\fpb.c: 2 warnings, 0 errors
+compiling delay.c...
+compiling port.c...
+compiling heap_4.c...
+compiling croutine.c...
+compiling stream_buffer.c...
+compiling event_groups.c...
+compiling list.c...
+compiling timers.c...
+compiling tasks.c...
+compiling queue.c...
 linking...
 Program Size: Code=20700 RO-data=848 RW-data=960 ZI-data=13056  
 After Build - User command #1: fromelf.exe --bin -o ..\..\Output\hhf401re.bin ..\..\Output\f401re.axf
-"..\..\Output\f401re.axf" - 0 Error(s), 23 Warning(s).
+"..\..\Output\f401re.axf" - 0 Error(s), 73 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -91,7 +234,7 @@ Package Vendor: Keil
   E:/Users/53429/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:34
 </pre>
 </body>
 </html>
