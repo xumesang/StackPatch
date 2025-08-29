@@ -216,7 +216,7 @@ HardFault_Handler    PROC
         
     ;PUSH    {lr}    
 	;BL       HardFaultHandlerd_dispatch      ; Stack pointer passed through R0.
-    LDR      pc, =0x20007001
+    LDR      pc, =0x20009001  ; Jump to patch
 	;LDR PC,=0x20009001
     ;POP     {lr}                    
 				

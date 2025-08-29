@@ -274,11 +274,11 @@ DebugMon_Handler    PROC
     MSREQ   msp, r0                  ;[2]=0 ==> Z=1, update stack pointer to MSP.
     MSRNE   psp, r0                  ;[2]=1 ==> Z=0, update stack pointer to PSP.
         
-    ;PUSH    {r1,lr}    
+      
 	;BL       rt_hw_hard_fault_exception1      ; Stack pointer passed through R0.
-    ;LDR      pc, =0x08009001
-	LDR PC, =0x20007001
-    ;POP     {r1,lr}                    
+    
+	LDR PC, =0x20007001   ;The control flow transfers to the patch dispatch.
+                       
 				
     TST     lr, #0x04                ;if(!EXC_RETURN[2])
     ITE     EQ                    
@@ -292,7 +292,7 @@ DebugMon_Handler    PROC
     ITE     EQ         
     MSREQ   msp, r0                  ;[2]=0 ==> Z=1, update stack pointer to MSP.
     MSRNE   psp, r0                  ;[2]=1 ==> Z=0, update stack pointer to PSP.
-		   
+		    
     ;ORR     lr, lr, #0x04
     BX      lr
     ENDP

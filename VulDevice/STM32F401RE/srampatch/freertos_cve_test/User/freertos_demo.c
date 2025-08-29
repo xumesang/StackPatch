@@ -134,7 +134,7 @@ static uint8_t patch2018_16601[] = ""
 "\x02\x6B\x41\x68\x09\x68\x0E\x39\x8A\x42\x02\xD8\x01\x6B\x14\x29"//16
 "\x06\xD2\x4F\xF0\xFF\x31\x41\x62\xC1\x6B\x89\x1C\xC1\x63\x04\xE0"
 "\x00\x21\x41\x62\xC1\x6B\x89\x1C\xC1\x63"//patch   //10
-"\xdf\xf8\x04\xf0\x00\x00\x8f\x13\x00\x20" //jumpback
+"\xdf\xf8\x04\xf0\x00\x00\x87\x13\x00\x20" //jumpback
 "";
 /*
 static uint8_t patch2018_16603[] = ""
@@ -199,16 +199,19 @@ static uint8_t patchcve2018_16524[] = ""
 
 void patchtask( void * pvParameters )
 {      
-	   break_point_instruction_addr = 0x200040a8;
-	   patch_address = 0x20009000;
+	   break_point_instruction_addr = 0x2000409c;/* The vulnerability entry point received from the update host is 0x2000409c.*/
+	   patch_address = 0x20009000;/* patch address is in idle RAM area, with a starting address of 0x20009000.*/
 	   uint32_t i;
 	   for ( i = 0; i < sizeof(patch2018_16601); i=i+1){           
-					  *(uint8_t *)(patch_address+i) = *(uint8_t *)(patch2018_16601+i);
+					  *(uint8_t *)(patch_address+i) = *(uint8_t *)(patch2018_16601+i);/** Write the patch into the specified patch area. **/
         }
-		 *(uint16_t *)(break_point_instruction_addr) = 0xBE00;
+		 *(uint16_t *)(break_point_instruction_addr) = 0xBE00; 
+/** To set a software breakpoint, you only need to replace the vulnerability entry address with a breakpoint instruction. **/
+/**  When the control flow reaches the break_point_instruction_addr, 
+   it will trigger the Hardfault_Handler located in /Startup/startup_stm32f401xe.s.   **/
 	  //  mymemcpy(patch_address,zephyr_cve_10063,sizeof(zephyr_cve_10063));
 	  // *(uint16_t *)(0x20003038) = 0xBE00;
-	 //  *(uint16_t *)(0x20003e2c) = 0xBE00;
+	 //  *(uint16_t *)(0x20003e2c) = 0xBE00;4
 	   /*
        printf("send\n");
 	  //   printf("%p \n",&patchfunc);
@@ -219,7 +222,6 @@ void patchtask( void * pvParameters )
 						{ //printf("ok1!");
                 break;}
         }
-				
         uint8_t data[4];
         HAL_UART_Receive(&g_uart1_handle, data, 4,10000);
         break_point_instruction_addr = data[0];// break_point_instruction_addr
@@ -260,5 +262,9 @@ void patchtask( void * pvParameters )
 		    vTaskDelete(NULL); 
 }
 
-
+/* PS: 
+  The patch information (update point address, binary patch and its address) 
+	is received from the update host (via communication protocols such as WIFI, Bluetooth, etc.). 
+  Stackpatch does not mandate the use of a specific communication protocol; therefore,
+  we assume that the patch has been received in the evaluation. */
 

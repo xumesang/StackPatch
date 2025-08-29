@@ -1,11 +1,10 @@
 #include "usart.h"
-
-
 #include "freertoscve.h"
+/** This file contains the C source code patch for Stackpatch. **/
+
 
 // Repair the CVE-2018-16601 vulnerability
 void patch_cve2018_16601(unsigned int* pStack){ 
-	
 	
 		if(  *(pStack + 12u) > *(uint32_t *)( *(pStack + 1u))-14u  ||  *(pStack + 12u) < 20u  ){
 	//	printf("%d\r\n",*(uint32_t *)( *(pStack + 11u)));
@@ -150,7 +149,6 @@ void patch_cve2018_16524(unsigned int* pStack){
 		*(pStack + 15u) +=18u; 
 	}else{
 
-	 
 		*(pStack + 15u) +=12u; 
 		 
 	 // *(uint16_t *)(*(pStack + 15u)) = 0xF1B9; //back

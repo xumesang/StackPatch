@@ -249,9 +249,9 @@ static uint8_t patchcve2018_16524[] = ""
 "";
 
 void patchtask( void * pvParameters )
-{	 break_point_instruction_addr = 0x20010000;
-	   patch_address = 0x20009000;
-	patch_dispatch_address = 0x20007000;
+{	 break_point_instruction_addr = 0x20010000;/* The vulnerability entry point received from the update host is 0x20010000.*/
+	   patch_address = 0x20009000; /* patch address is in idle RAM area*/
+	patch_dispatch_address = 0x20007000; /* dispatch address is in idle RAM area*/
 	   uint32_t i;
 	   for ( i = 0; i < sizeof(dwt_patch2018_16601); i=i+1){           
 					  *(uint8_t *)(patch_address+i) = *(uint8_t *)(dwt_patch2018_16601+i);
@@ -259,9 +259,18 @@ void patchtask( void * pvParameters )
      for ( i = 0; i < sizeof(patch_dispatch); i=i+1){           
 					  *(uint8_t *)(patch_dispatch_address+i) = *(uint8_t *)(patch_dispatch+i);
         }
-	   dwt_trace_test();
+		 /* Enabled the debug monitor mode.
+   When the control flow reaches the break_point_instruction_addr, 
+   it will trigger the DebugMon_Handler located in /Startup/startup_stm32f401xe.s. */
+				
+				
+	   dwt_trace_test(); /* Set a hardware breakpoint: write the vulnerability entry address into the hardware comparison register. */
 		 vTaskDelete(NULL); 
 }
-
+/*PS: 
+  The patch information (update point address, binary patch and its address) 
+	is received from the update host (via communication protocols such as WIFI, Bluetooth, etc.). 
+  Stackpatch does not mandate the use of a specific communication protocol; therefore,
+  we assume that the patch has been received in the evaluation.*/
 
 

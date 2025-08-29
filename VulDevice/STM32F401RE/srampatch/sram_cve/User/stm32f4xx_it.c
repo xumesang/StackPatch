@@ -91,7 +91,7 @@ typedef struct  stack_context {
 	printf(" lr  =0x%08x\r\n", ctx->lr);
 	printf(" pc  =0x%08x\r\n", ctx->pc);
 	printf(" xpsr=0x%08x\r\n", ctx->xpsr);
-	ctx->pc+= 2u;
+	ctx->pc += 2u;
 }
 void HardFaultHandler(unsigned int* pStack) {
 

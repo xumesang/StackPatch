@@ -168,7 +168,7 @@ volatile uint32_t  patch_dispatch_address = 0x08000000;
 void task1( void * pvParameters )
 {   uint32_t  i = 1;
 	  const TickType_t xDelay = pdMS_TO_TICKS(1000);
-   fpb_disable();
+   fpb_disable(); /*reset hardware breakpoint*/
 	
    while(1){
 		  //	ptr=(void(*)())0x20008001;
@@ -190,7 +190,7 @@ void task1( void * pvParameters )
 		
 	//	printf("%u\r\n",startTime);
 		printf("no.%u\r\n",i);
-		test_cve2018_16601();
+		test_cve2018_16601(); //test the vulnerable function.  
 	    i++;
 	//		 __ASM("bkpt 0x1");
 		   // __asm("nop");
@@ -226,7 +226,7 @@ static uint8_t patch_dispatch[] = ""
 "\x05\xD0\xDF\xF8\x20\x20\x91\x42\xFF\xD0\xDF\xF8\x1C\xF0\xDF\xF8"
 "\x1C\xF0\x00\x00\x01\x00\x00\x08\x02\x00\x00\x08\x03\x00\x00\x08"
 "\x04\x00\x00\x08\x74\x32\x00\x08\x01\x90\x00\x20\x05\x90\x00\x20"
-"";
+"";  
 
 
 static uint8_t fpb_patch2018_16601[] = ""
@@ -310,25 +310,33 @@ static uint8_t patchcve2018_16524[] = ""
 "";
 
 void patchtask( void * pvParameters )
-{	 	 break_point_instruction_addr = 0x08003274;
-	   patch_address = 0x20009000;
-	   patch_dispatch_address = 0x20007000;
+{	 	
+    	break_point_instruction_addr = 0x08003274; /* The vulnerability entry point received from the update host is 0x08003274.*/
+	   patch_address = 0x20009000; /* patch address is in idle RAM area, with a starting address of 0x20009000.*/
+	   patch_dispatch_address = 0x20007000; /*dispatch address is in idle RAM area*/
 	   uint32_t i;
 	   for ( i = 0; i < sizeof(fpb_patch2018_16601); i=i+1){           
-					  *(uint8_t *)(patch_address+i) = *(uint8_t *)(fpb_patch2018_16601+i);
-        }
+					  *(uint8_t *)(patch_address+i) = *(uint8_t *)(fpb_patch2018_16601+i);  
+        }/** cve-2018-16601 **/
      for ( i = 0; i < sizeof(patch_dispatch); i=i+1){           
-					  *(uint8_t *)(patch_dispatch_address+i) = *(uint8_t *)(patch_dispatch+i);
-        }
+					  *(uint8_t *)(patch_dispatch_address+i) = *(uint8_t *)(patch_dispatch+i); 
+        }/** Write the patch and patch_dispatch into the specified patch area. **/
+		
+		 debug_monitor_init(); 
+/* Enabled the debug monitor mode.
+   When the control flow reaches the break_point_instruction_addr, 
+   it will trigger the DebugMon_Handler located in /Startup/startup_stm32f401xe.s. */
 		 
-		 debug_monitor_init();
 		 uint32_t replace = (break_point_instruction_addr & 0x2) == 0 ? 1 : 2;
-	   uint32_t fp_comp = (break_point_instruction_addr & ~0x3) | 0x1 | (replace << 30);
-				
+	   uint32_t fp_comp = (break_point_instruction_addr & ~0x3) | 0x1 | (replace << 30);		
 		 FPB->COMP[5] = fp_comp;
+		/* Set a hardware breakpoint: write the vulnerability entry address into the hardware comparison register. */
 	   //dwt_trace_test();
-		 vTaskDelete(NULL); 
+		 vTaskDelete(NULL); 	
 }
-
-
+/* PS: 
+  The patch information (update point address, binary patch and its address) 
+	is received from the update host (via communication protocols such as WIFI, Bluetooth, etc.). 
+  Stackpatch does not mandate the use of a specific communication protocol; therefore,
+  we assume that the patch has been received in the evaluation. */
 

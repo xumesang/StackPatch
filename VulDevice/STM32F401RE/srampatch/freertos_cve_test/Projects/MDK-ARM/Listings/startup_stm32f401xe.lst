@@ -504,7 +504,7 @@ ARM Macro Assembler    Page 8
   217 0000002E         ;PUSH    {lr}    
   218 0000002E         ;BL       HardFaultHandlerd_dispatch      ; Stack pointe
                        r passed through R0.
-  219 0000002E F8DF F04C       LDR              pc, =0x20007001
+  219 0000002E F8DF F04C       LDR              pc, =0x20009001
   220 00000032         ;LDR PC,=0x20009001
   221 00000032         ;POP     {lr}                    
   222 00000032         
@@ -812,7 +812,7 @@ ARM Macro Assembler    Page 13
   421 00000074                 END
               00000000 
               00000000 
-              20007001 
+              20009001 
               00000000 
               00000400 
               00000200 

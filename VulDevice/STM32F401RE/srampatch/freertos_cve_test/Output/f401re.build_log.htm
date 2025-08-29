@@ -21,20 +21,50 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-H:\stm32f401re\iap\freertos_cve_test\Projects\MDK-ARM\f401re.uvprojx
-Project File Date:  05/16/2024
+H:\stm32f401re\StackPatchAE\VulDevice\STM32F401RE\srampatch\freertos_cve_test\Projects\MDK-ARM\f401re.uvprojx
+Project File Date:  08/28/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'template'
-compiling patch.c...
-..\..\User\patch.c(12): warning:  #68-D: integer conversion resulted in a change of sign
-  		*(pStack + 9u) = -1; //r0 = -1
-..\..\User\patch.c: 1 warning, 0 errors
+compiling freertos_demo.c...
+..\..\User\patch_delay_test.h(12): warning:  #1295-D: Deprecated declaration dwt_init - give arg types
+  void dwt_init();
+..\..\User\patch_delay_test.h(13): warning:  #1295-D: Deprecated declaration dwt_deinit - give arg types
+  void dwt_deinit();
+..\..\User\patch_delay_test.h(14): warning:  #1295-D: Deprecated declaration dwt_get_counter - give arg types
+  uint32_t dwt_get_counter();
+..\..\User\patch_delay_test.h(18): warning:  #1295-D: Deprecated declaration MeasureTimeStart - give arg types
+  void MeasureTimeStart();
+..\..\User\patch_delay_test.h(21): warning:  #1-D: last line of file ends without a newline
+  int MeasureTimeEnd();
+..\..\User\patch_delay_test.h(21): warning:  #1295-D: Deprecated declaration MeasureTimeEnd - give arg types
+  int MeasureTimeEnd();
+..\..\User\freertos_demo.c(121): warning:  #177-D: variable "NoPatch"  was declared but never referenced
+  static uint8_t NoPatch[] = ""
+..\..\User\freertos_demo.c(146): warning:  #177-D: variable "patch2018_16603"  was declared but never referenced
+  static uint8_t patch2018_16603[] = ""
+..\..\User\freertos_demo.c(152): warning:  #177-D: variable "patch16528"  was declared but never referenced
+  static uint8_t patch16528[] = ""
+..\..\User\freertos_demo.c(156): warning:  #177-D: variable "patch16526"  was declared but never referenced
+  static uint8_t patch16526[] = ""
+..\..\User\freertos_demo.c(160): warning:  #177-D: variable "patch16599"  was declared but never referenced
+  static uint8_t patch16599[] = ""
+..\..\User\freertos_demo.c(167): warning:  #177-D: variable "patch31572"  was declared but never referenced
+  static uint8_t patch31572[] = ""
+..\..\User\freertos_demo.c(174): warning:  #177-D: variable "patchcve2021_31571"  was declared but never referenced
+  static uint8_t patchcve2021_31571[] = ""
+..\..\User\freertos_demo.c(180): warning:  #177-D: variable "patchcve2018_16600"  was declared but never referenced
+  static uint8_t patchcve2018_16600[] = ""
+..\..\User\freertos_demo.c(185): warning:  #177-D: variable "patchcve2018_16523"  was declared but never referenced
+  static uint8_t patchcve2018_16523[] = ""
+..\..\User\freertos_demo.c(194): warning:  #177-D: variable "patchcve2018_16524"  was declared but never referenced
+  static uint8_t patchcve2018_16524[] = ""
+..\..\User\freertos_demo.c: 16 warnings, 0 errors
 linking...
 Program Size: Code=19648 RO-data=4992 RW-data=680 ZI-data=13056  
 After Build - User command #1: fromelf.exe --bin -o ..\..\Output\hhf401re.bin ..\..\Output\f401re.axf
-"..\..\Output\f401re.axf" - 0 Error(s), 1 Warning(s).
+"..\..\Output\f401re.axf" - 0 Error(s), 16 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -47,7 +77,7 @@ Package Vendor: Keil
   E:/Users/53429/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

@@ -6,28 +6,8 @@
 #include "cvefunc.h"
 void SystemClock_Config(void);
 void Error_Handler(void);
-
-int main(void)
-{ 
-	SCB->VTOR = SRAM_BASE | (0x1000 & (uint32_t)0xFFFFFE00); 
-
-	HAL_Init(); 
-  SystemClock_Config();
-  Led_Init();
-	delay_init(84);
-	usart_init(115200);
-
- while(1)
- {  
-    Led_ON();
-	  delay_ms(500);
-	  Led_OFF();
-	  delay_ms(500);
-	  printf("this is app sram code\r\n");
-}
-
-}
-
+volatile uint32_t break_point_instruction_addr;
+volatile uint32_t  patch_address = 0x08000000;
 
 static uint8_t patch_2017_14199_1[] = ""
 "\x41\x6A\x02\x29\x03\xD3\xC1\x6B\x09\x1F\xC1\x63\x05\xE0\xC1\x68"//16
@@ -141,6 +121,40 @@ static uint8_t patch_2024_0901[] = ""
 "\x41\x62\xC1\x6B\x89\x1C\xC1\x63" 
 "\xdf\xf8\x04\xf0\x00\x00\x8f\x13\x00\x20" //jumpback 
 "";
+
+int main(void)
+{ 
+	SCB->VTOR = SRAM_BASE | (0x1000 & (uint32_t)0xFFFFFE00); 
+
+	HAL_Init(); 
+  SystemClock_Config();
+  Led_Init();
+	delay_init(84);
+	usart_init(115200);
+
+ while(1)
+ {  
+    Led_ON();
+	  delay_ms(500);
+	  Led_OFF();
+	  delay_ms(500);
+	  printf("this is app sram code\r\n");
+	 
+	 	 break_point_instruction_addr = 0x2000409c;/* The vulnerability entry point received from the update host is 0x08003274.*/
+	   patch_address = 0x20009000;/* patch address is in idle RAM area, with a starting address of 0x20009000.*/
+	   uint32_t i;
+	   for ( i = 0; i < sizeof(patch_2020_10019); i=i+1){           
+					  *(uint8_t *)(patch_address+i) = *(uint8_t *)(patch_2020_10019+i);/** Write the patch into the specified patch area. **/
+        }
+		 *(uint16_t *)(break_point_instruction_addr) = 0xBE00; 
+				
+	 // test_cve_2020_10019();
+	  
+	 
+	 
+}
+
+}
 
 
 

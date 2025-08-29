@@ -37,7 +37,7 @@ void test_cve2018_16601(void){//errValue 50 0 CorrectValue 7 60
 			startTime = dwt_get_counter();
 	    i = freertos_cve2018_16601(&pkt,&data);
 			  __ASM("nop");
-				__ASM("nop");
+				__ASM("nop"); 
 			endTime = dwt_get_counter();
 		  q = endTime - startTime - 14;
 		  testtime = cycles_to_us(q);
@@ -45,7 +45,7 @@ void test_cve2018_16601(void){//errValue 50 0 CorrectValue 7 60
 		  printf("delay is %f us\r\n",testtime);
 		dwt_deinit();
       
-     if( i == -1){
+     if( i == -1){ 
 		   printf("cve2018-16601 patch success!\r\n");
 		 }else{
 		   printf("cve2018-16601 still vulnerable\r\n");

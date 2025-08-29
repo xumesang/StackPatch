@@ -1,6 +1,6 @@
+/** This file contains the C source code patch for Stackpatch. **/
+
 #include "usart.h"
-
-
 #include "freertoscve.h"
 
 // Repair the CVE-2018-16601 vulnerability

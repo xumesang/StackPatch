@@ -20,10 +20,10 @@ struct exception_info
 	uint32_t psr;   //*(pStack + 16u)
 };
 
-// Repair the CVE-2017-14199 vulnerability
+// Repair the CVE-2017-14199_1 vulnerability
 void patch_CVE_2017_14199_1(unsigned int* pStack){
      if(*(pStack + 9u) >= ARRAY_SIZE(ai_arr)) {
-   		NET_DBG("getaddrinfo entries overflow");
+   		
          *(pStack + 15u) -= 4u;
 	}else{  
 		     *(pStack + 11u) = *(uint16_t *)(*(pStack + 3u)+8);
@@ -31,7 +31,7 @@ void patch_CVE_2017_14199_1(unsigned int* pStack){
 	}
 }
 
-// Repair the CVE-2017-14199 vulnerability
+// Repair the CVE-2017-14199_2 vulnerability
 void patch_CVE_2017_14199_2(unsigned int* pStack){
 	   *(pStack + 10u) = *(uint16_t *)(*(pStack + 2u) + 0x1A);
 	   *(uint16_t *)(*(pStack + 9u) + 2) = *(pStack + 10u);
