@@ -21,70 +21,14 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-H:\stm32f401re\evaluation\dispatchdelaynewBinarySearch\Projects\MDK-ARM\f401re.uvprojx
+H:\stm32f401re\StackPatchAE\Evaluation\Performance\DispatchDelayBinarySearch\Projects\MDK-ARM\f401re.uvprojx
 Project File Date:  06/10/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'template'
-compiling freertos_demo.c...
-..\..\User\patch_delay_test.h(12): warning:  #1295-D: Deprecated declaration dwt_init - give arg types
-  void dwt_init();
-..\..\User\patch_delay_test.h(13): warning:  #1295-D: Deprecated declaration dwt_deinit - give arg types
-  void dwt_deinit();
-..\..\User\patch_delay_test.h(14): warning:  #1295-D: Deprecated declaration dwt_get_counter - give arg types
-  uint32_t dwt_get_counter();
-..\..\User\patch_delay_test.h(18): warning:  #1295-D: Deprecated declaration MeasureTimeStart - give arg types
-  void MeasureTimeStart();
-..\..\User\patch_delay_test.h(21): warning:  #1-D: last line of file ends without a newline
-  int MeasureTimeEnd();
-..\..\User\patch_delay_test.h(21): warning:  #1295-D: Deprecated declaration MeasureTimeEnd - give arg types
-  int MeasureTimeEnd();
-..\..\User\freertos_demo.c(71): warning:  #188-D: enumerated type mixed with another type
-  	return (((*dhcsr) & 0x1) != 0);
-..\..\User\freertos_demo.c(77): warning:  #61-D: integer operation result is out of range
-  	*scb_hfsr = (1 << 31);
-..\..\User\freertos_demo.c(77): warning:  #68-D: integer conversion resulted in a change of sign
-  	*scb_hfsr = (1 << 31);
-..\..\User\freertos_demo.c(101): warning:  #68-D: integer conversion resulted in a change of sign
-  	*shp8 = -1;
-..\..\User\freertos_demo.c(59): warning:  #177-D: variable "REMAP_ADDR"  was declared but never referenced
-  static FPB_REMAP REMAP_ADDR;
-..\..\User\freertos_demo.c(66): warning:  #177-D: function "fpb_disable"  was declared but never referenced
-  static void fpb_disable(void) {
-..\..\User\freertos_demo.c(74): warning:  #177-D: function "debug_monitor_init"  was declared but never referenced
-  static void debug_monitor_init() {
-..\..\User\freertos_demo.c(258): warning:  #177-D: variable "patch_dispatch"  was declared but never referenced
-  static uint8_t patch_dispatch[] = ""
-..\..\User\freertos_demo.c(267): warning:  #177-D: variable "fpb_patch2018_16601"  was declared but never referenced
-  static uint8_t fpb_patch2018_16601[] = ""
-..\..\User\freertos_demo.c(274): warning:  #177-D: variable "dwt_patch2018_16601"  was declared but never referenced
-  static uint8_t dwt_patch2018_16601[] = ""
-..\..\User\freertos_demo.c(279): warning:  #177-D: variable "patch2018_16601"  was declared but never referenced
-  static uint8_t patch2018_16601[] = ""
-..\..\User\freertos_demo.c(292): warning:  #177-D: variable "patch2018_16603"  was declared but never referenced
-  static uint8_t patch2018_16603[] = ""
-..\..\User\freertos_demo.c(298): warning:  #177-D: variable "patch16528"  was declared but never referenced
-  static uint8_t patch16528[] = ""
-..\..\User\freertos_demo.c(302): warning:  #177-D: variable "patch16526"  was declared but never referenced
-  static uint8_t patch16526[] = ""
-..\..\User\freertos_demo.c(306): warning:  #177-D: variable "patch16599"  was declared but never referenced
-  static uint8_t patch16599[] = ""
-..\..\User\freertos_demo.c(314): warning:  #177-D: variable "patch31532"  was declared but never referenced
-  static uint8_t patch31532[] = ""
-..\..\User\freertos_demo.c(321): warning:  #177-D: variable "patchcve2021_31571"  was declared but never referenced
-  static uint8_t patchcve2021_31571[] = ""
-..\..\User\freertos_demo.c(327): warning:  #177-D: variable "patchcve2018_16600"  was declared but never referenced
-  static uint8_t patchcve2018_16600[] = ""
-..\..\User\freertos_demo.c(332): warning:  #177-D: variable "patchcve2018_16523"  was declared but never referenced
-  static uint8_t patchcve2018_16523[] = ""
-..\..\User\freertos_demo.c(341): warning:  #177-D: variable "patchcve2018_16524"  was declared but never referenced
-  static uint8_t patchcve2018_16524[] = ""
-..\..\User\freertos_demo.c: 26 warnings, 0 errors
-linking...
-Program Size: Code=21048 RO-data=696 RW-data=956 ZI-data=13572  
 After Build - User command #1: fromelf.exe --bin -o ..\..\Output\hhf401re.bin ..\..\Output\f401re.axf
-"..\..\Output\f401re.axf" - 0 Error(s), 26 Warning(s).
+"..\..\Output\f401re.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -97,7 +41,7 @@ Package Vendor: Keil
   E:/Users/53429/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
