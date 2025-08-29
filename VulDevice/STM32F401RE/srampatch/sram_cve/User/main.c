@@ -131,15 +131,15 @@ int main(void)
   Led_Init();
 	delay_init(84);
 	usart_init(115200);
-
- while(1)
+  printf("this is app sram code\r\n");
+ while(1) 
  {  
     Led_ON();
 	  delay_ms(500);
 	  Led_OFF();
 	  delay_ms(500);
-	  printf("this is app sram code\r\n");
-	 
+	  
+	  
 	 	 break_point_instruction_addr = 0x2000409c;/* The vulnerability entry point received from the update host is 0x08003274.*/
 	   patch_address = 0x20009000;/* patch address is in idle RAM area, with a starting address of 0x20009000.*/
 	   uint32_t i;

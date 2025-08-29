@@ -439,9 +439,9 @@ ARM Macro Assembler    Page 7
   174 00000000                 IMPORT           SystemInit
   175 00000000                 IMPORT           __main
   176 00000000         
-  177 00000000 4809            LDR              R0, =SystemInit
+  177 00000000 481C            LDR              R0, =SystemInit
   178 00000002 4780            BLX              R0
-  179 00000004 4809            LDR              R0, =__main
+  179 00000004 481C            LDR              R0, =__main
   180 00000006 4700            BX               R0
   181 00000008                 ENDP
   182 00000008         
@@ -460,283 +460,349 @@ ARM Macro Assembler    Page 8
 
 
   188 0000000A                 ENDP
-  190 0000000A         HardFault_Handler
+  189 0000000A         ;IMPORT HardFaultHandlerd_dispatch
+  190 0000000A                 EXPORT           HardFault_Handler
+  191 0000000A         HardFault_Handler
                                PROC
-  191 0000000A                 EXPORT           HardFault_Handler          [WEA
-K]
-  192 0000000A E7FE            B                .
-  193 0000000C                 ENDP
-  195 0000000C         MemManage_Handler
-                               PROC
-  196 0000000C                 EXPORT           MemManage_Handler          [WEA
-K]
-  197 0000000C E7FE            B                .
-  198 0000000E                 ENDP
-  200 0000000E         BusFault_Handler
-                               PROC
-  201 0000000E                 EXPORT           BusFault_Handler           [WEA
-K]
-  202 0000000E E7FE            B                .
-  203 00000010                 ENDP
-  205 00000010         UsageFault_Handler
-                               PROC
-  206 00000010                 EXPORT           UsageFault_Handler         [WEA
-K]
-  207 00000010 E7FE            B                .
-  208 00000012                 ENDP
-  209 00000012         SVC_Handler
-                               PROC
-  210 00000012                 EXPORT           SVC_Handler                [WEA
-K]
-  211 00000012 E7FE            B                .
-  212 00000014                 ENDP
-  214 00000014         DebugMon_Handler
-                               PROC
-  215 00000014                 EXPORT           DebugMon_Handler           [WEA
-K]
-  216 00000014 E7FE            B                .
-  217 00000016                 ENDP
-  218 00000016         PendSV_Handler
-                               PROC
-  219 00000016                 EXPORT           PendSV_Handler             [WEA
-K]
-  220 00000016 E7FE            B                .
-  221 00000018                 ENDP
-  222 00000018         SysTick_Handler
-                               PROC
-  223 00000018                 EXPORT           SysTick_Handler            [WEA
-K]
-  224 00000018 E7FE            B                .
-  225 0000001A                 ENDP
-  226 0000001A         
-  227 0000001A         Default_Handler
-                               PROC
-  228 0000001A         
-  229 0000001A                 EXPORT           WWDG_IRQHandler                
-   [WEAK]
-  230 0000001A                 EXPORT           PVD_IRQHandler                 
-   [WEAK]
-  231 0000001A                 EXPORT           TAMP_STAMP_IRQHandler          
-   [WEAK]
+  192 0000000A         ; get current context
+  193 0000000A F01E 0F04       TST              lr, #0x04   ; if(!EXC_RETURN[2]
+                                                            )
+  194 0000000E BF0C            ITE              EQ
+  195 00000010 F3EF 8008       MRSEQ            r0, msp     ;[2]=0 ==> Z=1, get
+                                                             fault context from
+                                                             handler.
+  196 00000014 F3EF 8009       MRSNE            r0, psp     ; Stacking was usin
+                                                            g PSP.
+  197 00000018         
+  198 00000018 E920 0FF0       STMDB            r0!, {r4 - r11} ;push r4 - r11 
+                                                            register
+  199 0000001C F840 ED04       STMDB            r0!, {lr}   ;push exec_return r
+                                                            egister
+  200 00000020         
+  201 00000020         
+  202 00000020 F01E 0F04       TST              lr, #0x04   ;if(!EXC_RETURN[2])
+                                                            
+  203 00000024 BF0C            ITE              EQ
+  204 00000026 F380 8808       MSREQ            msp, r0     ;[2]=0 ==> Z=1, upd
+                                                            ate stack pointer t
+                                                            o MSP.
+  205 0000002A F380 8809       MSRNE            psp, r0     ;[2]=1 ==> Z=0, upd
+                                                            ate stack pointer t
+                                                            o PSP.
+  206 0000002E         
+  207 0000002E         ;PUSH    {lr}    
+  208 0000002E         ;BL       HardFaultHandlerd_dispatch      ; Stack pointe
+                       r passed through R0.
+  209 0000002E F8DF F04C       LDR              pc, =0x20009001 ; Jump to patch
+                                                            
+  210 00000032         ;LDR PC,=0x20009001
+  211 00000032         ;POP     {lr}                    
+  212 00000032         
+  213 00000032 F01E 0F04       TST              lr, #0x04   ;if(!EXC_RETURN[2])
+                                                            
+  214 00000036 BF0C            ITE              EQ
+  215 00000038 F3EF 8008       MRSEQ            r0, msp     ;[2]=0 ==> Z=1, get
+                                                             fault context from
+                                                             handler.
+  216 0000003C F3EF 8009       MRSNE            r0, psp     ;[2]=1 ==> Z=0, upd
+                                                            ate stack pointer t
+                                                            o PSP.
+  217 00000040         
+  218 00000040 F850 EB04       LDMIA            r0!, {lr}
+  219 00000044 E8B0 0FF0       LDMIA            r0!, {r4 - r11}
+  220 00000048         
+  221 00000048 F01E 0F04       TST              lr, #0x04   ;if(!EXC_RETURN[2])
+                                                            
+  222 0000004C BF0C            ITE              EQ
+  223 0000004E F380 8808       MSREQ            msp, r0     ;[2]=0 ==> Z=1, upd
+                                                            ate stack pointer t
+                                                            o MSP.
+  224 00000052 F380 8809       MSRNE            psp, r0     ;[2]=1 ==> Z=0, upd
 
 
 
 ARM Macro Assembler    Page 9 
 
 
-  232 0000001A                 EXPORT           RTC_WKUP_IRQHandler            
+                                                            ate stack pointer t
+                                                            o PSP.
+  225 00000056         
+  226 00000056         ; ORR     lr, lr, #0x04
+  227 00000056 4770            BX               lr
+  228 00000058                 ENDP
+  229 00000058         
+  231 00000058         MemManage_Handler
+                               PROC
+  232 00000058                 EXPORT           MemManage_Handler          [WEA
+K]
+  233 00000058 E7FE            B                .
+  234 0000005A                 ENDP
+  236 0000005A         BusFault_Handler
+                               PROC
+  237 0000005A                 EXPORT           BusFault_Handler           [WEA
+K]
+  238 0000005A E7FE            B                .
+  239 0000005C                 ENDP
+  241 0000005C         UsageFault_Handler
+                               PROC
+  242 0000005C                 EXPORT           UsageFault_Handler         [WEA
+K]
+  243 0000005C E7FE            B                .
+  244 0000005E                 ENDP
+  245 0000005E         SVC_Handler
+                               PROC
+  246 0000005E                 EXPORT           SVC_Handler                [WEA
+K]
+  247 0000005E E7FE            B                .
+  248 00000060                 ENDP
+  250 00000060         DebugMon_Handler
+                               PROC
+  251 00000060                 EXPORT           DebugMon_Handler           [WEA
+K]
+  252 00000060 E7FE            B                .
+  253 00000062                 ENDP
+  254 00000062         PendSV_Handler
+                               PROC
+  255 00000062                 EXPORT           PendSV_Handler             [WEA
+K]
+  256 00000062 E7FE            B                .
+  257 00000064                 ENDP
+  258 00000064         SysTick_Handler
+                               PROC
+  259 00000064                 EXPORT           SysTick_Handler            [WEA
+K]
+  260 00000064 E7FE            B                .
+  261 00000066                 ENDP
+  262 00000066         
+  263 00000066         Default_Handler
+                               PROC
+  264 00000066         
+  265 00000066                 EXPORT           WWDG_IRQHandler                
    [WEAK]
-  233 0000001A                 EXPORT           FLASH_IRQHandler               
+  266 00000066                 EXPORT           PVD_IRQHandler                 
    [WEAK]
-  234 0000001A                 EXPORT           RCC_IRQHandler                 
+  267 00000066                 EXPORT           TAMP_STAMP_IRQHandler          
    [WEAK]
-  235 0000001A                 EXPORT           EXTI0_IRQHandler               
-   [WEAK]
-  236 0000001A                 EXPORT           EXTI1_IRQHandler               
-   [WEAK]
-  237 0000001A                 EXPORT           EXTI2_IRQHandler               
-   [WEAK]
-  238 0000001A                 EXPORT           EXTI3_IRQHandler               
-   [WEAK]
-  239 0000001A                 EXPORT           EXTI4_IRQHandler               
-   [WEAK]
-  240 0000001A                 EXPORT           DMA1_Stream0_IRQHandler        
-   [WEAK]
-  241 0000001A                 EXPORT           DMA1_Stream1_IRQHandler        
-   [WEAK]
-  242 0000001A                 EXPORT           DMA1_Stream2_IRQHandler        
-   [WEAK]
-  243 0000001A                 EXPORT           DMA1_Stream3_IRQHandler        
-   [WEAK]
-  244 0000001A                 EXPORT           DMA1_Stream4_IRQHandler        
-   [WEAK]
-  245 0000001A                 EXPORT           DMA1_Stream5_IRQHandler        
-   [WEAK]
-  246 0000001A                 EXPORT           DMA1_Stream6_IRQHandler        
-   [WEAK]
-  247 0000001A                 EXPORT           ADC_IRQHandler                 
-   [WEAK]
-  248 0000001A                 EXPORT           EXTI9_5_IRQHandler             
-   [WEAK]
-  249 0000001A                 EXPORT           TIM1_BRK_TIM9_IRQHandler       
-   [WEAK]
-  250 0000001A                 EXPORT           TIM1_UP_TIM10_IRQHandler       
-   [WEAK]
-  251 0000001A                 EXPORT           TIM1_TRG_COM_TIM11_IRQHandler  
-   [WEAK]
-  252 0000001A                 EXPORT           TIM1_CC_IRQHandler             
-   [WEAK]
-  253 0000001A                 EXPORT           TIM2_IRQHandler                
-   [WEAK]
-  254 0000001A                 EXPORT           TIM3_IRQHandler                
-   [WEAK]
-  255 0000001A                 EXPORT           TIM4_IRQHandler                
-   [WEAK]
-  256 0000001A                 EXPORT           I2C1_EV_IRQHandler             
-   [WEAK]
-  257 0000001A                 EXPORT           I2C1_ER_IRQHandler             
-   [WEAK]
-  258 0000001A                 EXPORT           I2C2_EV_IRQHandler             
-   [WEAK]
-  259 0000001A                 EXPORT           I2C2_ER_IRQHandler             
-   [WEAK]
-  260 0000001A                 EXPORT           SPI1_IRQHandler                
-   [WEAK]
-  261 0000001A                 EXPORT           SPI2_IRQHandler                
 
 
 
 ARM Macro Assembler    Page 10 
 
 
+  268 00000066                 EXPORT           RTC_WKUP_IRQHandler            
    [WEAK]
-  262 0000001A                 EXPORT           USART1_IRQHandler              
+  269 00000066                 EXPORT           FLASH_IRQHandler               
    [WEAK]
-  263 0000001A                 EXPORT           USART2_IRQHandler              
+  270 00000066                 EXPORT           RCC_IRQHandler                 
    [WEAK]
-  264 0000001A                 EXPORT           EXTI15_10_IRQHandler           
+  271 00000066                 EXPORT           EXTI0_IRQHandler               
    [WEAK]
-  265 0000001A                 EXPORT           RTC_Alarm_IRQHandler           
+  272 00000066                 EXPORT           EXTI1_IRQHandler               
    [WEAK]
-  266 0000001A                 EXPORT           OTG_FS_WKUP_IRQHandler         
+  273 00000066                 EXPORT           EXTI2_IRQHandler               
    [WEAK]
-  267 0000001A                 EXPORT           DMA1_Stream7_IRQHandler        
+  274 00000066                 EXPORT           EXTI3_IRQHandler               
    [WEAK]
-  268 0000001A                 EXPORT           SDIO_IRQHandler                
+  275 00000066                 EXPORT           EXTI4_IRQHandler               
    [WEAK]
-  269 0000001A                 EXPORT           TIM5_IRQHandler                
+  276 00000066                 EXPORT           DMA1_Stream0_IRQHandler        
    [WEAK]
-  270 0000001A                 EXPORT           SPI3_IRQHandler                
+  277 00000066                 EXPORT           DMA1_Stream1_IRQHandler        
    [WEAK]
-  271 0000001A                 EXPORT           DMA2_Stream0_IRQHandler        
+  278 00000066                 EXPORT           DMA1_Stream2_IRQHandler        
    [WEAK]
-  272 0000001A                 EXPORT           DMA2_Stream1_IRQHandler        
+  279 00000066                 EXPORT           DMA1_Stream3_IRQHandler        
    [WEAK]
-  273 0000001A                 EXPORT           DMA2_Stream2_IRQHandler        
+  280 00000066                 EXPORT           DMA1_Stream4_IRQHandler        
    [WEAK]
-  274 0000001A                 EXPORT           DMA2_Stream3_IRQHandler        
+  281 00000066                 EXPORT           DMA1_Stream5_IRQHandler        
    [WEAK]
-  275 0000001A                 EXPORT           DMA2_Stream4_IRQHandler        
+  282 00000066                 EXPORT           DMA1_Stream6_IRQHandler        
    [WEAK]
-  276 0000001A                 EXPORT           OTG_FS_IRQHandler              
+  283 00000066                 EXPORT           ADC_IRQHandler                 
    [WEAK]
-  277 0000001A                 EXPORT           DMA2_Stream5_IRQHandler        
+  284 00000066                 EXPORT           EXTI9_5_IRQHandler             
    [WEAK]
-  278 0000001A                 EXPORT           DMA2_Stream6_IRQHandler        
+  285 00000066                 EXPORT           TIM1_BRK_TIM9_IRQHandler       
    [WEAK]
-  279 0000001A                 EXPORT           DMA2_Stream7_IRQHandler        
+  286 00000066                 EXPORT           TIM1_UP_TIM10_IRQHandler       
    [WEAK]
-  280 0000001A                 EXPORT           USART6_IRQHandler              
+  287 00000066                 EXPORT           TIM1_TRG_COM_TIM11_IRQHandler  
    [WEAK]
-  281 0000001A                 EXPORT           I2C3_EV_IRQHandler             
+  288 00000066                 EXPORT           TIM1_CC_IRQHandler             
    [WEAK]
-  282 0000001A                 EXPORT           I2C3_ER_IRQHandler             
+  289 00000066                 EXPORT           TIM2_IRQHandler                
    [WEAK]
-  283 0000001A                 EXPORT           FPU_IRQHandler                 
+  290 00000066                 EXPORT           TIM3_IRQHandler                
    [WEAK]
-  284 0000001A                 EXPORT           SPI4_IRQHandler                
+  291 00000066                 EXPORT           TIM4_IRQHandler                
    [WEAK]
-  285 0000001A         
-  286 0000001A         WWDG_IRQHandler
-  287 0000001A         PVD_IRQHandler
-  288 0000001A         TAMP_STAMP_IRQHandler
-  289 0000001A         RTC_WKUP_IRQHandler
-  290 0000001A         FLASH_IRQHandler
-  291 0000001A         RCC_IRQHandler
-  292 0000001A         EXTI0_IRQHandler
-  293 0000001A         EXTI1_IRQHandler
-  294 0000001A         EXTI2_IRQHandler
-  295 0000001A         EXTI3_IRQHandler
-  296 0000001A         EXTI4_IRQHandler
+  292 00000066                 EXPORT           I2C1_EV_IRQHandler             
+   [WEAK]
+  293 00000066                 EXPORT           I2C1_ER_IRQHandler             
+   [WEAK]
+  294 00000066                 EXPORT           I2C2_EV_IRQHandler             
+   [WEAK]
+  295 00000066                 EXPORT           I2C2_ER_IRQHandler             
+   [WEAK]
+  296 00000066                 EXPORT           SPI1_IRQHandler                
+   [WEAK]
+  297 00000066                 EXPORT           SPI2_IRQHandler                
 
 
 
 ARM Macro Assembler    Page 11 
 
 
-  297 0000001A         DMA1_Stream0_IRQHandler
-  298 0000001A         DMA1_Stream1_IRQHandler
-  299 0000001A         DMA1_Stream2_IRQHandler
-  300 0000001A         DMA1_Stream3_IRQHandler
-  301 0000001A         DMA1_Stream4_IRQHandler
-  302 0000001A         DMA1_Stream5_IRQHandler
-  303 0000001A         DMA1_Stream6_IRQHandler
-  304 0000001A         ADC_IRQHandler
-  305 0000001A         EXTI9_5_IRQHandler
-  306 0000001A         TIM1_BRK_TIM9_IRQHandler
-  307 0000001A         TIM1_UP_TIM10_IRQHandler
-  308 0000001A         TIM1_TRG_COM_TIM11_IRQHandler
-  309 0000001A         TIM1_CC_IRQHandler
-  310 0000001A         TIM2_IRQHandler
-  311 0000001A         TIM3_IRQHandler
-  312 0000001A         TIM4_IRQHandler
-  313 0000001A         I2C1_EV_IRQHandler
-  314 0000001A         I2C1_ER_IRQHandler
-  315 0000001A         I2C2_EV_IRQHandler
-  316 0000001A         I2C2_ER_IRQHandler
-  317 0000001A         SPI1_IRQHandler
-  318 0000001A         SPI2_IRQHandler
-  319 0000001A         USART1_IRQHandler
-  320 0000001A         USART2_IRQHandler
-  321 0000001A         EXTI15_10_IRQHandler
-  322 0000001A         RTC_Alarm_IRQHandler
-  323 0000001A         OTG_FS_WKUP_IRQHandler
-  324 0000001A         DMA1_Stream7_IRQHandler
-  325 0000001A         SDIO_IRQHandler
-  326 0000001A         TIM5_IRQHandler
-  327 0000001A         SPI3_IRQHandler
-  328 0000001A         DMA2_Stream0_IRQHandler
-  329 0000001A         DMA2_Stream1_IRQHandler
-  330 0000001A         DMA2_Stream2_IRQHandler
-  331 0000001A         DMA2_Stream3_IRQHandler
-  332 0000001A         DMA2_Stream4_IRQHandler
-  333 0000001A         OTG_FS_IRQHandler
-  334 0000001A         DMA2_Stream5_IRQHandler
-  335 0000001A         DMA2_Stream6_IRQHandler
-  336 0000001A         DMA2_Stream7_IRQHandler
-  337 0000001A         USART6_IRQHandler
-  338 0000001A         I2C3_EV_IRQHandler
-  339 0000001A         I2C3_ER_IRQHandler
-  340 0000001A         FPU_IRQHandler
-  341 0000001A         SPI4_IRQHandler
-  342 0000001A         
-  343 0000001A E7FE            B                .
-  344 0000001C         
-  345 0000001C                 ENDP
-  346 0000001C         
-  347 0000001C                 ALIGN
-  348 0000001C         
-  349 0000001C         ;*******************************************************
-                       ************************
-  350 0000001C         ; User Stack and Heap initialization
-  351 0000001C         ;*******************************************************
-                       ************************
-  352 0000001C                 IF               :DEF:__MICROLIB
-  359 0000001C         
+   [WEAK]
+  298 00000066                 EXPORT           USART1_IRQHandler              
+   [WEAK]
+  299 00000066                 EXPORT           USART2_IRQHandler              
+   [WEAK]
+  300 00000066                 EXPORT           EXTI15_10_IRQHandler           
+   [WEAK]
+  301 00000066                 EXPORT           RTC_Alarm_IRQHandler           
+   [WEAK]
+  302 00000066                 EXPORT           OTG_FS_WKUP_IRQHandler         
+   [WEAK]
+  303 00000066                 EXPORT           DMA1_Stream7_IRQHandler        
+   [WEAK]
+  304 00000066                 EXPORT           SDIO_IRQHandler                
+   [WEAK]
+  305 00000066                 EXPORT           TIM5_IRQHandler                
+   [WEAK]
+  306 00000066                 EXPORT           SPI3_IRQHandler                
+   [WEAK]
+  307 00000066                 EXPORT           DMA2_Stream0_IRQHandler        
+   [WEAK]
+  308 00000066                 EXPORT           DMA2_Stream1_IRQHandler        
+   [WEAK]
+  309 00000066                 EXPORT           DMA2_Stream2_IRQHandler        
+   [WEAK]
+  310 00000066                 EXPORT           DMA2_Stream3_IRQHandler        
+   [WEAK]
+  311 00000066                 EXPORT           DMA2_Stream4_IRQHandler        
+   [WEAK]
+  312 00000066                 EXPORT           OTG_FS_IRQHandler              
+   [WEAK]
+  313 00000066                 EXPORT           DMA2_Stream5_IRQHandler        
+   [WEAK]
+  314 00000066                 EXPORT           DMA2_Stream6_IRQHandler        
+   [WEAK]
+  315 00000066                 EXPORT           DMA2_Stream7_IRQHandler        
+   [WEAK]
+  316 00000066                 EXPORT           USART6_IRQHandler              
+   [WEAK]
+  317 00000066                 EXPORT           I2C3_EV_IRQHandler             
+   [WEAK]
+  318 00000066                 EXPORT           I2C3_ER_IRQHandler             
+   [WEAK]
+  319 00000066                 EXPORT           FPU_IRQHandler                 
+   [WEAK]
+  320 00000066                 EXPORT           SPI4_IRQHandler                
+   [WEAK]
+  321 00000066         
+  322 00000066         WWDG_IRQHandler
+  323 00000066         PVD_IRQHandler
+  324 00000066         TAMP_STAMP_IRQHandler
+  325 00000066         RTC_WKUP_IRQHandler
+  326 00000066         FLASH_IRQHandler
+  327 00000066         RCC_IRQHandler
+  328 00000066         EXTI0_IRQHandler
+  329 00000066         EXTI1_IRQHandler
+  330 00000066         EXTI2_IRQHandler
+  331 00000066         EXTI3_IRQHandler
+  332 00000066         EXTI4_IRQHandler
 
 
 
 ARM Macro Assembler    Page 12 
 
 
-  360 0000001C                 IMPORT           __use_two_region_memory
-  361 0000001C                 EXPORT           __user_initial_stackheap
-  362 0000001C         
-  363 0000001C         __user_initial_stackheap
-  364 0000001C         
-  365 0000001C 4804            LDR              R0, =  Heap_Mem
-  366 0000001E 4905            LDR              R1, =(Stack_Mem + Stack_Size)
-  367 00000020 4A05            LDR              R2, = (Heap_Mem +  Heap_Size)
-  368 00000022 4B06            LDR              R3, = Stack_Mem
-  369 00000024 4770            BX               LR
-  370 00000026         
-  371 00000026 00 00           ALIGN
-  372 00000028         
-  373 00000028                 ENDIF
-  374 00000028         
-  375 00000028                 END
+  333 00000066         DMA1_Stream0_IRQHandler
+  334 00000066         DMA1_Stream1_IRQHandler
+  335 00000066         DMA1_Stream2_IRQHandler
+  336 00000066         DMA1_Stream3_IRQHandler
+  337 00000066         DMA1_Stream4_IRQHandler
+  338 00000066         DMA1_Stream5_IRQHandler
+  339 00000066         DMA1_Stream6_IRQHandler
+  340 00000066         ADC_IRQHandler
+  341 00000066         EXTI9_5_IRQHandler
+  342 00000066         TIM1_BRK_TIM9_IRQHandler
+  343 00000066         TIM1_UP_TIM10_IRQHandler
+  344 00000066         TIM1_TRG_COM_TIM11_IRQHandler
+  345 00000066         TIM1_CC_IRQHandler
+  346 00000066         TIM2_IRQHandler
+  347 00000066         TIM3_IRQHandler
+  348 00000066         TIM4_IRQHandler
+  349 00000066         I2C1_EV_IRQHandler
+  350 00000066         I2C1_ER_IRQHandler
+  351 00000066         I2C2_EV_IRQHandler
+  352 00000066         I2C2_ER_IRQHandler
+  353 00000066         SPI1_IRQHandler
+  354 00000066         SPI2_IRQHandler
+  355 00000066         USART1_IRQHandler
+  356 00000066         USART2_IRQHandler
+  357 00000066         EXTI15_10_IRQHandler
+  358 00000066         RTC_Alarm_IRQHandler
+  359 00000066         OTG_FS_WKUP_IRQHandler
+  360 00000066         DMA1_Stream7_IRQHandler
+  361 00000066         SDIO_IRQHandler
+  362 00000066         TIM5_IRQHandler
+  363 00000066         SPI3_IRQHandler
+  364 00000066         DMA2_Stream0_IRQHandler
+  365 00000066         DMA2_Stream1_IRQHandler
+  366 00000066         DMA2_Stream2_IRQHandler
+  367 00000066         DMA2_Stream3_IRQHandler
+  368 00000066         DMA2_Stream4_IRQHandler
+  369 00000066         OTG_FS_IRQHandler
+  370 00000066         DMA2_Stream5_IRQHandler
+  371 00000066         DMA2_Stream6_IRQHandler
+  372 00000066         DMA2_Stream7_IRQHandler
+  373 00000066         USART6_IRQHandler
+  374 00000066         I2C3_EV_IRQHandler
+  375 00000066         I2C3_ER_IRQHandler
+  376 00000066         FPU_IRQHandler
+  377 00000066         SPI4_IRQHandler
+  378 00000066         
+  379 00000066 E7FE            B                .
+  380 00000068         
+  381 00000068                 ENDP
+  382 00000068         
+  383 00000068                 ALIGN
+  384 00000068         
+  385 00000068         ;*******************************************************
+                       ************************
+  386 00000068         ; User Stack and Heap initialization
+  387 00000068         ;*******************************************************
+                       ************************
+  388 00000068                 IF               :DEF:__MICROLIB
+  395 00000068         
+
+
+
+ARM Macro Assembler    Page 13 
+
+
+  396 00000068                 IMPORT           __use_two_region_memory
+  397 00000068                 EXPORT           __user_initial_stackheap
+  398 00000068         
+  399 00000068         __user_initial_stackheap
+  400 00000068         
+  401 00000068 4805            LDR              R0, =  Heap_Mem
+  402 0000006A 4906            LDR              R1, =(Stack_Mem + Stack_Size)
+  403 0000006C 4A06            LDR              R2, = (Heap_Mem +  Heap_Size)
+  404 0000006E 4B07            LDR              R3, = Stack_Mem
+  405 00000070 4770            BX               LR
+  406 00000072         
+  407 00000072 00 00           ALIGN
+  408 00000074         
+  409 00000074                 ENDIF
+  410 00000074         
+  411 00000074                 END
               00000000 
               00000000 
+              20009001 
               00000000 
               00000400 
               00000200 
@@ -770,9 +836,9 @@ Symbol: Stack_Mem
       At line 36 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
    Uses
-      At line 366 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 402 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 368 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 404 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 __initial_sp 00000400
@@ -808,9 +874,9 @@ Symbol: Heap_Mem
       At line 48 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
    Uses
-      At line 365 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 401 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 367 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 403 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 __heap_base 00000000
@@ -887,55 +953,55 @@ tes\arm\startup_stm32f401xe.s
    Uses
       None
 Comment: .text unused
-ADC_IRQHandler 0000001A
+ADC_IRQHandler 00000066
 
 Symbol: ADC_IRQHandler
    Definitions
-      At line 304 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 340 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 97 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 247 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 283 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-BusFault_Handler 0000000E
+BusFault_Handler 0000005A
 
 Symbol: BusFault_Handler
    Definitions
-      At line 200 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 236 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 66 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 201 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 237 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA1_Stream0_IRQHandler 0000001A
+DMA1_Stream0_IRQHandler 00000066
 
 Symbol: DMA1_Stream0_IRQHandler
    Definitions
-      At line 297 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 333 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 90 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 240 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 276 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA1_Stream1_IRQHandler 0000001A
+DMA1_Stream1_IRQHandler 00000066
 
 Symbol: DMA1_Stream1_IRQHandler
    Definitions
-      At line 298 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 334 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 91 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 241 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 277 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA1_Stream2_IRQHandler 0000001A
+DMA1_Stream2_IRQHandler 00000066
 
 
 
@@ -945,63 +1011,63 @@ Relocatable symbols
 
 Symbol: DMA1_Stream2_IRQHandler
    Definitions
-      At line 299 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 335 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 92 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 242 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 278 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA1_Stream3_IRQHandler 0000001A
+DMA1_Stream3_IRQHandler 00000066
 
 Symbol: DMA1_Stream3_IRQHandler
    Definitions
-      At line 300 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 336 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 93 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 243 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 279 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA1_Stream4_IRQHandler 0000001A
+DMA1_Stream4_IRQHandler 00000066
 
 Symbol: DMA1_Stream4_IRQHandler
    Definitions
-      At line 301 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 337 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 94 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 244 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 280 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA1_Stream5_IRQHandler 0000001A
+DMA1_Stream5_IRQHandler 00000066
 
 Symbol: DMA1_Stream5_IRQHandler
    Definitions
-      At line 302 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 338 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 95 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 245 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 281 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA1_Stream6_IRQHandler 0000001A
+DMA1_Stream6_IRQHandler 00000066
 
 Symbol: DMA1_Stream6_IRQHandler
    Definitions
-      At line 303 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 339 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 96 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 246 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 282 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA1_Stream7_IRQHandler 0000001A
+DMA1_Stream7_IRQHandler 00000066
 
 
 
@@ -1011,60 +1077,60 @@ Relocatable symbols
 
 Symbol: DMA1_Stream7_IRQHandler
    Definitions
-      At line 324 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 360 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 126 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 267 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 303 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA2_Stream0_IRQHandler 0000001A
+DMA2_Stream0_IRQHandler 00000066
 
 Symbol: DMA2_Stream0_IRQHandler
    Definitions
-      At line 328 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 364 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 135 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 271 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 307 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA2_Stream1_IRQHandler 0000001A
+DMA2_Stream1_IRQHandler 00000066
 
 Symbol: DMA2_Stream1_IRQHandler
    Definitions
-      At line 329 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 365 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 136 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 272 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 308 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA2_Stream2_IRQHandler 0000001A
+DMA2_Stream2_IRQHandler 00000066
 
 Symbol: DMA2_Stream2_IRQHandler
    Definitions
-      At line 330 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 366 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 137 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 273 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 309 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA2_Stream3_IRQHandler 0000001A
+DMA2_Stream3_IRQHandler 00000066
 
 Symbol: DMA2_Stream3_IRQHandler
    Definitions
-      At line 331 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 367 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 138 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 274 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 310 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 
@@ -1073,64 +1139,64 @@ tes\arm\startup_stm32f401xe.s
 ARM Macro Assembler    Page 4 Alphabetic symbol ordering
 Relocatable symbols
 
-DMA2_Stream4_IRQHandler 0000001A
+DMA2_Stream4_IRQHandler 00000066
 
 Symbol: DMA2_Stream4_IRQHandler
    Definitions
-      At line 332 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 368 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 139 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 275 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 311 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA2_Stream5_IRQHandler 0000001A
+DMA2_Stream5_IRQHandler 00000066
 
 Symbol: DMA2_Stream5_IRQHandler
    Definitions
-      At line 334 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 370 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 147 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 277 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 313 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA2_Stream6_IRQHandler 0000001A
+DMA2_Stream6_IRQHandler 00000066
 
 Symbol: DMA2_Stream6_IRQHandler
    Definitions
-      At line 335 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 371 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 148 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 278 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 314 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DMA2_Stream7_IRQHandler 0000001A
+DMA2_Stream7_IRQHandler 00000066
 
 Symbol: DMA2_Stream7_IRQHandler
    Definitions
-      At line 336 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 372 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 149 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 279 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 315 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-DebugMon_Handler 00000014
+DebugMon_Handler 00000060
 
 Symbol: DebugMon_Handler
    Definitions
-      At line 214 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 250 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 73 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 215 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 251 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 
@@ -1139,64 +1205,64 @@ ARM Macro Assembler    Page 5 Alphabetic symbol ordering
 Relocatable symbols
 
 
-Default_Handler 0000001A
+Default_Handler 00000066
 
 Symbol: Default_Handler
    Definitions
-      At line 227 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 263 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       None
 Comment: Default_Handler unused
-EXTI0_IRQHandler 0000001A
+EXTI0_IRQHandler 00000066
 
 Symbol: EXTI0_IRQHandler
    Definitions
-      At line 292 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 328 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 85 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 235 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 271 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-EXTI15_10_IRQHandler 0000001A
+EXTI15_10_IRQHandler 00000066
 
 Symbol: EXTI15_10_IRQHandler
    Definitions
-      At line 321 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 357 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 119 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 264 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 300 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-EXTI1_IRQHandler 0000001A
+EXTI1_IRQHandler 00000066
 
 Symbol: EXTI1_IRQHandler
    Definitions
-      At line 293 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 329 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 86 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 236 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 272 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-EXTI2_IRQHandler 0000001A
+EXTI2_IRQHandler 00000066
 
 Symbol: EXTI2_IRQHandler
    Definitions
-      At line 294 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 330 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 87 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 237 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 273 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-EXTI3_IRQHandler 0000001A
+EXTI3_IRQHandler 00000066
 
 
 
@@ -1206,60 +1272,60 @@ Relocatable symbols
 
 Symbol: EXTI3_IRQHandler
    Definitions
-      At line 295 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 331 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 88 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 238 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 274 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-EXTI4_IRQHandler 0000001A
+EXTI4_IRQHandler 00000066
 
 Symbol: EXTI4_IRQHandler
    Definitions
-      At line 296 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 332 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 89 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 239 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 275 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-EXTI9_5_IRQHandler 0000001A
+EXTI9_5_IRQHandler 00000066
 
 Symbol: EXTI9_5_IRQHandler
    Definitions
-      At line 305 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 341 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 102 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 248 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 284 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-FLASH_IRQHandler 0000001A
+FLASH_IRQHandler 00000066
 
 Symbol: FLASH_IRQHandler
    Definitions
-      At line 290 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 326 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 83 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 233 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 269 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-FPU_IRQHandler 0000001A
+FPU_IRQHandler 00000066
 
 Symbol: FPU_IRQHandler
    Definitions
-      At line 340 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 376 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 160 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 283 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 319 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 
@@ -1272,60 +1338,60 @@ HardFault_Handler 0000000A
 
 Symbol: HardFault_Handler
    Definitions
-      At line 190 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 191 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 64 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 191 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 190 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-I2C1_ER_IRQHandler 0000001A
+I2C1_ER_IRQHandler 00000066
 
 Symbol: I2C1_ER_IRQHandler
    Definitions
-      At line 314 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 350 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 111 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 257 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 293 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-I2C1_EV_IRQHandler 0000001A
+I2C1_EV_IRQHandler 00000066
 
 Symbol: I2C1_EV_IRQHandler
    Definitions
-      At line 313 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 349 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 110 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 256 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 292 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-I2C2_ER_IRQHandler 0000001A
+I2C2_ER_IRQHandler 00000066
 
 Symbol: I2C2_ER_IRQHandler
    Definitions
-      At line 316 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 352 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 113 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 259 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 295 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-I2C2_EV_IRQHandler 0000001A
+I2C2_EV_IRQHandler 00000066
 
 Symbol: I2C2_EV_IRQHandler
    Definitions
-      At line 315 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 351 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 112 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 258 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 294 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 
@@ -1334,40 +1400,40 @@ ARM Macro Assembler    Page 8 Alphabetic symbol ordering
 Relocatable symbols
 
 
-I2C3_ER_IRQHandler 0000001A
+I2C3_ER_IRQHandler 00000066
 
 Symbol: I2C3_ER_IRQHandler
    Definitions
-      At line 339 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 375 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 152 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 282 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 318 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-I2C3_EV_IRQHandler 0000001A
+I2C3_EV_IRQHandler 00000066
 
 Symbol: I2C3_EV_IRQHandler
    Definitions
-      At line 338 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 374 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 151 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 281 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 317 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-MemManage_Handler 0000000C
+MemManage_Handler 00000058
 
 Symbol: MemManage_Handler
    Definitions
-      At line 195 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 231 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 65 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 196 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 232 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 NMI_Handler 00000008
@@ -1382,16 +1448,16 @@ es\arm\startup_stm32f401xe.s
       At line 186 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-OTG_FS_IRQHandler 0000001A
+OTG_FS_IRQHandler 00000066
 
 Symbol: OTG_FS_IRQHandler
    Definitions
-      At line 333 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 369 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 146 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 276 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 312 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 
 
 
@@ -1400,59 +1466,59 @@ Relocatable symbols
 
 tes\arm\startup_stm32f401xe.s
 
-OTG_FS_WKUP_IRQHandler 0000001A
+OTG_FS_WKUP_IRQHandler 00000066
 
 Symbol: OTG_FS_WKUP_IRQHandler
    Definitions
-      At line 323 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 359 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 121 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 266 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 302 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-PVD_IRQHandler 0000001A
+PVD_IRQHandler 00000066
 
 Symbol: PVD_IRQHandler
    Definitions
-      At line 287 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 323 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 80 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 230 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 266 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-PendSV_Handler 00000016
+PendSV_Handler 00000062
 
 Symbol: PendSV_Handler
    Definitions
-      At line 218 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 254 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 75 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 219 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 255 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-RCC_IRQHandler 0000001A
+RCC_IRQHandler 00000066
 
 Symbol: RCC_IRQHandler
    Definitions
-      At line 291 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 327 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 84 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 234 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 270 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-RTC_Alarm_IRQHandler 0000001A
+RTC_Alarm_IRQHandler 00000066
 
 Symbol: RTC_Alarm_IRQHandler
    Definitions
-      At line 322 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 358 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 120 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
@@ -1463,19 +1529,19 @@ tes\arm\startup_stm32f401xe.s
 ARM Macro Assembler    Page 10 Alphabetic symbol ordering
 Relocatable symbols
 
-      At line 265 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 301 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-RTC_WKUP_IRQHandler 0000001A
+RTC_WKUP_IRQHandler 00000066
 
 Symbol: RTC_WKUP_IRQHandler
    Definitions
-      At line 289 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 325 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 82 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 232 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 268 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 Reset_Handler 00000000
@@ -1490,35 +1556,35 @@ es\arm\startup_stm32f401xe.s
       At line 173 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-SDIO_IRQHandler 0000001A
+SDIO_IRQHandler 00000066
 
 Symbol: SDIO_IRQHandler
    Definitions
-      At line 325 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 361 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 128 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 268 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 304 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-SPI1_IRQHandler 0000001A
+SPI1_IRQHandler 00000066
 
 Symbol: SPI1_IRQHandler
    Definitions
-      At line 317 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 353 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 114 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 260 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 296 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-SPI2_IRQHandler 0000001A
+SPI2_IRQHandler 00000066
 
 Symbol: SPI2_IRQHandler
    Definitions
-      At line 318 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 354 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 115 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
@@ -1529,62 +1595,62 @@ ARM Macro Assembler    Page 11 Alphabetic symbol ordering
 Relocatable symbols
 
 tes\arm\startup_stm32f401xe.s
-      At line 261 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 297 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-SPI3_IRQHandler 0000001A
+SPI3_IRQHandler 00000066
 
 Symbol: SPI3_IRQHandler
    Definitions
-      At line 327 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 363 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 130 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 270 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 306 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-SPI4_IRQHandler 0000001A
+SPI4_IRQHandler 00000066
 
 Symbol: SPI4_IRQHandler
    Definitions
-      At line 341 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 377 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 163 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 284 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 320 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-SVC_Handler 00000012
+SVC_Handler 0000005E
 
 Symbol: SVC_Handler
    Definitions
-      At line 209 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 245 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 72 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 210 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 246 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-SysTick_Handler 00000018
+SysTick_Handler 00000064
 
 Symbol: SysTick_Handler
    Definitions
-      At line 222 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 258 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 76 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 223 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 259 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-TAMP_STAMP_IRQHandler 0000001A
+TAMP_STAMP_IRQHandler 00000066
 
 Symbol: TAMP_STAMP_IRQHandler
    Definitions
-      At line 288 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 324 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
 
@@ -1595,62 +1661,62 @@ Relocatable symbols
 
       At line 81 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 231 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 267 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-TIM1_BRK_TIM9_IRQHandler 0000001A
+TIM1_BRK_TIM9_IRQHandler 00000066
 
 Symbol: TIM1_BRK_TIM9_IRQHandler
    Definitions
-      At line 306 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 342 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 103 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 249 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 285 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-TIM1_CC_IRQHandler 0000001A
+TIM1_CC_IRQHandler 00000066
 
 Symbol: TIM1_CC_IRQHandler
    Definitions
-      At line 309 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 345 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 106 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 252 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 288 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-TIM1_TRG_COM_TIM11_IRQHandler 0000001A
+TIM1_TRG_COM_TIM11_IRQHandler 00000066
 
 Symbol: TIM1_TRG_COM_TIM11_IRQHandler
    Definitions
-      At line 308 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 344 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 105 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 251 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 287 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-TIM1_UP_TIM10_IRQHandler 0000001A
+TIM1_UP_TIM10_IRQHandler 00000066
 
 Symbol: TIM1_UP_TIM10_IRQHandler
    Definitions
-      At line 307 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 343 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 104 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 250 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 286 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-TIM2_IRQHandler 0000001A
+TIM2_IRQHandler 00000066
 
 Symbol: TIM2_IRQHandler
    Definitions
-      At line 310 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 346 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 
@@ -1661,62 +1727,62 @@ Relocatable symbols
    Uses
       At line 107 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 253 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 289 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-TIM3_IRQHandler 0000001A
+TIM3_IRQHandler 00000066
 
 Symbol: TIM3_IRQHandler
    Definitions
-      At line 311 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 347 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 108 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 254 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 290 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-TIM4_IRQHandler 0000001A
+TIM4_IRQHandler 00000066
 
 Symbol: TIM4_IRQHandler
    Definitions
-      At line 312 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 348 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 109 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 255 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 291 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-TIM5_IRQHandler 0000001A
+TIM5_IRQHandler 00000066
 
 Symbol: TIM5_IRQHandler
    Definitions
-      At line 326 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 362 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 129 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 269 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 305 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-USART1_IRQHandler 0000001A
+USART1_IRQHandler 00000066
 
 Symbol: USART1_IRQHandler
    Definitions
-      At line 319 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 355 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 116 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 262 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 298 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-USART2_IRQHandler 0000001A
+USART2_IRQHandler 00000066
 
 Symbol: USART2_IRQHandler
    Definitions
-      At line 320 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 356 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 
 
 
@@ -1727,53 +1793,53 @@ tes\arm\startup_stm32f401xe.s
    Uses
       At line 117 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 263 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 299 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-USART6_IRQHandler 0000001A
+USART6_IRQHandler 00000066
 
 Symbol: USART6_IRQHandler
    Definitions
-      At line 337 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 373 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 150 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
-      At line 280 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 316 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-UsageFault_Handler 00000010
+UsageFault_Handler 0000005C
 
 Symbol: UsageFault_Handler
    Definitions
-      At line 205 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 241 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 67 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 206 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 242 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-WWDG_IRQHandler 0000001A
+WWDG_IRQHandler 00000066
 
 Symbol: WWDG_IRQHandler
    Definitions
-      At line 286 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 322 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       At line 79 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 229 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 265 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
-__user_initial_stackheap 0000001C
+__user_initial_stackheap 00000068
 
 Symbol: __user_initial_stackheap
    Definitions
-      At line 363 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 399 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
-      At line 361 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 397 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 Comment: __user_initial_stackheap used once
 69 symbols
@@ -1792,7 +1858,7 @@ es\arm\startup_stm32f401xe.s
    Uses
       At line 48 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 367 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 403 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 Stack_Size 00000400
@@ -1804,7 +1870,7 @@ es\arm\startup_stm32f401xe.s
    Uses
       At line 36 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templat
 es\arm\startup_stm32f401xe.s
-      At line 366 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 402 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
 
 __Vectors_Size 00000194
@@ -1848,7 +1914,7 @@ __use_two_region_memory 00000000
 
 Symbol: __use_two_region_memory
    Definitions
-      At line 360 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
+      At line 396 in file ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templa
 tes\arm\startup_stm32f401xe.s
    Uses
       None

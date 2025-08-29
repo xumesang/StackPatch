@@ -57,7 +57,7 @@ void NMI_Handler(void)
   * @retval None
   */
 #define NVIC_HFSR    (*(volatile unsigned int*)  (0xE000ED2Cu))  // Hard Fault Status Register
-
+/*****
 __asm void HardFault_Handler(void){
         extern dump_context;
         // This version is for Cortex M3, Cortex M4 and Cortex M4F
@@ -68,7 +68,7 @@ __asm void HardFault_Handler(void){
         b      dump_context  ;// Stack pointer passed through R0.
         
      //   END
-}
+}***/
 uint8_t Tx_str22[] = "hello\r\n" ;
 typedef struct  stack_context {
 	//uint32_t exc;

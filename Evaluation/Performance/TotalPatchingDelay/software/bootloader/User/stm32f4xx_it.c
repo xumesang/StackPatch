@@ -22,7 +22,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
-   
+#include "usart.h"
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
   */
@@ -59,31 +59,48 @@ void NMI_Handler(void)
 #define NVIC_HFSR    (*(volatile unsigned int*)  (0xE000ED2Cu))  // Hard Fault Status Register
 
 __asm void HardFault_Handler(void){
-        extern HardFaultHandler;
+        extern dump_context;
         // This version is for Cortex M3, Cortex M4 and Cortex M4F
         tst    LR, #4            ;// Check EXC_RETURN in Link register bit 2.
         ite    EQ
         mrseq  R0, MSP           ;// Stacking was using MSP.
         mrsne  R0, PSP           ;// Stacking was using PSP.
-        b      HardFaultHandler  ;// Stack pointer passed through R0.
- 
+        b      dump_context  ;// Stack pointer passed through R0.
+        
      //   END
 }
-//uint8_t Tx_str22[] = "hello\r\n" ;
-//void(*ptr)();
-//extern void patchfunc(void) __attribute__((section(".ARM.__at_0x08002100")));
-//extern void iap_load_app(uint32_t appxaddr);
+uint8_t Tx_str22[] = "hello\r\n" ;
+typedef struct  stack_context {
+	//uint32_t exc;
+	uint32_t r0;
+	uint32_t r1;
+	uint32_t r2;
+	uint32_t r3;
+	uint32_t r12; // ip
+	uint32_t lr;
+	uint32_t pc; // return address
+	uint32_t xpsr;
+} stack_context;
+ void dump_context(stack_context *ctx) {
+	//printf(" exc  =0x%08x\r\n", ctx->exc);
+	printf(" r0  =0x%08x\r\n", ctx->r0);
+	printf(" r1  =0x%08x\r\n", ctx->r1);
+	printf(" r2  =0x%08x\r\n", ctx->r2);
+	printf(" r3  =0x%08x\r\n", ctx->r3);
+	printf(" r12 =0x%08x\r\n", ctx->r12);
+	printf(" lr  =0x%08x\r\n", ctx->lr);
+	printf(" pc  =0x%08x\r\n", ctx->pc);
+	printf(" xpsr=0x%08x\r\n", ctx->xpsr);
+	ctx->pc+= 2u;
+}
 void HardFaultHandler(unsigned int* pStack) {
-if (NVIC_HFSR & (1u << 31)) {
-    NVIC_HFSR |=  (1u << 31);     // Reset Hard Fault status
-   // patchfunc();
-	
-	// ptr=(void(*)())0x08002101;
- //  ptr();
+
+
 	  *(pStack + 6u) += 2u;         // PC is located on stack at SP + 24 bytes. Increment PC by 2 to skip break instruction.
-    //return;                       // Return to interrupted application
-	// HAL_UART_Transmit(&huart2,Tx_str22,sizeof(Tx_str22),1000);
-  }
+
+    //printf("hhh");
+	
+
  
 }
 /**

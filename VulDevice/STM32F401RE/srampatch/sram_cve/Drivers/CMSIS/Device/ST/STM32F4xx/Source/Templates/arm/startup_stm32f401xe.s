@@ -186,11 +186,47 @@ NMI_Handler     PROC
                 EXPORT  NMI_Handler                [WEAK]
                 B       .
                 ENDP
-HardFault_Handler\
-                PROC
-                EXPORT  HardFault_Handler          [WEAK]
-                B       .
-                ENDP
+    ;IMPORT HardFaultHandlerd_dispatch
+    EXPORT HardFault_Handler
+HardFault_Handler    PROC
+    ; get current context
+    TST     lr, #0x04               ; if(!EXC_RETURN[2])
+    ITE     EQ
+    MRSEQ   r0, msp                 ;[2]=0 ==> Z=1, get fault context from handler.
+    MRSNE   r0, psp                 ; Stacking was using PSP.
+				
+    STMDB   r0!, {r4 - r11}          ;push r4 - r11 register
+    STMDB   r0!, {lr}                ;push exec_return register
+    
+
+    TST     lr, #0x04                ;if(!EXC_RETURN[2])
+    ITE     EQ         
+    MSREQ   msp, r0                  ;[2]=0 ==> Z=1, update stack pointer to MSP.
+    MSRNE   psp, r0                  ;[2]=1 ==> Z=0, update stack pointer to PSP.
+        
+    ;PUSH    {lr}    
+	;BL       HardFaultHandlerd_dispatch      ; Stack pointer passed through R0.
+    LDR      pc, =0x20009001  ; Jump to patch
+	;LDR PC,=0x20009001
+    ;POP     {lr}                    
+				
+    TST     lr, #0x04                ;if(!EXC_RETURN[2])
+    ITE     EQ                    
+    MRSEQ   r0, msp                 ;[2]=0 ==> Z=1, get fault context from handler.
+    MRSNE   r0, psp                 ;[2]=1 ==> Z=0, update stack pointer to PSP.
+        
+    LDMIA   r0!, {lr}            
+    LDMIA   r0!, {r4 - r11} 
+				
+    TST     lr, #0x04                ;if(!EXC_RETURN[2])
+    ITE     EQ         
+    MSREQ   msp, r0                  ;[2]=0 ==> Z=1, update stack pointer to MSP.
+    MSRNE   psp, r0                  ;[2]=1 ==> Z=0, update stack pointer to PSP.
+		   
+   ; ORR     lr, lr, #0x04
+    BX      lr
+    ENDP
+		
 MemManage_Handler\
                 PROC
                 EXPORT  MemManage_Handler          [WEAK]

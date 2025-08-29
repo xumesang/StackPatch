@@ -60,3 +60,7 @@
 ..\..\output\stm32f4xx_it.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h
 ..\..\output\stm32f4xx_it.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
 ..\..\output\stm32f4xx_it.o: ..\..\User\stm32f4xx_it.h
+..\..\output\stm32f4xx_it.o: ..\..\Drivers\SYSTEM\usart\usart.h
+..\..\output\stm32f4xx_it.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\stm32f4xx_it.o: ..\..\Drivers\./SYSTEM/sys/sys.h
+..\..\output\stm32f4xx_it.o: ..\..\Drivers\CMSIS\Include\core_cm4.h

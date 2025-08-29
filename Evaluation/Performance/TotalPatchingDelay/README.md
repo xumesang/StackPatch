@@ -13,7 +13,7 @@ hardware/           # Flash-based triggers
 
 software/            # SRAM-based triggers
 ├── bootloader/       # Bootloader in Flash; loads SRAM apps via serial
-├── APPbreakpoint/   # Software-breakpoint mode
+├── software_bkpt_test/   # Software-breakpoint mode
 └── Hook/         # Instrument mode
 
 ## Usage

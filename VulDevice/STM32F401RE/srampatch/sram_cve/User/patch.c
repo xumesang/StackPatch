@@ -31,6 +31,8 @@ void patch_CVE_2017_14199_1(unsigned int* pStack){
 	}
 }
 
+
+
 // Repair the CVE-2017-14199_2 vulnerability
 void patch_CVE_2017_14199_2(unsigned int* pStack){
 	   *(pStack + 10u) = *(uint16_t *)(*(pStack + 2u) + 0x1A);
