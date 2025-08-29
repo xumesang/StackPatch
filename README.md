@@ -83,7 +83,7 @@ To reproduce the results in our paper, you need one of these boards:
 
 **Common Requirements**:
 - Windows 10  
-- Serial terminal tool (e.g., UartAssist V5.0.10 in \VulDevice\SerialTerminalTool)  
+- Serial terminal tool (e.g.,  [UartAssistV5.0.10](https://www.nitwo.com/cn/download/UartAssist.html))  
 - Debugger: J-LINK, ST-LINK, or GD-LINK  
 
 ---
