@@ -1,0 +1,148 @@
+[1/10] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D D:\ESP\espdemo\hello_world\build\bootloader\esp-idf\esptool_py && D:\Espressif\python_env\idf5.2_py3.11_env\Scripts\python.exe D:/Espressif/frameworks/esp-idf-v5.2.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 D:/ESP/espdemo/hello_world/build/bootloader/bootloader.bin"
+Bootloader binary size 0x5250 bytes. 0x2db0 bytes (36%) free.
+[2/8] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/hello_world_main.c.obj
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'freertos_cve2018_16601':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:93:17: warning: unused variable 'ucProtocol' [-Wunused-variable]
+   93 |         uint8_t ucProtocol;
+      |                 ^~~~~~~~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:92:18: warning: unused variable 'uxHeaderLength' [-Wunused-variable]
+   92 |         uint32_t uxHeaderLength = ( uint32_t ) ( ( pxIPHeader->ucVersionHeaderLength & 0x0Fu ) << 2 );
+      |                  ^~~~~~~~~~~~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'cve2018_16524':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:166:10: warning: unused variable 'uxNewMSS' [-Wunused-variable]
+  166 | uint32_t uxNewMSS;
+      |          ^~~~~~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'test_cve2018_16528':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:285:20: warning: unused variable 'xResult' [-Wunused-variable]
+  285 |         BaseType_t xResult = TLS_Connect( &pCtx );
+      |                    ^~~~~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'patch_cve2018_16528':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:296:24: warning: assignment to 'uint32_t' {aka 'long unsigned int'} from 'uint32_t *' {aka 'long unsigned int *'} makes integer from pointer without a cast [-Wint-conversion]
+  296 |             *(sp + 11) = (uint32_t *)(*(sp + 10) + 16);
+      |                        ^
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'packet_length_decode':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:526:14: warning: unused variable 'shift' [-Wunused-variable]
+  526 |         u8_t shift = 0U;
+      |              ^~~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'patch_cve2020_10062':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:553:17: warning: assignment to 'uint32_t' {aka 'long unsigned int'} from 'uint32_t *' {aka 'long unsigned int *'} makes integer from pointer without a cast [-Wint-conversion]
+  553 |     *(sp + 11u) = (uint32_t *)(*(sp + 6u) +0 );
+      |                 ^
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'arch_syscall_invoke0':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:750:24: warning: variable 'r6' set but not used [-Wunused-but-set-variable]
+  750 |         register u32_t r6 __asm__("a6");
+      |                        ^~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: At top level:
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:769: warning: "INT_MAX" redefined
+  769 | #define INT_MAX         2147483647
+      | 
+In file included from D:/Espressif/frameworks/esp-idf-v5.2.1/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos/portmacro.h:62,
+                 from D:/Espressif/frameworks/esp-idf-v5.2.1/components/freertos/FreeRTOS-Kernel/include/freertos/portable.h:57,
+                 from D:/Espressif/frameworks/esp-idf-v5.2.1/components/freertos/FreeRTOS-Kernel/include/freertos/FreeRTOS.h:69,
+                 from D:/ESP/espdemo/hello_world/main/hello_world_main.c:10:
+D:/Espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/13.2.0/include/limits.h:120: note: this is the location of the previous definition
+  120 | #define INT_MAX __INT_MAX__
+      | 
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:770: warning: "UINT_MAX" redefined
+  770 | #define UINT_MAX        0xFFFFFFFFU
+      | 
+D:/Espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/13.2.0/include/limits.h:124: note: this is the location of the previous definition
+  124 | #define UINT_MAX (INT_MAX * 2U + 1U)
+      | 
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'patch_CVE_2020_10028':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:880:47: warning: initialization of 'uint32_t *' {aka 'long unsigned int *'} from 'uintptr_t' {aka 'unsigned int'} makes pointer from integer without a cast [-Wint-conversion]
+  880 |         uint32_t *gpio_enable_callback_ptr =  *(sp + 15);
+      |                                               ^
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'app_main':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:940:5: warning: 'cpu_ll_get_cycle_count' is deprecated [-Wdeprecated-declarations]
+  940 |     cntStart = cpu_hal_get_cycle_count();//2
+      |     ^~~~~~~~
+In file included from D:/Espressif/frameworks/esp-idf-v5.2.1/components/esp_hw_support/include/hal/cpu_hal.h:16,
+                 from D:/ESP/espdemo/hello_world/main/hello_world_main.c:15:
+D:/Espressif/frameworks/esp-idf-v5.2.1/components/esp_hw_support/include/hal/cpu_ll.h:28:56: note: declared here
+   28 | FORCE_INLINE_ATTR __attribute__((deprecated)) uint32_t cpu_ll_get_cycle_count(void)
+      |                                                        ^~~~~~~~~~~~~~~~~~~~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:944:26: warning: passing argument 1 of 'patch_CVE_2020_10028' from incompatible pointer type [-Wincompatible-pointer-types]
+  944 |     patch_CVE_2020_10028(sp);
+      |                          ^~
+      |                          |
+      |                          uint32_t * {aka long unsigned int *}
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:879:39: note: expected 'uintptr_t *' {aka 'unsigned int *'} but argument is of type 'uint32_t *' {aka 'long unsigned int *'}
+  879 |  void patch_CVE_2020_10028(uintptr_t *sp){
+      |                            ~~~~~~~~~~~^~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:949:5: warning: 'cpu_ll_get_cycle_count' is deprecated [-Wdeprecated-declarations]
+  949 |     cntEnd = cpu_hal_get_cycle_count();
+      |     ^~~~~~
+D:/Espressif/frameworks/esp-idf-v5.2.1/components/esp_hw_support/include/hal/cpu_ll.h:28:56: note: declared here
+   28 | FORCE_INLINE_ATTR __attribute__((deprecated)) uint32_t cpu_ll_get_cycle_count(void)
+      |                                                        ^~~~~~~~~~~~~~~~~~~~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:899:18: warning: unused variable 'port' [-Wunused-variable]
+  899 |    struct device port = {
+      |                  ^~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:898:10: warning: unused variable 'pin' [-Wunused-variable]
+  898 |    u32_t pin = 2;
+      |          ^~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:897:8: warning: unused variable 'hhhh' [-Wunused-variable]
+  897 |    int hhhh = 2;
+      |        ^~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:896:10: warning: unused variable 'str2' [-Wunused-variable]
+  896 |    u8_t *str2 = abc;
+      |          ^~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:895:9: warning: unused variable 'abc2' [-Wunused-variable]
+  895 |    u8_t abc2[2] = {0,1};
+      |         ^~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: At top level:
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:361:13: warning: 'infoTransfer' defined but not used [-Wunused-function]
+  361 | static bool infoTransfer(void)
+      |             ^~~~~~~~~~~~
+[3/8] Linking C static library esp-idf\main\libmain.a
+[4/8] Generating ld/sections.ld
+[5/8] Linking CXX executable hello_world.elf
+[6/8] Generating binary image from built executable
+esptool.py v4.7.0
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Generated D:/ESP/espdemo/hello_world/build/hello_world.bin
+[7/8] cmd.exe /C "cd /D D:\ESP\espdemo\hello_world\build\esp-idf\esptool_py && D:\Espressif\python_env\idf5.2_py3.11_env\Scripts\python.exe D:/Espressif/frameworks/esp-idf-v5.2.1/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/ESP/espdemo/hello_world/build/partition_table/partition-table.bin D:/ESP/espdemo/hello_world/build/hello_world.bin"
+hello_world.bin binary size 0x35ac0 bytes. Smallest app partition is 0x100000 bytes. 0xca540 bytes (79%) free.
+[7/8] cmd.exe /C "cd /D D:\Espressif\frameworks\esp-idf-v5.2.1\components\esptool_py && D:\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=D:/Espressesptool.py --chip esp32s3 -p COM5 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size 2MB 0x0 bootloader/bootloader.bin 0x10000 hello_world.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.7.0
+Serial port COM5
+Connecting....
+Chip is ESP32-S3 (QFN56) (revision v0.2)
+Features: WiFi, BLE, Embedded PSRAM 2MB (AP_3v3)
+Crystal is 40MHz
+MAC: dc:da:0c:61:e2:50
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00000000 to 0x00005fff...
+Flash will be erased from 0x00010000 to 0x00045fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Compressed 21072 bytes to 13079...
+Writing at 0x00000000... (100 %)
+Wrote 21072 bytes (13079 compressed) at 0x00000000 in 0.6 seconds (effective 286.0 kbit/s)...
+Hash of data verified.
+Compressed 219840 bytes to 111303...
+Writing at 0x00010000... (14 %)
+Writing at 0x0001e6b4... (28 %)
+Writing at 0x000251ff... (42 %)
+Writing at 0x0002b4bf... (57 %)
+Writing at 0x00032f85... (71 %)
+Writing at 0x0003a334... (85 %)
+Writing at 0x00040551... (100 %)
+Wrote 219840 bytes (111303 compressed) at 0x00010000 in 2.6 seconds (effective 677.9 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 103...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.1 seconds (effective 487.1 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
+if/frameworks/esp-idf-v5.2.1 -D SERIAL_TOOL=D:/Espressif/python_env/idf5.2_py3.11_env/Scripts/python.exe;;D:/Espressif/frameworks/esp-idf-v5.2.1/components/esptool_py/esptool/esptool.py;--chip;esp32s3 -D SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args -D WORKING_DIRECTORY=D:/ESP/espdemo/hello_world/build -P D:/Espressif/frameworks/esp-idf-v5.2.1/components/esptool_py/run_serial_tool.cmake"

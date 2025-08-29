@@ -1,0 +1,32 @@
+[1/11] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D D:\ESP\espdemo\hello_world\build\bootloader\esp-idf\esptool_py && D:\Espressif\python_env\idf5.2_py3.11_env\Scripts\python.exe D:/Espressif/frameworks/esp-idf-v5.2.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 D:/ESP/espdemo/hello_world/build/bootloader/bootloader.bin"
+Bootloader binary size 0x5250 bytes. 0x2db0 bytes (36%) free.
+[2/9] Building ASM object esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/xtensa_vectors.S.obj
+[3/9] Linking C static library esp-idf\xtensa\libxtensa.a
+[4/9] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/hello_world_main.c.obj
+D:/ESP/espdemo/hello_world/main/hello_world_main.c: In function 'app_main':
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:67:5: warning: 'cpu_ll_get_cycle_count' is deprecated [-Wdeprecated-declarations]
+   67 |     cntStart = cpu_hal_get_cycle_count();
+      |     ^~~~~~~~
+In file included from D:/Espressif/frameworks/esp-idf-v5.2.1/components/esp_hw_support/include/hal/cpu_hal.h:16,
+                 from D:/ESP/espdemo/hello_world/main/hello_world_main.c:15:
+D:/Espressif/frameworks/esp-idf-v5.2.1/components/esp_hw_support/include/hal/cpu_ll.h:28:56: note: declared here
+   28 | FORCE_INLINE_ATTR __attribute__((deprecated)) uint32_t cpu_ll_get_cycle_count(void)
+      |                                                        ^~~~~~~~~~~~~~~~~~~~~~
+D:/ESP/espdemo/hello_world/main/hello_world_main.c:73:5: warning: 'cpu_ll_get_cycle_count' is deprecated [-Wdeprecated-declarations]
+   73 |     cntEnd = cpu_hal_get_cycle_count();
+      |     ^~~~~~
+D:/Espressif/frameworks/esp-idf-v5.2.1/components/esp_hw_support/include/hal/cpu_ll.h:28:56: note: declared here
+   28 | FORCE_INLINE_ATTR __attribute__((deprecated)) uint32_t cpu_ll_get_cycle_count(void)
+      |                                                        ^~~~~~~~~~~~~~~~~~~~~~
+[5/9] Linking C static library esp-idf\main\libmain.a
+[6/9] Generating ld/sections.ld
+[7/9] Linking CXX executable hello_world.elf
+[8/9] Generating binary image from built executable
+esptool.py v4.7.0
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Generated D:/ESP/espdemo/hello_world/build/hello_world.bin
+[9/9] cmd.exe /C "cd /D D:\ESP\espdemo\hello_world\build\esp-idf\esptool_py && D:\Espressif\python_env\idf5.2_py3.11_env\Scripts\python.exe D:/Espressif/frameworks/esp-idf-v5.2.1/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/ESP/espdemo/hello_world/build/partition_table/partition-table.bin D:/ESP/espdemo/hello_world/build/hello_world.bin"
+hello_world.bin binary size 0x35910 bytes. Smallest app partition is 0x100000 bytes. 0xca6f0 bytes (79%) free.

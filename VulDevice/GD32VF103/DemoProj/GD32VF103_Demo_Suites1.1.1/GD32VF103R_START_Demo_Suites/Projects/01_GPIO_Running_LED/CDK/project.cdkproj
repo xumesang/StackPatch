@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project Name="project" Version="1" Language="C" Type="Simple">
+  <Description/>
+  <Dependencies Name="Debug"/>
+  <VendorInfo>
+    <VendorName>new_project</VendorName>
+  </VendorInfo>
+  <VirtualDirectory Name="Application">
+    <File Name="../gd32vf103_libopt.h">
+      <FileOption/>
+    </File>
+    <File Name="../main.c">
+      <FileOption/>
+    </File>
+    <File Name="../systick.c">
+      <FileOption/>
+    </File>
+    <File Name="../systick.h">
+      <FileOption/>
+    </File>
+  </VirtualDirectory>
+  <VirtualDirectory Name="GD32VF103_Peripherals">
+    <VirtualDirectory Name="Include">
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_adc.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_bkp.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_can.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_crc.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_dac.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_dbg.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_dma.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_eclic.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_exmc.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_exti.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_fmc.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_fwdgt.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_gpio.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_i2c.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_pmu.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_rcu.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_rtc.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_spi.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_timer.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_usart.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include/gd32vf103_wwdgt.h">
+        <FileOption/>
+      </File>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Source">
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_adc.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_bkp.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_can.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_crc.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_dac.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_dbg.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_dma.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_eclic.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_exmc.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_exti.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_fmc.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_fwdgt.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_gpio.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_i2c.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_pmu.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_rcu.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_rtc.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_spi.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_timer.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_usart.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Source/gd32vf103_wwdgt.c">
+        <FileOption/>
+      </File>
+    </VirtualDirectory>
+    <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/gd32vf103.h">
+      <FileOption/>
+    </File>
+    <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/system_gd32vf103.c">
+      <FileOption/>
+    </File>
+    <File Name="../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/system_gd32vf103.h">
+      <FileOption/>
+    </File>
+  </VirtualDirectory>
+  <VirtualDirectory Name="RISCV">
+    <VirtualDirectory Name="drivers">
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/drivers/n200_eclic.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/drivers/n200_func.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/drivers/n200_func.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/drivers/n200_timer.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/drivers/riscv_bits.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/drivers/riscv_const.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/drivers/riscv_encoding.h">
+        <FileOption/>
+      </File>
+    </VirtualDirectory>
+    <VirtualDirectory Name="env_Eclipse">
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/entry.S">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103x4.lds">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103x6.lds">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103x8.lds">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103xB.lds">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/handlers.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/init.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/start.S">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/your_printf.c">
+        <FileOption/>
+      </File>
+    </VirtualDirectory>
+    <VirtualDirectory Name="stubs">
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/close.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/fstat.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/isatty.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/lseek.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/read.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/sbrk.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/stub.h">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/write.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/write_hex.c">
+        <FileOption/>
+      </File>
+      <File Name="../../../../GD32VF103_Firmware_Library/RISCV/stubs/_exit.c">
+        <FileOption/>
+      </File>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Utilities">
+    <File Name="../../../Utilities/gd32vf103r_start.c">
+      <FileOption/>
+    </File>
+    <File Name="../../../Utilities/gd32vf103r_start.h">
+      <FileOption/>
+    </File>
+  </VirtualDirectory>
+  <DebugSessions>
+    <watchExpressions/>
+    <memoryExpressions/>
+    <statistics/>
+    <peripheralTabs/>
+    <WatchDisplayFormat/>
+    <LocalDisplayFormat/>
+    <debugLayout/>
+    <memoryTabColSizeExpressions/>
+  </DebugSessions>
+  <BuildConfigs>
+    <BuildConfig Name="BuildSet">
+      <Target>
+        <ROMBank Selected="1">
+          <ROM1>
+            <InUse>no</InUse>
+            <Start>0x0</Start>
+            <Size>0x20000</Size>
+          </ROM1>
+          <ROM2>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+          </ROM2>
+          <ROM3>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+          </ROM3>
+          <ROM4>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+          </ROM4>
+          <ROM5>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+          </ROM5>
+        </ROMBank>
+        <RAMBank>
+          <RAM1>
+            <InUse>yes</InUse>
+            <Start>0x20000000</Start>
+            <Size>0x80000</Size>
+            <Init>yes</Init>
+          </RAM1>
+          <RAM2>
+            <InUse>no</InUse>
+            <Start>0x50000000</Start>
+            <Size>0x800000</Size>
+            <Init>yes</Init>
+          </RAM2>
+          <RAM3>
+            <InUse>no</InUse>
+            <Start>0x60000000</Start>
+            <Size>0x20000</Size>
+            <Init>yes</Init>
+          </RAM3>
+          <RAM4>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+            <Init>yes</Init>
+          </RAM4>
+          <RAM5>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+            <Init>yes</Init>
+          </RAM5>
+        </RAMBank>
+        <CPU>N205</CPU>
+        <UseMiniLib>yes</UseMiniLib>
+        <Endian>little</Endian>
+        <UseHardFloat>no</UseHardFloat>
+        <UseEnhancedLRW>no</UseEnhancedLRW>
+        <UseContinueBuild>no</UseContinueBuild>
+        <UseSemiHost>no</UseSemiHost>
+      </Target>
+      <Output>
+        <OutputName>$(ProjectName)</OutputName>
+        <Type>Executable</Type>
+        <CreateHexFile>no</CreateHexFile>
+        <CreateBinFile>no</CreateBinFile>
+        <Preprocessor>no</Preprocessor>
+        <Disassmeble>yes</Disassmeble>
+        <CallGraph>no</CallGraph>
+        <Map>no</Map>
+      </Output>
+      <User>
+        <BeforeCompile>
+          <RunUserProg>no</RunUserProg>
+          <UserProgName/>
+        </BeforeCompile>
+        <BeforeMake>
+          <RunUserProg>no</RunUserProg>
+          <UserProgName/>
+        </BeforeMake>
+        <AfterMake>
+          <RunUserProg>no</RunUserProg>
+          <UserProgName/>
+        </AfterMake>
+        <Tools/>
+      </User>
+      <Compiler>
+        <Define>GD32VF103R_START;USE_STDPERIPH_DRIVER</Define>
+        <Undefine/>
+        <Optim>Optimize size (-Os)</Optim>
+        <DebugLevel>Default (-g)</DebugLevel>
+        <IncludePath>$(ProjectPath)/../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include;$(ProjectPath)/../../../../GD32VF103_Firmware_Library/RISCV/drivers;$(ProjectPath)/../../../../GD32VF103_Firmware_Library/RISCV/stubs;../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral;../../../Utilities;../../01_GPIO_Running_LED</IncludePath>
+        <OtherFlags>-mcmodel=medlow --specs=nano.specs -msmall-data-limit=8 -mno-save-restore -fmessage-length=0 -fsigned-char</OtherFlags>
+        <Verbose>no</Verbose>
+        <Ansi>no</Ansi>
+        <Syntax>no</Syntax>
+        <Pedantic>no</Pedantic>
+        <PedanticErr>no</PedanticErr>
+        <InhibitWarn>no</InhibitWarn>
+        <AllWarn>yes</AllWarn>
+        <WarnErr>no</WarnErr>
+        <OneElfS>yes</OneElfS>
+        <OneElfSPerData>yes</OneElfSPerData>
+        <Fstrict>no</Fstrict>
+      </Compiler>
+      <Asm>
+        <Define/>
+        <Undefine/>
+        <IncludePath>$(ProjectPath)/../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral/Include;$(ProjectPath)/../../../../GD32VF103_Firmware_Library/RISCV/drivers;$(ProjectPath)/../../../../GD32VF103_Firmware_Library/RISCV/stubs;../../../../GD32VF103_Firmware_Library/GD32VF103_standard_peripheral;../../../Utilities;../../01_GPIO_Running_LED</IncludePath>
+        <OtherFlags>-mcmodel=medlow --specs=nano.specs -msmall-data-limit=8 -mno-save-restore -fmessage-length=0 -fsigned-char</OtherFlags>
+        <DebugLevel>gdwarf2</DebugLevel>
+      </Asm>
+      <Linker>
+        <Garbage>yes</Garbage>
+        <Garbage2>yes</Garbage2>
+        <LDFile>$(ProjectPath)/../../../../GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103xB.lds</LDFile>
+        <LibName/>
+        <LibPath/>
+        <OtherFlags>-mcmodel=medlow --specs=nano.specs -msmall-data-limit=8 -mno-save-restore -fmessage-length=0 -fsigned-char -nostartfiles -Xlinker --gc-sections </OtherFlags>
+        <AutoLDFile>no</AutoLDFile>
+        <LinkType/>
+        <IncludeAllLibs>no</IncludeAllLibs>
+      </Linker>
+      <Debug>
+        <LoadApplicationAtStartup>yes</LoadApplicationAtStartup>
+        <Connector>OpenOCD</Connector>
+        <StopAt>yes</StopAt>
+        <StopAtText>main</StopAtText>
+        <InitFile>$(ProjectPath)/gdb.init</InitFile>
+        <AfterLoadFile/>
+        <AutoRun>yes</AutoRun>
+        <ResetType>Hard Reset</ResetType>
+        <SoftResetVal>0</SoftResetVal>
+        <ResetAfterLoad>no</ResetAfterLoad>
+        <AfterResetFile/>
+        <Dumpcore>no</Dumpcore>
+        <DumpcoreText/>
+        <ConfigICE>
+          <IP>localhost</IP>
+          <PORT>1025</PORT>
+          <CPUNumber>0</CPUNumber>
+          <Clock>12000</Clock>
+          <Delay>10</Delay>
+          <NResetDelay>100</NResetDelay>
+          <WaitReset>50</WaitReset>
+          <DDC>yes</DDC>
+          <TRST>no</TRST>
+          <DebugPrint>no</DebugPrint>
+          <Connect>Normal</Connect>
+          <ResetType>soft</ResetType>
+          <SoftResetVal>0</SoftResetVal>
+          <RTOSType>None</RTOSType>
+          <DownloadToFlash>no</DownloadToFlash>
+          <ResetAfterConnect>yes</ResetAfterConnect>
+          <GDBName/>
+          <GDBServerType>Local</GDBServerType>
+          <OtherFlags/>
+          <ICEEnablePCSampling>yes</ICEEnablePCSampling>
+          <ICESamplingFreq>1000</ICESamplingFreq>
+          <RemoteICEEnablePCSampling>no</RemoteICEEnablePCSampling>
+          <RemoteICESamplingPort>1026</RemoteICESamplingPort>
+          <Version>latest</Version>
+        </ConfigICE>
+        <ConfigSIM>
+          <SIMTarget/>
+          <OtherFlags/>
+          <NoGraphic>yes</NoGraphic>
+          <Log>no</Log>
+          <SimTrace>no</SimTrace>
+          <Version>latest</Version>
+        </ConfigSIM>
+        <ConfigOpenOCD>
+          <OpenOCDExecutablePath/>
+          <OpenOCDTelnetPortEnable>no</OpenOCDTelnetPortEnable>
+          <OpenOCDTelnetPort>4444</OpenOCDTelnetPort>
+          <OpenOCDTclPortEnable>no</OpenOCDTclPortEnable>
+          <OpenOCDTclPort>6666</OpenOCDTclPort>
+          <OpenOCDConfigOptions>-f openocd.cfg</OpenOCDConfigOptions>
+          <OpenOCDTimeout>5000</OpenOCDTimeout>
+          <PluginID>openocd-GigaDevice</PluginID>
+          <Version>latest</Version>
+        </ConfigOpenOCD>
+      </Debug>
+      <Flash>
+        <InitFile/>
+        <Erase>Erase Sectors</Erase>
+        <Algorithms Path=""/>
+        <Program>no</Program>
+        <Verify>no</Verify>
+        <ResetAndRun>no</ResetAndRun>
+        <ResetType>Soft Reset</ResetType>
+        <SoftResetVal/>
+        <External>no</External>
+        <Command/>
+        <Arguments/>
+      </Flash>
+    </BuildConfig>
+  </BuildConfigs>
+</Project>

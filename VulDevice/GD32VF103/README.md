@@ -1,6 +1,6 @@
 # StackPatch Implementation on GD32VF103  
 
-StackPatch on the GD32VF103 (RISC‑V32) platform installs a custom exception handler to intercept faults and apply hot-patches at runtime without reboot.
+StackPatch on the GD32VF103 (RISC-V32) platform installs a custom exception handler to intercept faults and apply hot-patches at runtime without reboot.
 
 ---
 
@@ -29,4 +29,11 @@ Replace the default `trap_entry` routine to capture CPU context on exceptions, i
 
 With this handler in place, any exception triggered by a known vulnerability will automatically divert to StackPatch for live correction, then resume normal execution seamlessly.  
 
+---
 
+#  Demo project
+1. Download the required toolchain from https://www.nucleisys.com/download.php 
+2. Import the GD32VF103_Demo_Suites1.1.1 project using Nuclei Studio IDE (201909), and select NucleiStudio_workspace3 as the workspace.
+3. Connect the GD32VF103 development board to the update host using both GD-LINK and UART simultaneously.
+4. Compile the project and download the firmware to the development board.
+5. Observe the output information from the UART port.
