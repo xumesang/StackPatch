@@ -18,15 +18,15 @@ Welcome to the artifact for the CCS 2025 submission of our paper, titled "Dynami
 
 ## Repository Structure
 
-StackPatch/  
-├── Evaluation/  
-│   └── Effectiveness/  
-│   └── Performance/  
-├── VulDevice/  
-│   └── ESP32S3/  
-│   └── GD32VF103/  
-│   └── STM32F401RE/  
-│   └── SerialTerminalTool/
+StackPatch/   
+├── Evaluation/   
+│   └── Effectiveness/   
+│   └── Performance/    
+├── VulDevice/    
+│   └── ESP32S3/    
+│   └── GD32VF103/    
+│   └── STM32F401RE/    
+│   └── SerialTerminalTool/  
 └── README.md  
 
 
@@ -39,7 +39,7 @@ StackPatch/
 
 ## Getting Start Guide
 ## Hardware and Software Requirements:
-- STM32F401RE (NUCLEO-F401RE board)
+- STM32F401RET6 ([NUCLEO-F401RE board](https://www.st.com/en/evaluation-tools/nucleo-f401re.html))
 - Debugger: ST-LINK
 - Windows 10  
 - Keil µVision5 (MDK-Arm version < 5.3)
@@ -102,9 +102,15 @@ You can start with the demo **VulDevice/STM32F401RE/flashpatch/fpbflashpatch**, 
 StackPatch has currently been implemented on three architectures: ARM, RISC-V, and Xtensa. If you want to run StackPatch on other boards, we also provide demo projects for the **GD32VF103** (based on the RISC-V32 architecture) and the **ESP32S3** (based on the Xtensa LX7 architecture) for your reference.
 
 ## GD32VF103
-- IDE: Eclipse IDE (201909)
-- Debugger: GD-Link    
-Replace the component's `entry.S` (modified `trap_entry` handler) to integrate StackPatch.    
+- GD32VF103R-START V1.0 board
+- Debugger: GD-Link   
+- Windows 10
+- IDE: Eclipse IDE (201909) 
+- Serial terminal tool
+
+1. Replace the component's `entry.S` (modified `trap_entry` handler) to integrate StackPatch.   
+2. Build and flash via Eclipse IDE.
+3. Monitor serial output for StackPatch logs.
 
 **Demo project:**
 - **VulDevice/GD32VF103**  
@@ -112,11 +118,14 @@ Replace the component's `entry.S` (modified `trap_entry` handler) to integrate S
 ---
 
 ### ESP32S3
+- ESP32-S3-WROOM-1 board
+- Debugger: J-LINK 
+- Windows 10
 - Toolchain: ESP-IDF (Python, Git, cross-compilers, CMake, Ninja)  
-- Debugger: J-LINK   
- 
+- Serial terminal tool   
+
 1. Replace `panic_handler_asm.S` in ESP-IDF (modified `xt_panic` handler).  
-2. Run `instrument.py` to instrument target functions in ESP-IDF.  
+2. Run `instrument.py` to instrument target functions in ESP-IDF (Optional).  
 3. Build and flash via ESP-IDF.  
 4. Monitor serial output for StackPatch logs.
 
