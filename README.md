@@ -54,7 +54,7 @@ It is important to note that due to university policies, external access to the 
 2. Connect the board to your PC via debugger (The NUCLEO-F401RE board is integrated with ST-Link, so it can be connected using a USB cable).  
 ![pic3](VulDevice/STM32F401RE/pic3.png)
 
-3. Open the Keil project. (e.g., double-click StackPatch\VulDevice\STM32F401RE\flashpatch\fpbflashpatch\Projects\MDK-ARM\f401re.uvprojx.)  
+3. Open the Keil project. (e.g., double-click `StackPatch\VulDevice\STM32F401RE\flashpatch\fpbflashpatch\Projects\MDK-ARM\f401re.uvprojx`.)  
 4. Build and flash the firmware.  
 ![pic1](VulDevice/STM32F401RE/pic1.png)
 5. Use the serial terminal tool to view StackPatch log output. 
@@ -99,21 +99,21 @@ You can start with the demo **VulDevice/STM32F401RE/flashpatch/fpbflashpatch**, 
 ---
 
 ## StackPatch implementation on other boards
-
 StackPatch has currently been implemented on three architectures: ARM, RISC-V, and Xtensa. If you want to run StackPatch on other boards, we also provide demo projects for the **GD32VF103** (based on the RISC-V32 architecture) and the **ESP32S3** (based on the Xtensa LX7 architecture) for your reference.
 
-### GD32VF103
+## GD32VF103
 - IDE: Eclipse IDE (201909)
-- Debugger: GD-Link 
-Replace the component's `entry.S` (modified `trap_entry` handler) to integrate StackPatch. 
+- Debugger: GD-Link    
+Replace the component's `entry.S` (modified `trap_entry` handler) to integrate StackPatch.    
 
 **Demo project:**
 - **VulDevice/GD32VF103**  
   StackPatch on the RISC-V32 (GD32VF103) platform.
+---
 
 ### ESP32S3
 - Toolchain: ESP-IDF (Python, Git, cross-compilers, CMake, Ninja)  
-- Debugger: J-LINK  
+- Debugger: J-LINK   
  
 1. Replace `panic_handler_asm.S` in ESP-IDF (modified `xt_panic` handler).  
 2. Run `instrument.py` to instrument target functions in ESP-IDF.  
