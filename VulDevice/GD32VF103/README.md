@@ -31,9 +31,11 @@ With this handler in place, any exception triggered by a known vulnerability wil
 
 ---
 
-#  Demo project
+#  Development Environment Setup & Demo project 
 1. Download the required toolchain from https://www.nucleisys.com/download.php 
-2. Import the GD32VF103_Demo_Suites1.1.1 project using Nuclei Studio IDE (201909), and select NucleiStudio_workspace3 as the workspace.
+2. Import the GD32VF103_Demo_Suites1.1.1 project using Nuclei Studio IDE (201909), and select NucleiStudio_workspace3 as the workspace. 
 3. Connect the GD32VF103 development board to the update host using both GD-LINK and UART simultaneously.
-4. Compile the project and download the firmware to the development board.
+4. Compile the project and flash the firmware to the development board.
 5. Observe the output information from the UART port.
+
+For instructions on how to build the project, you can refer to https://www.rvmcu.com/site/gd32vf103c_start_ide_quickstart/
