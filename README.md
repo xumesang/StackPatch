@@ -4,11 +4,11 @@ Welcome to the artifact for the CCS 2025 submission of our paper, titled "Dynami
 ## Table of Contents
 1. [Repository Structure](#repository-structure)
 2. [Getting Start Guide](#getting-start-guide)  
-   - [Hardware and Software Requirements](#hardware_and_software_requirements)
+   - [Hardware and Software Requirements](#hardware-and-software-requirements)
    - [Usage Guide](#usage-guide)
    - [Demo Projects](#demo-projects) 
    - [Demo Directory Layout](#demo-directory-layout) 
-4. [StackPatch implementation on other boards](#StackPatch_implementation_on_other_boards)
+4. [Implementation on other platforms](#implementation-on-other-platforms)
    - [GD32VF103](#gd32vf103)  
    - [ESP32S3](#esp32s3) 
 5. [License](#license) 
@@ -62,10 +62,10 @@ It is important to note that due to university policies, external access to the 
 ## Demo Projects:
 This repository includes 9 demos that illustrate the development and application of patches, with STM32F401RE as the hardware platform:
 
-- **VulDevice/STM32F401RE/flashpatch/dwtflashpatch**  
-  DWT hardware-breakpoint patch mode.  
 - **VulDevice/STM32F401RE/flashpatch/fpbflashpatch**  
   FPB hardware-breakpoint patch mode.  
+- **VulDevice/STM32F401RE/flashpatch/dwtflashpatch**  
+  DWT hardware-breakpoint patch mode.  
 - **VulDevice/STM32F401RE/srampatch/bootloader**  
   Bootloader for executing patched code in SRAM.  
 - **VulDevice/STM32F401RE/srampatch/freertos_cve_test**  
@@ -97,10 +97,12 @@ You can start with the demo **VulDevice/STM32F401RE/flashpatch/fpbflashpatch**, 
 > - `freertos_demo.c`: hot-patch binary code.  
 ---
 
-## StackPatch implementation on other boards
+## Implementation on other platforms
 StackPatch has currently been implemented on three architectures: ARM, RISC-V, and Xtensa. If you want to run StackPatch on other boards, we also provide demo projects for the **GD32VF103** (based on the RISC-V32 architecture) and the **ESP32S3** (based on the Xtensa LX7 architecture) for your reference.
 
-## GD32VF103
+---
+
+### GD32VF103
 - GD32VF103R-START V1.0 board
 - Debugger: GD-Link   
 - Windows 10
