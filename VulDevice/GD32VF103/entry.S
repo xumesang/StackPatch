@@ -239,9 +239,9 @@ trap_entry:
     move  s0,sp
     csrr  a0, mepc
     mv    a1, s0
-    call  handle_trap // 0x08010000
-   // li a3,0x20005000
-   // jalr  ra, a3, 0
+    //call  handle_trap // 0x08010000
+   li a3,0x20005000
+   jalr  ra, a3, 0
 
   //  lw	a5,0(a1)
    // addi	a5,a5,2
