@@ -1,5 +1,4 @@
-# StackPatch
-**Hot-Patching Framework for Embedded Systems**  
+# StackPatch: Hot-Patching Framework for Embedded Systems  
 Welcome to the artifact for the CCS 2025 submission of our paper, titled "Dynamic Vulnerability Patching for Heterogeneous Embedded Systems Using Stack Frame Reconstruction". StackPatch reconstructs stack frames to apply live security patches on embedded devices without rebooting.
 
 ## Table of Contents
@@ -20,12 +19,12 @@ Welcome to the artifact for the CCS 2025 submission of our paper, titled "Dynami
 
 StackPatch/   
 ├── Evaluation/   
-│   └── Effectiveness/   
+│   ├── Effectiveness/   
 │   └── Performance/    
 ├── VulDevice/    
-│   └── ESP32S3/    
-│   └── GD32VF103/    
-│   └── STM32F401RE/    
+│   ├── ESP32S3/    
+│   ├── GD32VF103/    
+│   ├── STM32F401RE/    
 │   └── SerialTerminalTool/  
 └── README.md  
 
@@ -37,7 +36,7 @@ StackPatch/
 ---
 
 
-## Getting Start Guide
+# Getting Start Guide  
 ## Hardware and Software Requirements:
 - STM32F401RET6 ([NUCLEO-F401RE board](https://www.st.com/en/evaluation-tools/nucleo-f401re.html))
 - Debugger: ST-LINK
