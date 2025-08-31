@@ -35,7 +35,6 @@ StackPatch/
 
 ---
 
-
 # Getting Start Guide  
 ## Hardware and Software Requirements:
 - STM32F401RET6 ([NUCLEO-F401RE board](https://www.st.com/en/evaluation-tools/nucleo-f401re.html))
@@ -131,7 +130,7 @@ StackPatch has currently been implemented on three architectures: ARM, RISC-V, a
 4. Monitor serial output for StackPatch logs.
 
 **Demo projects:**  
-- **VulDevice/ESP32S3**  
+- **VulDevice/ESP32S3**    
   StackPatch on the Xtensa-LX7 (ESP32S3) platform.  
 - **Evaluation/Effectiveness/NetworkService**  
   Patching network service vulnerabilities and measuring latency.
