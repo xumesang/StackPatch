@@ -40,7 +40,7 @@ StackPatch/
 - STM32F401RET6 ([NUCLEO-F401RE board](https://www.st.com/en/evaluation-tools/nucleo-f401re.html))
 - Debugger: ST-LINK
 - Windows 10  
-- Keil µVision5 (MDK-Arm version < 5.3)
+- Keil µVision5 (MDK-Arm version < 5.36)
 - Serial terminal tool (e.g.,  [UartAssist V5.0.10](https://www.nitwo.com/cn/download/UartAssist.html))  
 
 It is important to note that due to university policies, external access to the university's internal internet is not allowed. Therefore, we cannot provide the AE committee with access to the boards. To run this project, the development board is a requirement.
