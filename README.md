@@ -11,7 +11,7 @@ Welcome to the artifact for the CCS 2025 submission of our paper, titled "Dynami
 4. [Implementation on other platforms](#implementation-on-other-platforms)
    - [GD32VF103](#gd32vf103)  
    - [ESP32S3](#esp32s3)
-5. [Ackownledgement](#ackownledgement)
+5. [Acknowledgement](#acknowledgement)
 6. [License](#license) 
 
 ---
