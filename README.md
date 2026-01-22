@@ -10,8 +10,9 @@ Welcome to the artifact for the CCS 2025 submission of our paper, titled "Dynami
    - [Demo Directory Layout](#demo-directory-layout) 
 4. [Implementation on other platforms](#implementation-on-other-platforms)
    - [GD32VF103](#gd32vf103)  
-   - [ESP32S3](#esp32s3) 
-5. [License](#license) 
+   - [ESP32S3](#esp32s3)
+5. [Ackownledgement](#ackownledgement)
+6. [License](#license) 
 
 ---
 
@@ -135,6 +136,12 @@ StackPatch has currently been implemented on three architectures: ARM, RISC-V, a
 - **Evaluation/Effectiveness/NetworkService**  
   Patching network service vulnerabilities and measuring latency.
 ---
+
+## Acknowledgement
+
+The core components of this project were developed in **AIoTSec Lab**.
+
+Contact: mingzhou@njust.edu.cn
 
 ## License
 This project is licensed under the MIT License.  
