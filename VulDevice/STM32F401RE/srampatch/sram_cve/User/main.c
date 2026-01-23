@@ -9,6 +9,8 @@ void Error_Handler(void);
 volatile uint32_t break_point_instruction_addr;
 volatile uint32_t  patch_address = 0x08000000;
 
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
+
 static uint8_t patch_2017_14199_1[] = ""
 "\x41\x6A\x02\x29\x03\xD3\xC1\x6B\x09\x1F\xC1\x63\x05\xE0\xC1\x68"//16
 "\x09\x89\xC1\x62\xC1\x6B\x89\x1C\xC1\x63"  //10

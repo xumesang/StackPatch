@@ -1,8 +1,8 @@
 ..\..\output\event_groups.o: ..\..\Middlewares\FreeRTOS\event_groups.c
-..\..\output\event_groups.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\event_groups.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\..\output\event_groups.o: ..\..\Middlewares\FreeRTOS\include\FreeRTOS.h
-..\..\output\event_groups.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-..\..\output\event_groups.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\event_groups.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\event_groups.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\event_groups.o: ..\..\User\FreeRTOSConfig.h
 ..\..\output\event_groups.o: ..\..\Drivers\./SYSTEM/sys/sys.h
 ..\..\output\event_groups.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
@@ -64,7 +64,7 @@
 ..\..\output\event_groups.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
 ..\..\output\event_groups.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
 ..\..\output\event_groups.o: ..\..\Drivers\./SYSTEM/usart/usart.h
-..\..\output\event_groups.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\event_groups.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\event_groups.o: ..\..\Middlewares\FreeRTOS\include\projdefs.h
 ..\..\output\event_groups.o: ..\..\Middlewares\FreeRTOS\include\portable.h
 ..\..\output\event_groups.o: ..\..\Middlewares\FreeRTOS\include\deprecated_definitions.h

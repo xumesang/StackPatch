@@ -12,6 +12,7 @@
 TaskHandle_t    start_task_handler;
 void start_task( void * pvParameters );
 
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
 
 #define TASK1_PRIO         3
 #define TASK1_STACK_SIZE   64

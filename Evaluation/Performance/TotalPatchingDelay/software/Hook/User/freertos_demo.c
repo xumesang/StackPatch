@@ -23,6 +23,7 @@ TaskHandle_t    task2_handler;
 void patchtask( void * pvParameters );
 /******************************************************************************************************/
 
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
 
 
 void freertos_demo(void)

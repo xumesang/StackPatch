@@ -3,54 +3,172 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ¦ÌVision V5.38.0.0
-Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: °¡ 534299650@qq.com,  , LIC=VGXG8-3PBYS-QD9KD-8W7I1-WCZLV-LRJ1C
+IDE-Version: ¦ÌVision V5.30.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 123 Administrator, 123, LIC=8MZI6-DTMZT-WKJB8-37JV3-49UMX-IHGUM
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.38.0.0
-Toolchain Path:  E:\Keil_v5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 7 (build 960)
-Assembler:       Armasm.exe V5.06 update 7 (build 960)
-Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
-Library Manager: ArmAr.exe V5.06 update 7 (build 960)
-Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
-CPU DLL:         SARMCM3.DLL V5.38.0.0
-Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
-Dialog DLL:      TCM.DLL V1.56.4.0
+Toolchain:       MDK-ARM Professional  Version: 5.30.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.30.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.7.0
+Dialog DLL:      TCM.DLL V1.42.0.0
  
 <h2>Project:</h2>
-H:\plc\STM32CubeFunctionPack_PLCWIFI1_V1.0.1\Projects\Multi\Applications\FP_IND_PLCWIFI1\MDK-ARM\STM32F401RE-Nucleo\Project.uvprojx
-Project File Date:  06/17/2024
+D:\icProject\StackPatch\Evaluation\Effectiveness\SoftPLC\FP_IND_PLCWIFI1\MDK-ARM\STM32F401RE-Nucleo\Project.uvprojx
+Project File Date:  01/19/2026
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'PLC01A1'
-"PLC01A1\PLC01A1.axf" - 0 Error(s), 0 Warning(s).
+compiling CLT01_38S.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/BSP/Components/CLT01-38SQ7/CLT01_38S.c": No such file or directory
+../../../../../../Drivers/BSP/Components/CLT01-38SQ7/CLT01_38S.c: 0 warnings, 1 error
+compiling ISO8200BQ.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/BSP/Components/ISO8200BQ/ISO8200BQ.c": No such file or directory
+../../../../../../Drivers/BSP/Components/ISO8200BQ/ISO8200BQ.c: 0 warnings, 1 error
+compiling VNI8200XP.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/BSP/Components/VNI8200XP/VNI8200XP.c": No such file or directory
+../../../../../../Drivers/BSP/Components/VNI8200XP/VNI8200XP.c: 0 warnings, 1 error
+compiling stm32_spwf_wifi.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/BSP/X-NUCLEO/X-NUCLEO-IDW01M1/stm32_spwf_wifi.c": No such file or directory
+../../../../../../Drivers/BSP/X-NUCLEO/X-NUCLEO-IDW01M1/stm32_spwf_wifi.c: 0 warnings, 1 error
+compiling console.c...
+../../Src/console.c(51): error:  #5: cannot open source input file "stm32f4xx_hal.h": No such file or directory
+  #include "stm32f4xx_hal.h"
+../../Src/console.c: 0 warnings, 1 error
+compiling stm32f4xx_nucleo.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.c": No such file or directory
+../../../../../../Drivers/BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.c: 0 warnings, 1 error
+compiling wifi_module.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Middlewares/ST/STM32_SPWF01SA/wifi_module.c": No such file or directory
+../../../../../../Middlewares/ST/STM32_SPWF01SA/wifi_module.c: 0 warnings, 1 error
+compiling X_NUCLEO_PLC01A1.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/BSP/X-NUCLEO/X-NUCLEO-PLC01A1/X_NUCLEO_PLC01A1.c": No such file or directory
+../../../../../../Drivers/BSP/X-NUCLEO/X-NUCLEO-PLC01A1/X_NUCLEO_PLC01A1.c: 0 warnings, 1 error
+compiling main.c...
+../../Inc/main.h(51): error:  #5: cannot open source input file "stm32f4xx_hal.h": No such file or directory
+  #include "stm32f4xx_hal.h"
+../../Src/main.c: 0 warnings, 1 error
+compiling stm32_xx_hal_msp.c...
+../../Inc/main.h(51): error:  #5: cannot open source input file "stm32f4xx_hal.h": No such file or directory
+  #include "stm32f4xx_hal.h"
+../../Src/stm32_xx_hal_msp.c: 0 warnings, 1 error
+compiling wifi_interface.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Middlewares/ST/STM32_SPWF01SA/wifi_interface.c": No such file or directory
+../../../../../../Middlewares/ST/STM32_SPWF01SA/wifi_interface.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_flash.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_pwr_ex.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c: 0 warnings, 1 error
+compiling X_NUCLEO_01A1.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/BSP/X-NUCLEO/X-NUCLEO-OUT01A1/X_NUCLEO_01A1.c": No such file or directory
+../../../../../../Drivers/BSP/X-NUCLEO/X-NUCLEO-OUT01A1/X_NUCLEO_01A1.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_flash_ex.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c: 0 warnings, 1 error
+compiling system_stm32f4xx.c...
+../../Src/system_stm32f4xx.c(67): error:  #5: cannot open source input file "stm32f4xx.h": No such file or directory
+  #include "stm32f4xx.h"
+../../Src/system_stm32f4xx.c: 0 warnings, 1 error
+compiling stm32_xx_it.c...
+../../Src/stm32_xx_it.c(41): error:  #5: cannot open source input file "wifi_module.h": No such file or directory
+  #include "wifi_module.h"
+../../Src/stm32_xx_it.c: 0 warnings, 1 error
+compiling PLC_Handling.c...
+../../Src/PLC_Handling.c(38): error:  #5: cannot open source input file "stm32f4xx_hal.h": No such file or directory
+  #include "stm32f4xx_hal.h"
+../../Src/PLC_Handling.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_adc_ex.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_adc.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_flash_ramfunc.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_tim_ex.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_gpio.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_spi.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_uart.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_pwr.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_rcc.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_dma.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c: 0 warnings, 1 error
+compiling stm32f4xx_hal.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_rcc_ex.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_tim.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_cortex.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_usart.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_usart.c": No such file or directory
+../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_usart.c: 0 warnings, 1 error
+compiling event_buffer.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Middlewares/ST/STM32_SPWF01SA/Utils/event_buffer.c": No such file or directory
+../../../../../../Middlewares/ST/STM32_SPWF01SA/Utils/event_buffer.c: 0 warnings, 1 error
+compiling ring_buffer.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Middlewares/ST/STM32_SPWF01SA/Utils/ring_buffer.c": No such file or directory
+../../../../../../Middlewares/ST/STM32_SPWF01SA/Utils/ring_buffer.c: 0 warnings, 1 error
+compiling wifi_globals.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../Middlewares/ST/STM32_SPWF01SA/Utils/wifi_globals.c": No such file or directory
+../../../../../../Middlewares/ST/STM32_SPWF01SA/Utils/wifi_globals.c: 0 warnings, 1 error
+compiling Ladder_Lib.c...
+"no source": Error:  #5: cannot open source input file "..\..\..\..\..\..\Middlewares\ST\STM32_LADDER_LIBRARY\Ladder_Lib.c": No such file or directory
+..\..\..\..\..\..\Middlewares\ST\STM32_LADDER_LIBRARY\Ladder_Lib.c: 0 warnings, 1 error
+assembling startup_stm32f401xe.s...
+"PLC01A1\PLC01A1.axf" - 37 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
-                ARM.CMSIS.5.9.0
+                https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
+                ARM.CMSIS.6.1.0
                 CMSIS (Common Microcontroller Software Interface Standard)
-   * Component: CORE Version: 5.6.0
+   * Component: CORE Version: 6.1.0
 
 Package Vendor: Keil
-                https://www.keil.com/pack/Keil.STM32F4xx_DFP.2.17.1.pack
-                Keil.STM32F4xx_DFP.2.17.1
-                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+                https://www.keil.com/pack/Keil.STM32F4xx_DFP.3.1.1.pack
+                Keil.STM32F4xx_DFP.3.1.1
+                STMicroelectronics STM32F4 Series Device Support
 
 <h2>Collection of Component include folders:</h2>
-  ./RTE/_PLC01A1
-  E:/Users/53429/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
-  E:/Users/53429/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+  .\RTE\_PLC01A1
+  C:\Users\Administrator\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:5.6.0
-Build Time Elapsed:  00:00:02
+   * Component: ARM::CMSIS:CORE:6.1.0
+Target not created.
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

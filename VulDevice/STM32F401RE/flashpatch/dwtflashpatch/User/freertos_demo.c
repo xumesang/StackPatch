@@ -1,3 +1,6 @@
+/*
+	AIoTSec Lab.  email: mingzhou@njust.edu.cn
+*/
 #include "freertos_demo.h"
 #include "usart.h"
 #include "led.h"
@@ -10,6 +13,7 @@
 #define START_TASK_STACK_SIZE   64
 TaskHandle_t    start_task_handler;
 void start_task( void * pvParameters );
+
 
 /* TASK1 cve func
  *

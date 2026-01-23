@@ -14,6 +14,7 @@
 #include "esp_system.h"
 #include "hal/cpu_hal.h"
 
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
 
 typedef struct exception_info
 {

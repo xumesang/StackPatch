@@ -1,6 +1,8 @@
 #include "cvefunc.h"
 #include <stdbool.h>
 
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
+
 void *memcpy(void *_MLIBC_RESTRICT d, const void *_MLIBC_RESTRICT s, size_t n)
 {
 	/* attempt word-sized copying only if buffers have identical alignment */

@@ -54,6 +54,9 @@ void ledblinktask( void * pvParameters );
 
 #define MAX_BP 6 // six inst breakpoint in cortex-m4
 #define FPB_CB_REG 5
+
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
+
 typedef struct {
 	volatile uint32_t CTRL;
 	volatile uint32_t REMAP;

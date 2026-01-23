@@ -603,12 +603,14 @@ ARM Macro Assembler    Page 10
                                                             ate stack pointer t
                                                             o PSP.
   276 00000084         
-  277 00000084         ;PUSH    {r1,lr}    
+  277 00000084         
   278 00000084         ;BL       rt_hw_hard_fault_exception1      ; Stack point
                        er passed through R0.
-  279 00000084         ;LDR      pc, =0x08009001
-  280 00000084 F8DF F040       LDR              PC, =0x20007001
-  281 00000088         ;POP     {r1,lr}                    
+  279 00000084         
+  280 00000084 F8DF F040       LDR              PC, =0x20007001 ;The control fl
+                                                            ow transfers to the
+                                                             patch dispatch.
+  281 00000088         
   282 00000088         
   283 00000088 F01E 0F04       TST              lr, #0x04   ;if(!EXC_RETURN[2])
                                                             
@@ -646,14 +648,14 @@ K]
                                PROC
   304 000000B0                 EXPORT           SysTick_Handler            [WEA
 K]
-  305 000000B0 E7FE            B                .
-  306 000000B2                 ENDP
 
 
 
 ARM Macro Assembler    Page 11 
 
 
+  305 000000B0 E7FE            B                .
+  306 000000B2                 ENDP
   307 000000B2         
   308 000000B2         Default_Handler
                                PROC
@@ -711,14 +713,14 @@ ARM Macro Assembler    Page 11
   335 000000B2                 EXPORT           TIM3_IRQHandler                
    [WEAK]
   336 000000B2                 EXPORT           TIM4_IRQHandler                
-   [WEAK]
-  337 000000B2                 EXPORT           I2C1_EV_IRQHandler             
 
 
 
 ARM Macro Assembler    Page 12 
 
 
+   [WEAK]
+  337 000000B2                 EXPORT           I2C1_EV_IRQHandler             
    [WEAK]
   338 000000B2                 EXPORT           I2C1_ER_IRQHandler             
    [WEAK]
@@ -776,14 +778,14 @@ ARM Macro Assembler    Page 12
    [WEAK]
   365 000000B2                 EXPORT           SPI4_IRQHandler                
    [WEAK]
-  366 000000B2         
-  367 000000B2         WWDG_IRQHandler
 
 
 
 ARM Macro Assembler    Page 13 
 
 
+  366 000000B2         
+  367 000000B2         WWDG_IRQHandler
   368 000000B2         PVD_IRQHandler
   369 000000B2         TAMP_STAMP_IRQHandler
   370 000000B2         RTC_WKUP_IRQHandler
@@ -841,14 +843,14 @@ ARM Macro Assembler    Page 13
   422 000000B2         SPI4_IRQHandler
   423 000000B2         
   424 000000B2 E7FE            B                .
-  425 000000B4         
-  426 000000B4                 ENDP
 
 
 
 ARM Macro Assembler    Page 14 
 
 
+  425 000000B4         
+  426 000000B4                 ENDP
   427 000000B4         
   428 000000B4                 ALIGN
   429 000000B4         
@@ -884,11 +886,12 @@ ARM Macro Assembler    Page 14
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\..\output\startup_stm32f401xe.d -o..\..\output\startup_st
-m32f401xe.o -IE:\Users\53429\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\
-Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__UVISION_VERSION SETA 5
-38" --predefine="STM32F401xE SETA 1" --list=.\listings\startup_stm32f401xe.lst 
-..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f401x
-e.s
+m32f401xe.o -I.\RTE\_template -IC:\Keil_v5\ARM\CMSIS\Include -IC:\Users\Adminis
+trator\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Drivers\CMSIS\Device\ST
+\STM32F4xx\Include --predefine="__UVISION_VERSION SETA 530" --predefine="STM32F
+401xE SETA 1" --predefine="_RTE_ SETA 1" --list=.\listings\startup_stm32f401xe.
+lst ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f
+401xe.s
 
 
 
@@ -2014,4 +2017,4 @@ tes\arm\startup_stm32f401xe.s
       None
 Comment: rt_hw_hard_fault_exception1 unused
 5 symbols
-424 symbols in table
+425 symbols in table

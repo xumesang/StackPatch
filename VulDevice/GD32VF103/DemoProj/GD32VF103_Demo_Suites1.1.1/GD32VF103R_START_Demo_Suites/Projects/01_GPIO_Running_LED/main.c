@@ -33,6 +33,8 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 OF SUCH DAMAGE.
 */
 
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
+
 #include "gd32vf103.h"
 #include "gd32vf103r_start.h"
 #include "systick.h"
@@ -1320,22 +1322,22 @@ void led_init(void)
 }
 void TIMER0_Init()
 {
-    timer_parameter_struct   timer_initpara; //¶¨Ê±Æ÷½á¹¹Ìå
-    rcu_periph_clock_enable(RCU_TIMER0);     //Ê¹ÄÜTIMER0Ê±ÖÓ
+    timer_parameter_struct   timer_initpara; //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½
+    rcu_periph_clock_enable(RCU_TIMER0);     //Ê¹ï¿½ï¿½TIMER0Ê±ï¿½ï¿½
 
     timer_deinit(TIMER0);
-    timer_struct_para_init(&timer_initpara); //½«½á¹¹Ìå²ÎÊý±äÎª³õÊ¼Öµ
+    timer_struct_para_init(&timer_initpara); //ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ê¼Öµ
 
-    timer_initpara.prescaler         = 0;               //Ô¤·ÖÆµ
-    timer_initpara.alignedmode       = TIMER_COUNTER_EDGE; //¶ÔÆëÄ£Ê½
-    timer_initpara.counterdirection  = TIMER_COUNTER_UP;   //¼ÆÊý·½Ïò
-    timer_initpara.period            = 65535;               //ÖÜÆÚ
-    timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;   //Ê±ÖÓ·ÖÆµ
-    timer_initpara.repetitioncounter = 0;                  //ÖØ¸´¼ÆÊýÆ÷
+    timer_initpara.prescaler         = 0;               //Ô¤ï¿½ï¿½Æµ
+    timer_initpara.alignedmode       = TIMER_COUNTER_EDGE; //ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+    timer_initpara.counterdirection  = TIMER_COUNTER_UP;   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    timer_initpara.period            = 65535;               //ï¿½ï¿½ï¿½ï¿½
+    timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;   //Ê±ï¿½Ó·ï¿½Æµ
+    timer_initpara.repetitioncounter = 0;                  //ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     timer_init(TIMER0, &timer_initpara);
 
-    timer_interrupt_enable(TIMER0,TIMER_INT_UP); //Ê¹ÄÜ¸üÐÂÖÐ¶Ï
-    eclic_irq_enable(TIMER0_UP_IRQn,2,0); //Ê¹ÄÜÖÐ¶ÏÏß
+    timer_interrupt_enable(TIMER0,TIMER_INT_UP); //Ê¹ï¿½Ü¸ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+    eclic_irq_enable(TIMER0_UP_IRQn,2,0); //Ê¹ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
 
     timer_enable(TIMER0);
 }
@@ -1344,9 +1346,9 @@ void TIMER0_Init()
 uint8_t TIMER0_i = 0;
 void TIMER0_UP_IRQHandler(void)
 {
-    if(timer_interrupt_flag_get(TIMER0, TIMER_INT_FLAG_UP) != RESET) //½ÓÊÕÖÐ¶Ï
+    if(timer_interrupt_flag_get(TIMER0, TIMER_INT_FLAG_UP) != RESET) //ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
     {
-    	timer_interrupt_flag_clear(TIMER0, TIMER_INT_FLAG_UP); //Çå³ýÖÐ¶Ï±êÖ¾Î»
+    	timer_interrupt_flag_clear(TIMER0, TIMER_INT_FLAG_UP); //ï¿½ï¿½ï¿½ï¿½Ð¶Ï±ï¿½Ö¾Î»
     	TIMER0_i++;
     	printf("TIMER0 -->> %d \n\r",TIMER0_i);
     }

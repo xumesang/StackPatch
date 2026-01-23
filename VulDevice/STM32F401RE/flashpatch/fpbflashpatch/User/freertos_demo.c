@@ -1,3 +1,6 @@
+/*
+	AIoTSec Lab.  email: mingzhou@njust.edu.cn
+*/
 #include "freertos_demo.h"
 #include "usart.h"
 #include "led.h"

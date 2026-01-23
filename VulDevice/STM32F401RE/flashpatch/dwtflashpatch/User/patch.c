@@ -1,4 +1,8 @@
-/** This file contains the C source code patch for Stackpatch. **/
+/* 
+	This file contains the C source code patch for Stackpatch. 
+	AIoTSec Lab.  email: mingzhou@njust.edu.cn
+*/
+
 
 #include "usart.h"
 #include "freertoscve.h"

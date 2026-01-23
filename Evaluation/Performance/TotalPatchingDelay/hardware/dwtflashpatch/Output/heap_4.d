@@ -1,9 +1,9 @@
 ..\..\output\heap_4.o: ..\..\Middlewares\FreeRTOS\portable\MemMang\heap_4.c
-..\..\output\heap_4.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-..\..\output\heap_4.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\..\output\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\..\output\heap_4.o: ..\..\Middlewares\FreeRTOS\include\FreeRTOS.h
-..\..\output\heap_4.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-..\..\output\heap_4.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\heap_4.o: ..\..\User\FreeRTOSConfig.h
 ..\..\output\heap_4.o: ..\..\Drivers\./SYSTEM/sys/sys.h
 ..\..\output\heap_4.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
@@ -65,7 +65,7 @@
 ..\..\output\heap_4.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
 ..\..\output\heap_4.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
 ..\..\output\heap_4.o: ..\..\Drivers\./SYSTEM/usart/usart.h
-..\..\output\heap_4.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\heap_4.o: ..\..\Middlewares\FreeRTOS\include\projdefs.h
 ..\..\output\heap_4.o: ..\..\Middlewares\FreeRTOS\include\portable.h
 ..\..\output\heap_4.o: ..\..\Middlewares\FreeRTOS\include\deprecated_definitions.h

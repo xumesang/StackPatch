@@ -1,3 +1,6 @@
+/*
+	AIoTSec Lab.  email: mingzhou@njust.edu.cn
+*/
 #include "./SYSTEM/sys/sys.h"
 #include "freertoscve.h"
 #include "patch_delay_test.h"

@@ -3,45 +3,248 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ¦ÌVision V5.38.0.0
-Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: °¡ 534299650@qq.com,  , LIC=VGXG8-3PBYS-QD9KD-8W7I1-WCZLV-LRJ1C
+IDE-Version: ¦ÌVision V5.30.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 123 Administrator, 123, LIC=8MZI6-DTMZT-WKJB8-37JV3-49UMX-IHGUM
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.38.0.0
-Toolchain Path:  E:\Keil_v5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 7 (build 960)
-Assembler:       Armasm.exe V5.06 update 7 (build 960)
-Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
-Library Manager: ArmAr.exe V5.06 update 7 (build 960)
-Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
-CPU DLL:         SARMCM3.DLL V5.38.0.0
-Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
-Dialog DLL:      TCM.DLL V1.56.4.0
+Toolchain:       MDK-ARM Professional  Version: 5.30.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.30.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.7.0
+Dialog DLL:      TCM.DLL V1.42.0.0
  
 <h2>Project:</h2>
-H:\stm32f401re\StackPatchAE\Evaluation\Performance\DispatchDelayBinarySearch\Projects\MDK-ARM\f401re.uvprojx
-Project File Date:  06/10/2024
+D:\icProject\StackPatch\Evaluation\Performance\DispatchDelayBinarySearch\Projects\MDK-ARM\f401re.uvprojx
+Project File Date:  01/19/2026
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'template'
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'template'
+assembling startup_stm32f401xe.s...
+compiling iap.c...
+compiling patch_delay_test.c...
+..\..\User\patch_delay_test.h(12): warning:  #1295-D: Deprecated declaration dwt_init - give arg types
+  void dwt_init();
+..\..\User\patch_delay_test.h(13): warning:  #1295-D: Deprecated declaration dwt_deinit - give arg types
+  void dwt_deinit();
+..\..\User\patch_delay_test.h(14): warning:  #1295-D: Deprecated declaration dwt_get_counter - give arg types
+  uint32_t dwt_get_counter();
+..\..\User\patch_delay_test.h(18): warning:  #1295-D: Deprecated declaration MeasureTimeStart - give arg types
+  void MeasureTimeStart();
+..\..\User\patch_delay_test.h(21): warning:  #1-D: last line of file ends without a newline
+  int MeasureTimeEnd();
+..\..\User\patch_delay_test.h(21): warning:  #1295-D: Deprecated declaration MeasureTimeEnd - give arg types
+  int MeasureTimeEnd();
+..\..\User\patch_delay_test.c: 6 warnings, 0 errors
+compiling main.c...
+compiling stm32f4xx_it.c...
+..\..\User\stm32f4xx_it.c(140): warning:  #68-D: integer conversion resulted in a change of sign
+   	{ exception_info->r0 = -1;
+..\..\User\stm32f4xx_it.c(181): warning:  #1207-D: unknown attribute "naked"
+  __NAKE __asm void patch_dispatch(unsigned int* pStack)  {
+..\..\User\stm32f4xx_it.c(191): warning:  #9-D: nested comment is not allowed
+  /*
+..\..\User\stm32f4xx_it.c(260): warning:  #68-D: integer conversion resulted in a change of sign
+   	{ *(sp + 9u) = -1;
+..\..\User\stm32f4xx_it.c(188): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+..\..\User\stm32f4xx_it.c: 4 warnings, 0 errors
+compiling stm32f4xx_hal_dma_ex.c...
+compiling patch.c...
+..\..\User\patch.c(12): warning:  #68-D: integer conversion resulted in a change of sign
+  		*(pStack + 9u) = -1; //r0 = -1
+..\..\User\patch.c: 1 warning, 0 errors
+compiling stm32f4xx_hal_cortex.c...
+compiling system_stm32f4xx.c...
+compiling freertos_demo.c...
+..\..\User\patch_delay_test.h(12): warning:  #1295-D: Deprecated declaration dwt_init - give arg types
+  void dwt_init();
+..\..\User\patch_delay_test.h(13): warning:  #1295-D: Deprecated declaration dwt_deinit - give arg types
+  void dwt_deinit();
+..\..\User\patch_delay_test.h(14): warning:  #1295-D: Deprecated declaration dwt_get_counter - give arg types
+  uint32_t dwt_get_counter();
+..\..\User\patch_delay_test.h(18): warning:  #1295-D: Deprecated declaration MeasureTimeStart - give arg types
+  void MeasureTimeStart();
+..\..\User\patch_delay_test.h(21): warning:  #1-D: last line of file ends without a newline
+  int MeasureTimeEnd();
+..\..\User\patch_delay_test.h(21): warning:  #1295-D: Deprecated declaration MeasureTimeEnd - give arg types
+  int MeasureTimeEnd();
+..\..\User\freertos_demo.c(71): warning:  #188-D: enumerated type mixed with another type
+  	return (((*dhcsr) & 0x1) != 0);
+..\..\User\freertos_demo.c(77): warning:  #61-D: integer operation result is out of range
+  	*scb_hfsr = (1 << 31);
+..\..\User\freertos_demo.c(77): warning:  #68-D: integer conversion resulted in a change of sign
+  	*scb_hfsr = (1 << 31);
+..\..\User\freertos_demo.c(101): warning:  #68-D: integer conversion resulted in a change of sign
+  	*shp8 = -1;
+..\..\User\freertos_demo.c(59): warning:  #177-D: variable "REMAP_ADDR"  was declared but never referenced
+  static FPB_REMAP REMAP_ADDR;
+..\..\User\freertos_demo.c(66): warning:  #177-D: function "fpb_disable"  was declared but never referenced
+  static void fpb_disable(void) {
+..\..\User\freertos_demo.c(74): warning:  #177-D: function "debug_monitor_init"  was declared but never referenced
+  static void debug_monitor_init() {
+..\..\User\freertos_demo.c(258): warning:  #177-D: variable "patch_dispatch"  was declared but never referenced
+  static uint8_t patch_dispatch[] = ""
+..\..\User\freertos_demo.c(267): warning:  #177-D: variable "fpb_patch2018_16601"  was declared but never referenced
+  static uint8_t fpb_patch2018_16601[] = ""
+..\..\User\freertos_demo.c(274): warning:  #177-D: variable "dwt_patch2018_16601"  was declared but never referenced
+  static uint8_t dwt_patch2018_16601[] = ""
+..\..\User\freertos_demo.c(279): warning:  #177-D: variable "patch2018_16601"  was declared but never referenced
+  static uint8_t patch2018_16601[] = ""
+..\..\User\freertos_demo.c(292): warning:  #177-D: variable "patch2018_16603"  was declared but never referenced
+  static uint8_t patch2018_16603[] = ""
+..\..\User\freertos_demo.c(298): warning:  #177-D: variable "patch16528"  was declared but never referenced
+  static uint8_t patch16528[] = ""
+..\..\User\freertos_demo.c(302): warning:  #177-D: variable "patch16526"  was declared but never referenced
+  static uint8_t patch16526[] = ""
+..\..\User\freertos_demo.c(306): warning:  #177-D: variable "patch16599"  was declared but never referenced
+  static uint8_t patch16599[] = ""
+..\..\User\freertos_demo.c(314): warning:  #177-D: variable "patch31532"  was declared but never referenced
+  static uint8_t patch31532[] = ""
+..\..\User\freertos_demo.c(321): warning:  #177-D: variable "patchcve2021_31571"  was declared but never referenced
+  static uint8_t patchcve2021_31571[] = ""
+..\..\User\freertos_demo.c(327): warning:  #177-D: variable "patchcve2018_16600"  was declared but never referenced
+  static uint8_t patchcve2018_16600[] = ""
+..\..\User\freertos_demo.c(332): warning:  #177-D: variable "patchcve2018_16523"  was declared but never referenced
+  static uint8_t patchcve2018_16523[] = ""
+..\..\User\freertos_demo.c(341): warning:  #177-D: variable "patchcve2018_16524"  was declared but never referenced
+  static uint8_t patchcve2018_16524[] = ""
+..\..\User\freertos_demo.c: 26 warnings, 0 errors
+compiling stm32f4xx_hal_gpio.c...
+compiling stm32f4xx_hal_dma.c...
+compiling stm32f4xx_hal_pwr.c...
+compiling stm32f4xx_hal_pwr_ex.c...
+compiling stm32f4xx_hal.c...
+compiling freertoscve.c...
+..\..\User\patch_delay_test.h(12): warning:  #1295-D: Deprecated declaration dwt_init - give arg types
+  void dwt_init();
+..\..\User\patch_delay_test.h(13): warning:  #1295-D: Deprecated declaration dwt_deinit - give arg types
+  void dwt_deinit();
+..\..\User\patch_delay_test.h(14): warning:  #1295-D: Deprecated declaration dwt_get_counter - give arg types
+  uint32_t dwt_get_counter();
+..\..\User\patch_delay_test.h(18): warning:  #1295-D: Deprecated declaration MeasureTimeStart - give arg types
+  void MeasureTimeStart();
+..\..\User\patch_delay_test.h(21): warning:  #1-D: last line of file ends without a newline
+  int MeasureTimeEnd();
+..\..\User\patch_delay_test.h(21): warning:  #1295-D: Deprecated declaration MeasureTimeEnd - give arg types
+  int MeasureTimeEnd();
+..\..\User\freertoscve.c(27): warning:  #177-D: variable "uxHeaderLength"  was declared but never referenced
+  	uint32_t uxHeaderLength = ( uint32_t ) ( ( pxIPHeader->ucVersionHeaderLength & 0x0Fu ) << 2 );
+..\..\User\freertoscve.c(28): warning:  #177-D: variable "ucProtocol"  was declared but never referenced
+  	uint8_t ucProtocol;
+..\..\User\freertoscve.c(92): warning:  #188-D: enumerated type mixed with another type
+  	return 1;
+..\..\User\freertoscve.c(76): warning:  #177-D: variable "eReturn"  was declared but never referenced
+  eFrameProcessingResult_t eReturn;
+..\..\User\freertoscve.c(78): warning:  #177-D: variable "uxHeaderLength"  was declared but never referenced
+  UBaseType_t uxHeaderLength = ( UBaseType_t ) ( ( pxIPHeader->ucVersionHeaderLength & 0x0Fu ) << 2 );
+..\..\User\freertoscve.c(79): warning:  #550-D: variable "ucProtocol"  was set but never used
+  uint8_t ucProtocol;
+..\..\User\freertoscve.c(152): warning:  #550-D: variable "i"  was set but never used
+  	int i;
+..\..\User\freertoscve.c(176): warning:  #550-D: variable "ucProtocol"  was set but never used
+  uint8_t ucProtocol;
+..\..\User\freertoscve.c(265): warning:  #177-D: variable "xRemainingOptionsBytes"  was declared but never referenced
+          UBaseType_t xRemainingOptionsBytes = pucLast - pucPtr;
+..\..\User\freertoscve.c(247): warning:  #177-D: variable "uxNewMSS"  was declared but never referenced
+  UBaseType_t uxNewMSS;
+..\..\User\freertoscve.c(296): warning:  #513-D: a value of type "TCPPacket_t *" cannot be assigned to an entity of type "uint8_t *"
+  	testdata.pucEthernetBuffer = &prv;
+..\..\User\freertoscve.c(312): warning:  #177-D: variable "uxNewMSS"  was declared but never referenced
+  UBaseType_t uxNewMSS;
+..\..\User\freertoscve.c(362): warning:  #513-D: a value of type "TCPPacket_t *" cannot be assigned to an entity of type "uint8_t *"
+  	testdata.pucEthernetBuffer = &prv;
+..\..\User\freertoscve.c(375): warning:  #177-D: variable "usFlags"  was declared but never referenced
+  		uint16_t usFlags, usType, usClass;
+..\..\User\freertoscve.c(375): warning:  #177-D: variable "usType"  was declared but never referenced
+  		uint16_t usFlags, usType, usClass;
+..\..\User\freertoscve.c(375): warning:  #177-D: variable "usClass"  was declared but never referenced
+  		uint16_t usFlags, usType, usClass;
+..\..\User\freertoscve.c(376): warning:  #177-D: variable "pucSource"  was declared but never referenced
+  		uint8_t *pucSource, *pucTarget;
+..\..\User\freertoscve.c(376): warning:  #177-D: variable "pucTarget"  was declared but never referenced
+  		uint8_t *pucSource, *pucTarget;
+..\..\User\freertoscve.c(377): warning:  #177-D: variable "ucByte"  was declared but never referenced
+  		uint8_t ucByte;
+..\..\User\freertoscve.c(378): warning:  #177-D: variable "ucNBNSName"  was declared but never referenced
+  		uint8_t ucNBNSName[ 17 ];
+..\..\User\freertoscve.c(439): warning:  #144-D: a value of type "EthernetHeader_t *" cannot be used to initialize an entity of type "uint8_t *"
+  		.pucEthernetBuffer = &data,
+..\..\User\freertoscve.c(489): warning:  #177-D: variable "pucQueueStorage"  was declared but never referenced
+          uint8_t * pucQueueStorage;
+..\..\User\freertoscve.c(544): warning:  #177-D: variable "xReturn"  was declared but never referenced
+  			BaseType_t xReturn = pdPASS;
+..\..\User\freertoscve.c(549): warning:  #940-D: missing return statement at end of non-void function "prvProcessDHCPReplies" 
+  }
+..\..\User\freertoscve.c(522): warning:  #177-D: variable "pucUDPPayload"  was declared but never referenced
+  uint8_t *pucUDPPayload, *pucLastByte;
+..\..\User\freertoscve.c(522): warning:  #177-D: variable "pucLastByte"  was declared but never referenced
+  uint8_t *pucUDPPayload, *pucLastByte;
+..\..\User\freertoscve.c(527): warning:  #177-D: variable "pucByte"  was declared but never referenced
+  uint8_t *pucByte, ucOptionCode, ucLength;
+..\..\User\freertoscve.c(527): warning:  #177-D: variable "ucOptionCode"  was declared but never referenced
+  uint8_t *pucByte, ucOptionCode, ucLength;
+..\..\User\freertoscve.c(527): warning:  #177-D: variable "ucLength"  was declared but never referenced
+  uint8_t *pucByte, ucOptionCode, ucLength;
+..\..\User\freertoscve.c(528): warning:  #177-D: variable "ulProcessed"  was declared but never referenced
+  uint32_t ulProcessed, ulParameter;
+..\..\User\freertoscve.c(528): warning:  #177-D: variable "ulParameter"  was declared but never referenced
+  uint32_t ulProcessed, ulParameter;
+..\..\User\freertoscve.c(530): warning:  #177-D: variable "ulMandatoryOptions"  was declared but never referenced
+  const uint32_t ulMandatoryOptions = 2ul; /* DHCP server address, and the correct DHCP message type must be present in the options. */
+..\..\User\freertoscve.c: 38 warnings, 0 errors
+compiling stm32f4xx_hal_rcc.c...
+compiling stm32f4xx_hal_rcc_ex.c...
+compiling stm32f4xx_hal_usart.c...
+compiling stm32f4xx_hal_flash.c...
+compiling stm32f4xx_hal_uart.c...
+compiling stm32f4xx_hal_flash_ex.c...
+compiling stm32f4xx_hal_flash_ramfunc.c...
+compiling sys.c...
+compiling led.c...
+compiling fpb.c...
+..\..\Drivers\MY_Driver\fpb.c(211): warning:  #188-D: enumerated type mixed with another type
+  		hera_remap_instr(old_instruction_address,new_instruction_address,1,link);
+..\..\Drivers\MY_Driver\fpb.c(212): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\Drivers\MY_Driver\fpb.c: 2 warnings, 0 errors
+compiling flash.c...
+compiling stm32f4xx_hal_tim_ex.c...
+compiling delay.c...
+compiling usart.c...
+compiling stm32f4xx_hal_tim.c...
+compiling port.c...
+compiling heap_4.c...
+compiling croutine.c...
+compiling event_groups.c...
+compiling list.c...
+compiling stream_buffer.c...
+compiling queue.c...
+compiling timers.c...
+compiling tasks.c...
+linking...
+Program Size: Code=21048 RO-data=696 RW-data=956 ZI-data=13572  
 After Build - User command #1: fromelf.exe --bin -o ..\..\Output\hhf401re.bin ..\..\Output\f401re.axf
-"..\..\Output\f401re.axf" - 0 Error(s), 0 Warning(s).
+"..\..\Output\f401re.axf" - 0 Error(s), 78 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: Keil
-                https://www.keil.com/pack/Keil.STM32F4xx_DFP.2.17.1.pack
-                Keil.STM32F4xx_DFP.2.17.1
-                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+                https://www.keil.com/pack/Keil.STM32F4xx_DFP.3.1.1.pack
+                Keil.STM32F4xx_DFP.3.1.1
+                STMicroelectronics STM32F4 Series Device Support
 
 <h2>Collection of Component include folders:</h2>
-  E:/Users/53429/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+  .\RTE\_template
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

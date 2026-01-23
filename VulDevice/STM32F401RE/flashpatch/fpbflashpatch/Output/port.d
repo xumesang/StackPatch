@@ -1,7 +1,7 @@
 ..\..\output\port.o: ..\..\Middlewares\FreeRTOS\portable\RVDS\ARM_CM4F\port.c
 ..\..\output\port.o: ..\..\Middlewares\FreeRTOS\include\FreeRTOS.h
-..\..\output\port.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-..\..\output\port.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\port.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\port.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\port.o: ..\..\User\FreeRTOSConfig.h
 ..\..\output\port.o: ..\..\Drivers\./SYSTEM/sys/sys.h
 ..\..\output\port.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
@@ -63,7 +63,7 @@
 ..\..\output\port.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
 ..\..\output\port.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
 ..\..\output\port.o: ..\..\Drivers\./SYSTEM/usart/usart.h
-..\..\output\port.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\port.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\port.o: ..\..\Middlewares\FreeRTOS\include\projdefs.h
 ..\..\output\port.o: ..\..\Middlewares\FreeRTOS\include\portable.h
 ..\..\output\port.o: ..\..\Middlewares\FreeRTOS\include\deprecated_definitions.h

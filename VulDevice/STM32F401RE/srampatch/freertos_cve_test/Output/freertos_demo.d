@@ -1,12 +1,12 @@
 ..\..\output\freertos_demo.o: ..\..\User\freertos_demo.c
 ..\..\output\freertos_demo.o: ..\..\User\freertos_demo.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\SYSTEM\usart\usart.h
-..\..\output\freertos_demo.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\freertos_demo.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\./SYSTEM/sys/sys.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xe.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
-..\..\output\freertos_demo.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\freertos_demo.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\CMSIS\Include\cmsis_version.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\CMSIS\Include\cmsis_compiler.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\CMSIS\Include\cmsis_armcc.h
@@ -18,7 +18,7 @@
 ..\..\output\freertos_demo.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-..\..\output\freertos_demo.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\freertos_demo.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h
 ..\..\output\freertos_demo.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h

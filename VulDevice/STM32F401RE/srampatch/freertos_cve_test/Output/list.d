@@ -1,8 +1,8 @@
 ..\..\output\list.o: ..\..\Middlewares\FreeRTOS\list.c
-..\..\output\list.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\..\output\list.o: ..\..\Middlewares\FreeRTOS\include\FreeRTOS.h
-..\..\output\list.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-..\..\output\list.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\list.o: ..\..\User\FreeRTOSConfig.h
 ..\..\output\list.o: ..\..\Drivers\./SYSTEM/sys/sys.h
 ..\..\output\list.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
@@ -64,7 +64,7 @@
 ..\..\output\list.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
 ..\..\output\list.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
 ..\..\output\list.o: ..\..\Drivers\./SYSTEM/usart/usart.h
-..\..\output\list.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\list.o: ..\..\Middlewares\FreeRTOS\include\projdefs.h
 ..\..\output\list.o: ..\..\Middlewares\FreeRTOS\include\portable.h
 ..\..\output\list.o: ..\..\Middlewares\FreeRTOS\include\deprecated_definitions.h

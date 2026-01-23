@@ -11,6 +11,9 @@
 TaskHandle_t    start_task_handler;
 void start_task( void * pvParameters );
 
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
+
+
 /* TASK1 cve FUNC
  * 
  */

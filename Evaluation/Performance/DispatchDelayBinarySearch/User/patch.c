@@ -3,6 +3,7 @@
 
 #include "freertoscve.h"
 
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
 
 void patch_cve2018_16601(unsigned int* pStack){ 
 	

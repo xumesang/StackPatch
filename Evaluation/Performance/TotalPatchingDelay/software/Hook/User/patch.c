@@ -3,6 +3,8 @@
 
 #include "freertoscve.h"
 
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
+
 // Repair the CVE-2018-16601 vulnerability
 //void patch_cve2018_16601(unsigned int* pStack) __attribute__((section(".ARM.__at_0x20008000")));
 void patch_cve2018_16601(unsigned int* pStack){ 

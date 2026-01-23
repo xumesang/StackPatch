@@ -3,7 +3,7 @@
 #include "usart.h"
 
 
-
+/** AIoTSec Lab.  email: mingzhou@njust.edu.cn **/
 
 #define SYSCoreClock 80000000 // 80mhz
 

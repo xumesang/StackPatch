@@ -4,7 +4,7 @@
 ..\..\output\iap.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\..\output\iap.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xe.h
 ..\..\output\iap.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
-..\..\output\iap.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\iap.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\iap.o: ..\..\Drivers\CMSIS\Include\cmsis_version.h
 ..\..\output\iap.o: ..\..\Drivers\CMSIS\Include\cmsis_compiler.h
 ..\..\output\iap.o: ..\..\Drivers\CMSIS\Include\cmsis_armcc.h
@@ -16,7 +16,7 @@
 ..\..\output\iap.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h
 ..\..\output\iap.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\..\output\iap.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-..\..\output\iap.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\iap.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 ..\..\output\iap.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
 ..\..\output\iap.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h
 ..\..\output\iap.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h
@@ -62,6 +62,6 @@
 ..\..\output\iap.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
 ..\..\output\iap.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
 ..\..\output\iap.o: ..\..\Drivers\./SYSTEM/usart/usart.h
-..\..\output\iap.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\iap.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\iap.o: ..\..\Drivers\./SYSTEM/delay/delay.h
 ..\..\output\iap.o: ..\..\Drivers\MY_Driver\flash.h

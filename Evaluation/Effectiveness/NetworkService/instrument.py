@@ -1,6 +1,7 @@
 import re
 import os
 
+# AIoTSec Lab.  email: mingzhou@njust.edu.cn 
 # ctags -x --c-kinds=f --_xformat="%N %S" -R --languages=c > result.txt
 # ctags -x --c-kinds=f --_xformat="%t %N %S %F" -R --languages=c > zephyr_1141_func.txt
 # cscope -d -f db.csc -L -2 '.*' -v

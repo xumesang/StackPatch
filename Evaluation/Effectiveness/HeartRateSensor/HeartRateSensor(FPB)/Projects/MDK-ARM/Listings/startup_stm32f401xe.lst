@@ -884,11 +884,12 @@ ARM Macro Assembler    Page 14
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\..\output\startup_stm32f401xe.d -o..\..\output\startup_st
-m32f401xe.o -IE:\Users\53429\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.1\
-Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__UVISION_VERSION SETA 5
-38" --predefine="STM32F401xE SETA 1" --list=.\listings\startup_stm32f401xe.lst 
-..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f401x
-e.s
+m32f401xe.o -I.\RTE\_template -IC:\Keil_v5\ARM\CMSIS\Include -IC:\Users\Adminis
+trator\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Drivers\CMSIS\Device\ST
+\STM32F4xx\Include --predefine="__UVISION_VERSION SETA 530" --predefine="STM32F
+401xE SETA 1" --predefine="_RTE_ SETA 1" --list=.\listings\startup_stm32f401xe.
+lst ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f
+401xe.s
 
 
 
@@ -2009,4 +2010,4 @@ tes\arm\startup_stm32f401xe.s
 tes\arm\startup_stm32f401xe.s
 Warning: rt_hw_hard_fault_exception multiply defined
 4 symbols
-423 symbols in table
+424 symbols in table

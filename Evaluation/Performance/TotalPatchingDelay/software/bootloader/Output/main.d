@@ -2,7 +2,7 @@
 ..\..\output\main.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\..\output\main.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xe.h
 ..\..\output\main.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
-..\..\output\main.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\main.o: ..\..\Drivers\CMSIS\Include\cmsis_version.h
 ..\..\output\main.o: ..\..\Drivers\CMSIS\Include\cmsis_compiler.h
 ..\..\output\main.o: ..\..\Drivers\CMSIS\Include\cmsis_armcc.h
@@ -14,7 +14,7 @@
 ..\..\output\main.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h
 ..\..\output\main.o: ..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\..\output\main.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-..\..\output\main.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\..\output\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 ..\..\output\main.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
 ..\..\output\main.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h
 ..\..\output\main.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h
@@ -59,7 +59,7 @@
 ..\..\output\main.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h
 ..\..\output\main.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
 ..\..\output\main.o: ..\..\Drivers\SYSTEM\usart\usart.h
-..\..\output\main.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\main.o: ..\..\Drivers\./SYSTEM/sys/sys.h
 ..\..\output\main.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
 ..\..\output\main.o: ..\..\Drivers\MY_Driver\led.h
